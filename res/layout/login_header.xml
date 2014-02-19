@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+    <RelativeLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:background="@color/white"
+    	android:orientation="vertical"
+    	android:id="@+id/layout"
+        >
+        <EditText
+        android:id="@+id/editTextAccount"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="55dp"
+        android:hint="账号"
+        android:textColorHint="#8f8f8f"
+        android:textColor="#222222"
+        android:textSize="18sp" 
+        android:inputType="text" 
+        >
+        <requestFocus />
+    </EditText>
+    
+    <EditText
+        android:layout_below="@+id/editTextAccount"
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="55dp"
+        android:hint="密码"
+        android:textColorHint="#8f8f8f"
+        android:textColor="#222222"
+        android:textSize="18sp" 
+        android:inputType="text"
+        android:password="true" 
+        >
+    </EditText>
+    
+    <Button 
+        android:layout_below="@+id/editTextPassword"
+        android:layout_marginTop="20dp"
+        android:id="@+id/loginButton"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginRight="56dp"
+        android:background="#c11332"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:onClick="ButtonClick"
+        />
+	<Button 
+	    android:layout_alignParentBottom="true"
+	    android:layout_centerHorizontal="true"
+	    android:id="@+id/registerButton"
+        android:layout_width="100dp"
+        android:layout_height="33dp"
+        android:layout_marginBottom="10dp"
+        android:background="#c11332"
+        android:text="注册"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        android:onClick="ButtonClick"
+        />
+    </RelativeLayout>
+    
+</RelativeLayout>

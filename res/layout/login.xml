@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    
+    <widget.XListView
+        android:id="@+id/xlistview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#00000000"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:fadingEdge="none"
+        android:cacheColorHint="#00000000"
+        android:listSelector="#00000000" />
+</LinearLayout>

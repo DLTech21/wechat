@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_height="44dp"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        >
+        <!-- <Button
+            android:id="@+id/leftBarButton"
+            android:layout_width="90dp"
+            android:layout_height="44dp"
+            android:drawableLeft="@drawable/btn_back_normal"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:drawablePadding="-20dp"
+            android:paddingLeft="12dp"
+            android:onClick="ButtonClick"
+            /> -->
+        
+        <TextView 
+            android:id="@+id/titleBarView"
+            android:layout_width="wrap_content"
+      		android:layout_height="wrap_content"
+            android:text="微信"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            />
+        
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/xindicator"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_toRightOf="@+id/titleBarView"
+            android:layout_marginLeft="8dp"
+            android:visibility="invisible"
+            android:background="@drawable/round_1"/>
+    </RelativeLayout>
+    
+    <widget.XListView
+        android:id="@+id/xlistview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#00000000"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:fadingEdge="none"
+        android:cacheColorHint="#00000000"
+        android:listSelector="#00000000" />
+</LinearLayout>
