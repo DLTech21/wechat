@@ -5,11 +5,17 @@ package ui;
 
 import java.util.ArrayList;
 
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.packet.Presence;
+
 import tools.AppManager;
 import tools.ImageUtils;
 import tools.UIHelper;
 import ui.adapter.TextAdapter;
 import widget.XListView;
+import xmpp.XmppTool;
+
+import bean.UserEntity;
 
 import com.donal.wechat.R;
 import com.google.analytics.tracking.android.EasyTracker;
@@ -17,6 +23,7 @@ import com.google.analytics.tracking.android.EasyTracker;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
@@ -106,7 +113,7 @@ public class Login extends AppActivity{
 	
 	private void login() {
 		String account = accountET.getText().toString();
-		String password = passwordET.getText().toString();
+		final String password = passwordET.getText().toString();
 		if (account.length() == 0 ||  password.length() ==0) {
 			UIHelper.ToastMessage(this, "请输入账号和密码", Toast.LENGTH_SHORT);
 		}
@@ -115,15 +122,15 @@ public class Login extends AppActivity{
 			ApiClent.login(appContext, account, password, new ClientCallback() {
 				@Override
 				public void onSuccess(Object data) {
-//					UIHelper.dismissProgress(loadingPd);
-//					LoginAndRegisterEntity entity = (LoginAndRegisterEntity) data;
-//					if (entity.data.equals("1")) {
-//						setResult(RESULT_OK);
-//						AppManager.getAppManager().finishActivity(Login.this);
-//					}
-//					else {
-//						UIHelper.ToastMessage(getApplicationContext(), entity.error, Toast.LENGTH_SHORT);
-//					}
+					UIHelper.dismissProgress(loadingPd);
+					UserEntity user = (UserEntity) data;
+					if (user.status == 1) {
+						appContext.saveLoginInfo(user);
+						appContext.saveLoginPassword(password);
+						Intent intent = new Intent(Login.this, Tabbar.class);
+						startActivity(intent);
+						AppManager.getAppManager().finishActivity(Login.this);
+					}
 				}
 				
 				@Override

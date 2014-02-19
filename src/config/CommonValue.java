@@ -21,8 +21,9 @@ import com.vikaa.baseapp.R;
 public class CommonValue {
 	public static final String PackageName = "com.vikaa.mycontact";
 	
-	public static String BASE_API = "http://115.29.150.153//api/";
+	public static String BASE_API = "http://115.29.150.153/api/";
 	public static String BASE_URL = "http://115.29.150.153/";
+	public static String XMPP_HOST = "115.29.150.153";
 	
 	public static final String KEY_GUIDE_SHOWN = "preferences_guide_shown";
 	

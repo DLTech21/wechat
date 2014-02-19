@@ -12,11 +12,11 @@ import tools.Logger;
  *
  */
 public class AppActivity extends BaseActivity {
-	protected WeChatApplication appContext;
+	protected WCApplication appContext;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		appContext =  (WeChatApplication)getApplication();
+		appContext =  (WCApplication)getApplication();
 	}
 }

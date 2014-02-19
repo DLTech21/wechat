@@ -5,6 +5,9 @@ import java.util.Properties;
 
 import org.apache.http.client.CookieStore;
 
+import bean.UserEntity;
+import bean.UserInfo;
+
 import com.loopj.android.http.PersistentCookieStore;
 import com.nostra13.universalimageloader.utils.L;
 
@@ -25,16 +28,16 @@ import android.content.Intent;
  * @author donal
  *
  */
-public class WeChatApplication extends AppContext {
-	private static WeChatApplication mApplication;
+public class WCApplication extends AppContext {
+	private static WCApplication mApplication;
 	
 	private NotificationManager mNotificationManager;
 	
 	private boolean login = false;	//登录状态
 	private String loginUid = "0";	//登录用户的id
+	private String apiKey = "0";	//登录用户的id
 	
-	
-	public synchronized static WeChatApplication getInstance() {
+	public synchronized static WCApplication getInstance() {
 		return mApplication;
 	}
 	
@@ -84,20 +87,23 @@ public class WeChatApplication extends AppContext {
 	 * @param username
 	 * @param pwd
 	 */
-//	@SuppressWarnings("serial")
-//	public void saveLoginInfo(final UserEntity user) {
-//		this.loginUid = user.openid;
-//		this.login = true;
-//		setProperties(new Properties(){
-//			{
-//				setProperty("user.login","1");
-//				setProperty("user.uid", user.openid);
-//				setProperty("user.name", user.nickname);
-//				setProperty("user.face", user.headimgurl);
-//				setProperty("user.hash", user.hash);
-//			}
-//		});		
-//	}
+	@SuppressWarnings("serial")
+	public void saveLoginInfo(final UserEntity user) {
+		this.loginUid = user.userInfo.userId;
+		this.apiKey = user.apiKey;
+		this.login = true;
+		setProperties(new Properties(){
+			{
+				setProperty("user.login","1");
+				setProperty("user.uid", user.userInfo.userId);
+				setProperty("user.name", user.userInfo.nickName);
+				setProperty("user.face", user.userInfo.userHead);
+				setProperty("user.description", user.userInfo.description);
+				setProperty("user.registerDate", user.userInfo.registerDate);
+				setProperty("user.apikey", user.apiKey);
+			}
+		});		
+	}
 
 	/**
 	 * 获取登录用户id
@@ -107,21 +113,38 @@ public class WeChatApplication extends AppContext {
 		return (getProperty("user.uid"));
 	}
 	
-	public String getLoginHash() {
-		return (getProperty("user.hash"));
+	public String getLoginApiKey() {
+		return (getProperty("user.apikey"));
 	}
-
+	
+	
+	public void saveLoginPassword(final String password) {
+		setProperties(new Properties(){
+			{
+				setProperty("user.password",password);
+			}
+		});		
+	}
+	
+	public String getLoginPassword() {
+		return (getProperty("user.password"));
+	}
 	/**
 	 * 获取登录信息
 	 * @return
 	 */
-//	public UserEntity getLoginInfo() {		
-//		UserEntity lu = new UserEntity();		
-//		lu.openid = (getProperty("user.uid"));
-//		lu.nickname = (getProperty("user.name"));
-//		lu.headimgurl = (getProperty("user.face"));
-//		return lu;
-//	}
+	public UserEntity getLoginInfo() {		
+		UserEntity lu = new UserEntity();		
+		UserInfo userInfo = new UserInfo();
+		userInfo.userId = (getProperty("user.uid"));
+		userInfo.nickName = (getProperty("user.name"));
+		userInfo.userHead = (getProperty("user.face"));
+		userInfo.description = (getProperty("user.description"));
+		userInfo.registerDate = (getProperty("user.registerDate"));
+		lu.apiKey = (getProperty("user.apikey"));
+		lu.userInfo = userInfo;
+		return lu;
+	}
 	
 	public String getNickname() {		
 		return (getProperty("user.name"));

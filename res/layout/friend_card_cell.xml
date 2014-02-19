@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white" >
+    <TextView
+        android:id="@+id/alpha"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#f1f1f1"
+        android:paddingLeft="10dip"
+        android:textColor="#999999"
+        android:visibility="gone" />
+    <RelativeLayout 
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+        >
+        <ImageView 
+        android:id="@+id/avatarImageView"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_launcher"
+        />
+    
+    <TextView 
+        android:id="@+id/title"
+        android:layout_toRightOf="@+id/avatarImageView"
+        android:layout_width="match_parent"
+        android:layout_marginRight="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="14dp"
+        android:textSize="16sp"
+        android:textColor="#2b2b2b"
+        android:text=""
+        android:singleLine="false"
+        />
+    
+    <TextView 
+        android:id="@+id/role"
+        android:layout_toRightOf="@+id/title"
+        android:layout_alignTop="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="4dp"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:text=""
+        android:gravity="center_vertical"
+        />
+    
+    <TextView 
+        android:id="@+id/des"
+        android:layout_below="@+id/title"
+        android:layout_alignLeft="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="100dp"
+        android:singleLine="false"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:text=""
+        />
+    
+    <TextView 
+        android:id="@+id/mobile"
+        android:layout_below="@+id/des"
+        android:layout_alignLeft="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_marginTop="5dp"
+        android:textSize="12sp"
+        android:textColor="#999999"
+        android:visibility="gone"
+        />
+    
+    </RelativeLayout>
+    
+    <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#e4e4e4"
+        />
+	
+</LinearLayout>

@@ -32,7 +32,6 @@ public class Update extends Entity {
 	public static Update parse(String postRequest) throws AppException{
 		Update update = new Update();
 		try {
-			
 			Gson gson = new Gson();
 			update = gson.fromJson(postRequest, Update.class);
 		} catch (Exception e) {
