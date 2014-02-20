@@ -1,4 +1,4 @@
-package xmpp;
+package tools;
 
 public class TransferUtils {
 	public static String calculateSpeed(long bytediff, long timediff) {

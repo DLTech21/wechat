@@ -1,9 +1,14 @@
 package ui;
 
 
+import im.WeChat;
+import tools.AppManager;
+
 import com.donal.wechat.R;
 
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

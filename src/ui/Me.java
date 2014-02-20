@@ -21,4 +21,9 @@ public class Me extends AppActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wechat);
 	}
+	
+	@Override
+	public void onBackPressed() {
+		isExit();
+	}
 }

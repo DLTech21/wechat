@@ -151,4 +151,9 @@ public class Friend extends AppActivity implements IXListViewListener{
 			getMyFriend(currentPage, UIHelper.LISTVIEW_ACTION_SCROLL);
 		}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		isExit();
+	}
 }

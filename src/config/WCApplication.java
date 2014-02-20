@@ -11,13 +11,16 @@ import bean.UserInfo;
 import com.loopj.android.http.PersistentCookieStore;
 import com.nostra13.universalimageloader.utils.L;
 
+
 import tools.AppContext;
 import tools.AppException;
+import tools.AppManager;
 import tools.ImageCacheUtil;
 import tools.Logger;
 import tools.StringUtils;
 
 
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
@@ -61,6 +64,11 @@ public class WCApplication extends AppContext {
 		Intent intent = new Intent();
         intent.setAction("tools.NetworkState.Service");
         startService(intent);
+	}
+	
+	public void exit() {
+		XmppConnectionManager.getInstance().disconnect();
+		AppManager.getAppManager().finishAllActivity();
 	}
 	
 	/**

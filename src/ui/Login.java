@@ -13,7 +13,6 @@ import tools.ImageUtils;
 import tools.UIHelper;
 import ui.adapter.TextAdapter;
 import widget.XListView;
-import xmpp.XmppTool;
 
 import bean.UserEntity;
 

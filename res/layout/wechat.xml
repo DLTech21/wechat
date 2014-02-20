@@ -43,6 +43,13 @@
             android:layout_marginLeft="8dp"
             android:visibility="invisible"
             android:background="@drawable/round_1"/>
+        
+        <View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e4e4e4"
+        android:layout_alignParentBottom="true"
+        />
     </RelativeLayout>
     
     <widget.XListView

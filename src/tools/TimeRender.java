@@ -1,4 +1,4 @@
-package xmpp;
+package tools;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

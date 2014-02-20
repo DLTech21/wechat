@@ -11,7 +11,9 @@ import tools.StringUtils;
 
 import bean.StrangerEntity;
 import bean.Update;
+import bean.UserDetail;
 import bean.UserEntity;
+import bean.UserInfo;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -150,6 +152,29 @@ public class ApiClent {
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (AppException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] responseBody, Throwable error) {
+				callback.onFailure(message_error);
+			}
+		});
+	}
+	
+	public static void getUserInfo(String apiKey, String userId, final ClientCallback callback) {
+		RequestParams params = new RequestParams();
+		params.add("apiKey", apiKey);
+		params.add("userId", userId);
+		QYRestClient.post("getUserDetail.do", params, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+				try {
+					UserDetail data = UserDetail.parse(new String(responseBody));
+					callback.onSuccess(data);
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

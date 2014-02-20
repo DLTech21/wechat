@@ -71,7 +71,13 @@
         <activity android:name="ui.Tabbar" android:screenOrientation="portrait" android:launchMode="singleTask" >           
         </activity>
         
-        <activity android:name="ui.WeChat" android:screenOrientation="portrait" android:launchMode="singleTask" >           
+        <activity android:name="im.WeChat" android:screenOrientation="portrait" android:launchMode="singleTask" >           
+        </activity>
+        
+        <activity
+            android:name="im.Chating" 
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         
         <activity android:name="ui.Friend" android:screenOrientation="portrait" android:launchMode="singleTask" >           
@@ -86,6 +92,9 @@
         <activity android:name="ui.Login" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing" >           
         </activity>
         
+        <!-- 聊天服务 -->
+		<service android:name="service.IMChatService"></service>  
+		
         <service android:name="tools.NetworkStateService" >
             <intent-filter android:priority="1000" >
                 <action android:name="tools.NetworkState.Service" /> 

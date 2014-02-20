@@ -6,4 +6,20 @@
     <string name="main_friend">通讯录</string>
     <string name="main_find_friend">发现</string>
     <string name="main_me">我</string>
+    
+    <!-- 网络和内存卡提示 -->
+    <string name="prompt">提示</string>
+    <string name="check_connection">无可用网络连接，请检查网络设置！</string>
+    <string name="check_sdcard">请检查内存卡！</string>
+ 	<string name="menu_settings">设置</string>
+ 	<string name="close">关闭</string>
+	<string name="exit">退出</string>
+	<string name="confirm">确定</string>
+	<string name="cancel">取消</string>
+	
+	<!-- 数据库和文件路径 -->
+	<string name="dir">/eim</string>
+	<string name="app_dir">/app</string>
+	<string name="db_dir">/database</string>
+	<string name="img_dir">/img</string>  
 </resources>
