@@ -91,7 +91,6 @@ public class WeChatAdapter extends BaseAdapter {
 			cell = (CellHolder) convertView.getTag();
 		}
 		String jid = notice.getFrom();
-		Logger.i(jid);
 		cell.desView.setTag(jid);
 		
 		getUserInfo(jid, cell, notice);
