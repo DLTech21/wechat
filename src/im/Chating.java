@@ -54,12 +54,6 @@ public class Chating extends AChating{
 	private String to_name;
 	private Notice notice;
 	
-	@Override
-	protected void onDestroy() {
-		Logger.i("d");
-		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
-		super.onDestroy();
-	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -192,5 +186,11 @@ public class Chating extends AChating{
 			return convertView;
 		}
 
+	}
+	
+	@Override
+	public void onBackPressed() {
+		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
+		super.onBackPressed();
 	}
 }
