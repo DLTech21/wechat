@@ -4,12 +4,22 @@
 package im;
 
 import im.model.IMMessage;
+import im.model.Notice;
 
 import java.util.List;
 
+import tools.Logger;
+
+import bean.JsonMessage;
+import bean.UserInfo;
+
 import com.donal.wechat.R;
 
+import config.CommonValue;
+import config.Constant;
+import config.FriendManager;
 import config.MessageManager;
+import config.NoticeManager;
 
 
 import android.content.Context;
@@ -40,14 +50,23 @@ public class Chating extends AChating{
 	private Button messageSendBtn = null;
 	private ListView listView;
 	private int recordCount;
-//	private User user;// 聊天人
+	private UserInfo user;// 聊天人
 	private String to_name;
+	private Notice notice;
+	
+	@Override
+	protected void onDestroy() {
+		Logger.i("d");
+		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
+		super.onDestroy();
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chating);
 		init();
+		user = FriendManager.getInstance(context).getFriend(to.split("@")[0]);
 	}
 	
 	private void init() {
@@ -83,6 +102,11 @@ public class Chating extends AChating{
 		});
 	}
 
+	@Override
+	protected void receiveNotice(Notice notice) {
+		this.notice = notice;
+	}
+	
 	@Override
 	protected void receiveNewMessage(IMMessage message) {
 		
@@ -138,34 +162,33 @@ public class Chating extends AChating{
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			inflater = (LayoutInflater) context
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			IMMessage message = items.get(position);
 			if (message.getMsgType() == 0) {
-				convertView = this.inflater.inflate(
-						R.layout.formclient_chat_in, null);
+				convertView = this.inflater.inflate(R.layout.formclient_chat_in, null);
 			} else {
-				convertView = this.inflater.inflate(
-						R.layout.formclient_chat_out, null);
+				convertView = this.inflater.inflate(R.layout.formclient_chat_out, null);
 			}
-			TextView useridView = (TextView) convertView
-					.findViewById(R.id.formclient_row_userid);
-			TextView dateView = (TextView) convertView
-					.findViewById(R.id.formclient_row_date);
-			TextView msgView = (TextView) convertView
-					.findViewById(R.id.formclient_row_msg);
-//			if (message.getMsgType() == 0) {
-//				if (null == user) {
-//					useridView.setText(StringUtil.getUserNameByJid(to));
-//				} else {
-//					useridView.setText(user.getName());
-//				}
-//
-//			} else {
-//				useridView.setText("我");
-//			}
+			ImageView avatar = (ImageView) convertView.findViewById(R.id.from_head);
+			TextView useridView = (TextView) convertView.findViewById(R.id.formclient_row_userid);
+			TextView dateView = (TextView) convertView.findViewById(R.id.formclient_row_date);
+			TextView msgView = (TextView) convertView.findViewById(R.id.formclient_row_msg);
+			
+			useridView.setVisibility(View.GONE);
+			String content = message.getContent();
+			if (message.getMsgType() == 0) {
+				imageLoader.displayImage(CommonValue.BASE_URL+user.userHead, avatar, CommonValue.DisplayOptions.default_options);
+			} else {
+				imageLoader.displayImage(CommonValue.BASE_URL+appContext.getLoginUserHead(), avatar, CommonValue.DisplayOptions.default_options);
+			}
+			try {
+				JsonMessage msg = JsonMessage.parse(content);
+				msgView.setText(msg.text);
+			} catch (Exception e) {
+				Logger.i(e);
+				msgView.setText(content);
+			}
 			dateView.setText(message.getTime());
-			msgView.setText(message.getContent());
 			return convertView;
 		}
 

@@ -503,8 +503,6 @@ public class SQLiteTemplate {
 
 	/**
 	 * 
-	 * @author shimiso
-	 * 
 	 * @param <T>
 	 */
 	public interface RowMapper<T> {

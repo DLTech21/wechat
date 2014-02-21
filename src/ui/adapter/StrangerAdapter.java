@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import tools.StringUtils;
+import ui.FindFriend;
 import ui.Friend;
 
 import com.donal.wechat.R;
@@ -24,7 +25,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class FriendCardAdapter extends BaseAdapter {
+public class StrangerAdapter extends BaseAdapter {
 	private Context context;
 	private LayoutInflater inflater;
 	private List<UserInfo> cards;
@@ -36,7 +37,7 @@ public class FriendCardAdapter extends BaseAdapter {
 		TextView desView;
 	}
 	
-	public FriendCardAdapter(Context context, List<UserInfo> cards) {
+	public StrangerAdapter(Context context, List<UserInfo> cards) {
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
 		this.cards = cards;
@@ -80,7 +81,8 @@ public class FriendCardAdapter extends BaseAdapter {
 		convertView.setOnClickListener( new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				((Friend)context).createChat(model.userId+CommonValue.BASE_XMPP_SERVER_NAME);
+				
+				((FindFriend)context).show2OptionsDialog(new String[]{CommonValue.Operation.addFriend}, model);
 			}
 		});
 		return convertView;

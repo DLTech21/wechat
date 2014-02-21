@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
  * 
  */
 public class DBManager {
-	private int version = 1;
+	private int version = 2;
 	private String databaseName;
 
 	// 本地Context对象

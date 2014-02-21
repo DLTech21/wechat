@@ -33,17 +33,18 @@
         android:layout_gravity="right"
         android:paddingBottom="3.0dip"
         android:paddingLeft="10.0dip"
-        android:paddingTop="3.0dip" >
+        android:paddingTop="3.0dip" 
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="50dp"
+        >
 
         <ImageView
             android:id="@+id/from_head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="5dip"
             android:src="@drawable/ic_launcher"
-            android:textColor="#FF000000"
-            android:textSize="16sp" />
+            />
 
         <TextView
             android:id="@+id/formclient_row_msg"
@@ -52,6 +53,7 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/from_head"
             android:background="@drawable/outgoing"
+            android:layout_marginRight="3dip"
             android:textColor="#FF000000"
             android:textSize="14sp" />
     </RelativeLayout>

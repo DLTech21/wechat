@@ -8,8 +8,11 @@ import java.util.List;
 
 import tools.UIHelper;
 import ui.adapter.FriendCardAdapter;
+import ui.adapter.StrangerAdapter;
 import widget.XListView;
 import widget.XListView.IXListViewListener;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
@@ -35,7 +38,7 @@ public class FindFriend extends AppActivity implements IXListViewListener{
 	
 	private XListView xlistView;
 	private List<UserInfo> datas;
-	private FriendCardAdapter mAdapter;
+	private StrangerAdapter mAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,7 @@ public class FindFriend extends AppActivity implements IXListViewListener{
         xlistView.setPullLoadEnable(false);
         xlistView.setDividerHeight(0);
         datas = new ArrayList<UserInfo>();
-		mAdapter = new FriendCardAdapter(this, datas);
+		mAdapter = new StrangerAdapter(this, datas);
 		xlistView.setAdapter(mAdapter);
 	}
 	
@@ -155,5 +158,38 @@ public class FindFriend extends AppActivity implements IXListViewListener{
 	@Override
 	public void onBackPressed() {
 		isExit();
+	}
+	
+	public void show2OptionsDialog(final String[] arg ,final UserInfo model){
+		new AlertDialog.Builder(context).setTitle(null).setItems(arg,
+				new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int which){
+				switch(which){
+				case 0:
+					addFriend(model);
+					break;
+				}
+			}
+		}).show();
+	}
+	
+	private void addFriend(UserInfo user) {
+		ApiClent.addFriend(appContext, appContext.getLoginApiKey(), user.userId, new ClientCallback() {
+			
+			@Override
+			public void onSuccess(Object data) {
+				showToast((String)data);
+			}
+			
+			@Override
+			public void onFailure(String message) {
+				showToast(message);
+			}
+			
+			@Override
+			public void onError(Exception e) {
+				
+			}
+		});
 	}
 }

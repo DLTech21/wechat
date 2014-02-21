@@ -125,6 +125,9 @@ public class WCApplication extends AppContext {
 		return (getProperty("user.apikey"));
 	}
 	
+	public String getLoginUserHead() {
+		return (getProperty("user.face"));
+	}
 	
 	public void saveLoginPassword(final String password) {
 		setProperties(new Properties(){

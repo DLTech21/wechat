@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import tools.AppException;
 import tools.Logger;
@@ -93,15 +95,17 @@ public class ApiClent {
 		QYRestClient.post("addFriend.do", params, new AsyncHttpResponseHandler() {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-				Logger.i(new String(responseBody));
-//				try {
-//					StrangerEntity data = StrangerEntity.parse(new String(responseBody));
-//					callback.onSuccess(data);
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				} catch (AppException e) {
-//					e.printStackTrace();
-//				}
+				try {
+					JSONObject js = new JSONObject(new String(responseBody));
+					int status = js.getInt("status");
+					if (status == 1) {
+						callback.onSuccess(js.getString("msg"));
+					} else {
+						callback.onFailure(js.getString("msg"));
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			@Override

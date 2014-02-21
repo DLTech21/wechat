@@ -22,6 +22,7 @@ import bean.UserInfo;
 
 import com.donal.wechat.R;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -51,12 +52,22 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 	
 	private List<HistoryChatBean> inviteNotices;
 	private WeChatAdapter noticeAdapter;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wechat);
 		initUI();
 		connect2xmpp();
+	}
+	
+	@Override
+	protected void onResume() {
+		inviteNotices = MessageManager.getInstance(context)
+				.getRecentContactsWithLastMsg();
+		noticeAdapter.setNoticeList(inviteNotices);
+		noticeAdapter.notifyDataSetChanged();
+		super.onResume();
 	}
 	
 	private void initUI() {
@@ -98,7 +109,6 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 					indicatorImageView.clearAnimation();
 					titleBarView.setText("微信");
 					startService();
-					saveLoginConfig(appContext.getLoginInfo());
 					break;
 				case 2:
 					indicatorImageView.setVisibility(View.INVISIBLE);
@@ -159,7 +169,6 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 
 	@Override
 	protected void msgReceive(Notice notice) {
-		Logger.i(notice.getFrom());
 		for (HistoryChatBean ch : inviteNotices) {
 			if (ch.getFrom().equals(notice.getFrom())) {
 				ch.setContent(notice.getContent());
@@ -217,4 +226,6 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 			createChat(userId);
 		}
 	};
+	
+	
 }

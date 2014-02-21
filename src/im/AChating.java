@@ -13,6 +13,10 @@ import java.util.List;
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.packet.Message;
 
+import com.google.gson.Gson;
+
+import bean.JsonMessage;
+
 import tools.DateUtil;
 import tools.Logger;
 
@@ -23,6 +27,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 
 import config.AppActivity;
+import config.CommonValue;
 import config.Constant;
 import config.MessageManager;
 import config.NoticeManager;
@@ -62,14 +67,14 @@ public abstract class AChating extends AppActivity{
 		// 第一次查询
 		message_pool = MessageManager.getInstance(context)
 				.getMessageListByFrom(to, 1, pageSize);
-		Logger.i(message_pool.size()+"");
 		if (null != message_pool && message_pool.size() > 0)
 			Collections.sort(message_pool);
 		IntentFilter filter = new IntentFilter();
+		filter.setPriority(1000);
 		filter.addAction(Constant.NEW_MESSAGE_ACTION);
 		registerReceiver(receiver, filter);
 
-		// 跟心某人所有通知
+		// 跟新某人所有通知
 		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
 		super.onResume();
 
@@ -80,16 +85,20 @@ public abstract class AChating extends AppActivity{
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
+			Notice notice = (Notice) intent.getSerializableExtra("notice");
 			if (Constant.NEW_MESSAGE_ACTION.equals(action)) {
 				IMMessage message = intent
 						.getParcelableExtra(IMMessage.IMMESSAGE_KEY);
 				message_pool.add(message);
 				receiveNewMessage(message);
 				refreshMessage(message_pool);
+				receiveNotice(notice);
 			}
 		}
 
 	};
+	
+	protected abstract void receiveNotice(Notice notice);
 	
 	protected abstract void receiveNewMessage(IMMessage message);
 
@@ -100,18 +109,24 @@ public abstract class AChating extends AppActivity{
 	}
 	
 	protected void sendMessage(String messageContent) throws Exception {
-
+		JsonMessage msg = new JsonMessage();
+		msg.file = "";
+		msg.messageType = CommonValue.kWCMessageTypePlain;
+		msg.text = messageContent;
+		Gson gson = new Gson();
+		String json = gson.toJson(msg);
+		
 		String time = DateUtil.date2Str(Calendar.getInstance(),
 				Constant.MS_FORMART);
 		Message message = new Message();
 		message.setProperty(IMMessage.KEY_TIME, time);
-		message.setBody(messageContent);
+		message.setBody(json);
 		chat.sendMessage(message);
 
 		IMMessage newMessage = new IMMessage();
 		newMessage.setMsgType(1);
 		newMessage.setFromSubJid(chat.getParticipant());
-		newMessage.setContent(messageContent);
+		newMessage.setContent(json);
 		newMessage.setTime(time);
 		message_pool.add(newMessage);
 		MessageManager.getInstance(context).saveIMMessage(newMessage);

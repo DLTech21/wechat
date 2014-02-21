@@ -16,7 +16,7 @@ import com.google.gson.Gson;
  */
 public class JsonMessage {
 	public String file;
-	public String messageType;
+	public int messageType;
 	public String text;
 	
 	public static JsonMessage parse(String res)  {

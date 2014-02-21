@@ -64,9 +64,11 @@ public abstract class AWechatActivity extends AppActivity {
 		filter.addAction(Constant.ROSTER_SUBSCRIPTION);
 		// 好友请求
 		filter.addAction(Constant.NEW_MESSAGE_ACTION);
+		filter.addAction(Constant.NEW_NOTICE_ACTION);
 		filter.addAction(Constant.ACTION_SYS_MSG);
 
 		filter.addAction(Constant.ACTION_RECONNECT_STATE);
+		filter.setPriority(1000);
 		registerReceiver(receiver, filter);
 		super.onResume();
 	}
@@ -75,11 +77,12 @@ public abstract class AWechatActivity extends AppActivity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
+			Logger.i("new no");
 			String action = intent.getAction();
 
 			Notice notice = (Notice) intent.getSerializableExtra("notice");
 
-			if (Constant.NEW_MESSAGE_ACTION.equals(action)) {
+			if (Constant.NEW_MESSAGE_ACTION.equals(action) || Constant.NEW_NOTICE_ACTION.equals(action)) {
 				msgReceive(notice);
 			} else if (Constant.ACTION_RECONNECT_STATE.equals(action)) {
 				boolean isSuccess = intent.getBooleanExtra(

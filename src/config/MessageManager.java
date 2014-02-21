@@ -21,7 +21,7 @@ import android.database.Cursor;
 
 /**
  * 
- * 消息历史记录，
+ * 消息历史记录
  * 
  */
 public class MessageManager {
@@ -137,7 +137,6 @@ public class MessageManager {
 	}
 
 	/**
-	 * 删除与某人的聊天记录 author shimiso
 	 * 
 	 * @param fromUser
 	 */

@@ -77,6 +77,7 @@
         <activity
             android:name="im.Chating" 
             android:screenOrientation="portrait"
+            android:launchMode="standard"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
         

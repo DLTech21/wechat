@@ -3,6 +3,8 @@
  */
 package ui;
 
+import im.Chating;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import tools.UIHelper;
 import ui.adapter.FriendCardAdapter;
 import widget.XListView;
 import widget.XListView.IXListViewListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
@@ -155,5 +158,11 @@ public class Friend extends AppActivity implements IXListViewListener{
 	@Override
 	public void onBackPressed() {
 		isExit();
+	}
+	
+	public void createChat(String userId) {
+		Intent intent = new Intent(context, Chating.class);
+		intent.putExtra("to", userId);
+		startActivity(intent);
 	}
 }

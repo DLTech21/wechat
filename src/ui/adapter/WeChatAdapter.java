@@ -5,6 +5,7 @@ import im.model.HistoryChatBean;
 import java.util.List;
 
 import tools.Logger;
+import tools.StringUtils;
 import ui.adapter.FriendCardAdapter.CellHolder;
 
 import bean.JsonMessage;
@@ -19,6 +20,7 @@ import config.ApiClent;
 import config.ApiClent.ClientCallback;
 import config.CommonValue;
 import config.Constant;
+import config.FriendManager;
 import config.WCApplication;
 
 import android.content.Context;
@@ -91,6 +93,7 @@ public class WeChatAdapter extends BaseAdapter {
 		String jid = notice.getFrom();
 		Logger.i(jid);
 		cell.desView.setTag(jid);
+		
 		getUserInfo(jid, cell, notice);
 		convertView.setOnClickListener(contacterOnClick);
 
@@ -102,30 +105,42 @@ public class WeChatAdapter extends BaseAdapter {
 		this.contacterOnClick = contacterOnClick;
 	}
 	
-	private void getUserInfo(final String userId, final CellHolder holder, final HistoryChatBean notice) {
-		final Integer ppCount = notice.getNoticeSum();
+	private void getUserInfo(final String userId, final CellHolder holder, HistoryChatBean notice) {
+		Integer ppCount = notice.getNoticeSum();
+		if (ppCount != null && ppCount > 0) {
+			holder.paopao.setText(ppCount + "");
+			holder.paopao.setVisibility(View.VISIBLE);
+
+		} else {
+			holder.paopao.setVisibility(View.GONE);
+		}
+		
+		String content = notice.getContent();
+		JsonMessage msg = JsonMessage.parse(content);
+		if (msg.messageType == CommonValue.kWCMessageTypePlain) {
+			holder.desView.setText(msg.text);
+		}
+		holder.newDate.setText(notice.getNoticeTime().substring(5, 16));
+		
+		UserInfo friend = FriendManager.getInstance(context).getFriend(userId.split("@")[0]);
+		if (friend != null && StringUtils.notEmpty(friend.userHead)) {
+			ImageLoader.getInstance().displayImage(CommonValue.BASE_URL+friend.userHead, holder.avatarImageView, CommonValue.DisplayOptions.default_options);
+			holder.titleView.setText(friend.nickName);
+			return;
+		}
 		SharedPreferences sharedPre = context.getSharedPreferences(
 				Constant.LOGIN_SET, Context.MODE_PRIVATE);
 		String apiKey = sharedPre.getString(Constant.APIKEY, null);
+		
 		ApiClent.getUserInfo(apiKey, userId.split("@")[0], new ClientCallback() {
 			
 			@Override
 			public void onSuccess(Object data) {
 				UserDetail userInfo = (UserDetail) data;
+				FriendManager.getInstance(context).saveOrUpdateFriend(userInfo.userDetail);
 				holder.titleView.setText(userInfo.userDetail.nickName);
 				ImageLoader.getInstance().displayImage(CommonValue.BASE_URL+userInfo.userDetail.userHead, holder.avatarImageView, CommonValue.DisplayOptions.default_options);
-				String content = notice.getContent();
-				JsonMessage msg = JsonMessage.parse(content);
-				holder.desView.setText(msg.text);
-				holder.newDate.setText(notice.getNoticeTime().substring(5, 16));
 		
-				if (ppCount != null && ppCount > 0) {
-					holder.paopao.setText(ppCount + "");
-					holder.paopao.setVisibility(View.VISIBLE);
-		
-				} else {
-					holder.paopao.setVisibility(View.GONE);
-				}
 			}
 			
 			@Override
