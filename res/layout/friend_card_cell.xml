@@ -22,14 +22,13 @@
         android:layout_marginTop="14dp"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_launcher"
+        android:scaleType="centerCrop"
         />
     
     <TextView 
         android:id="@+id/title"
         android:layout_toRightOf="@+id/avatarImageView"
-        android:layout_width="match_parent"
-        android:layout_marginRight="100dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:layout_marginLeft="14dp"
@@ -40,17 +39,19 @@
         />
     
     <TextView 
-        android:id="@+id/role"
-        android:layout_toRightOf="@+id/title"
+        android:id="@+id/time"
+        android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/title"
+        android:layout_toRightOf="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:layout_marginLeft="4dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="4dp"
         android:textSize="12sp"
         android:textColor="#999999"
         android:text=""
-        android:gravity="center_vertical"
+        android:gravity="center_vertical|right"
+        android:singleLine="true"
         />
     
     <TextView 

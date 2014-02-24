@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.donal.wechat"
+    android:installLocation="preferExternal"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -78,7 +79,7 @@
             android:name="im.Chating" 
             android:screenOrientation="portrait"
             android:launchMode="standard"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" >
+            android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         
         <activity android:name="ui.Friend" android:screenOrientation="portrait" android:launchMode="singleTask" >           

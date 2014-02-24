@@ -127,27 +127,10 @@ public class IMMessage implements Parcelable, Comparable<IMMessage> {
 		if (null == this.getTime() || null == oth.getTime()) {
 			return 0;
 		}
-		String format = null;
 		String time1 = "";
 		String time2 = "";
-		if (this.getTime().length() == oth.getTime().length()
-				&& this.getTime().length() == 23) {
-			time1 = this.getTime();
-			time2 = oth.getTime();
-			format = Constant.MS_FORMART;
-		} else {
-			time1 = this.getTime().substring(0, 19);
-			time2 = oth.getTime().substring(0, 19);
-		}
-		Date da1 = DateUtil.str2Date(time1, format);
-		Date da2 = DateUtil.str2Date(time2, format);
-		if (da1.before(da2)) {
-			return -1;
-		}
-		if (da2.before(da1)) {
-			return 1;
-		}
-
-		return 0;
+		time1 = this.getTime();
+		time2 = oth.getTime();
+		return time1.compareTo(time2);
 	}
 }

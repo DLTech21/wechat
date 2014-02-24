@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
 
 import com.google.gson.Gson;
@@ -70,10 +71,8 @@ public abstract class AChating extends AppActivity{
 		if (null != message_pool && message_pool.size() > 0)
 			Collections.sort(message_pool);
 		IntentFilter filter = new IntentFilter();
-		filter.setPriority(1000);
 		filter.addAction(Constant.NEW_MESSAGE_ACTION);
 		registerReceiver(receiver, filter);
-
 		// 跟新某人所有通知
 		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
 		super.onResume();
@@ -116,8 +115,7 @@ public abstract class AChating extends AppActivity{
 		Gson gson = new Gson();
 		String json = gson.toJson(msg);
 		
-		String time = DateUtil.date2Str(Calendar.getInstance(),
-				Constant.MS_FORMART);
+		String time = (System.currentTimeMillis()/1000)+"";//DateUtil.date2Str(Calendar.getInstance(),Constant.MS_FORMART);
 		Message message = new Message();
 		message.setProperty(IMMessage.KEY_TIME, time);
 		message.setBody(json);
@@ -130,8 +128,6 @@ public abstract class AChating extends AppActivity{
 		newMessage.setTime(time);
 		message_pool.add(newMessage);
 		MessageManager.getInstance(context).saveIMMessage(newMessage);
-		// MChatManager.message_pool.add(newMessage);
-
 		// 刷新视图
 		refreshMessage(message_pool);
 
@@ -152,9 +148,30 @@ public abstract class AChating extends AppActivity{
 		}
 		return false;
 	}
+	
+	protected int addNewMessage(int currentPage) {
+		List<IMMessage> newMsgList = MessageManager.getInstance(context)
+				.getMessageListByFrom(to, currentPage, pageSize);
+		if (newMsgList != null && newMsgList.size() > 0) {
+			message_pool.addAll(newMsgList);
+			Collections.sort(message_pool);
+			return newMsgList.size();
+		}
+		return 0;
+	}
 
 	protected void resh() {
 		// 刷新视图
 		refreshMessage(message_pool);
+	}
+	
+	class MsgListener implements MessageListener {
+
+		@Override
+		public void processMessage(Chat arg0, Message message) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

@@ -4,8 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15.0dp"
             android:textColor="#FF666666"
-            android:text="111111" />
+            />
 
         <TextView
             android:id="@+id/formclient_row_date"
@@ -23,17 +23,19 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5.0dp"
             android:textColor="#FF666666" 
-            android:text="111111" />
-    </LinearLayout>
+            android:layout_centerHorizontal="true"
+             />
+        
+    </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:paddingBottom="3.0dip"
+        android:paddingBottom="8dip"
         android:paddingRight="10.0dip"
-        android:paddingTop="3.0dip"
+        android:paddingTop="8dip"
         android:layout_marginLeft="10dip"
         android:layout_marginRight="50dp"
          >

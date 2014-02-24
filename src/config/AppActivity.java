@@ -59,8 +59,8 @@ public class AppActivity extends BaseActivity implements AppActivitySupport{
 	@Override
 	public void stopService() {
 		// 聊天服务
-		Intent chatServer = new Intent(context, IMChatService.class);
-		context.stopService(chatServer);
+//		Intent chatServer = new Intent(context, IMChatService.class);
+//		context.stopService(chatServer);
 	}
 
 	@Override

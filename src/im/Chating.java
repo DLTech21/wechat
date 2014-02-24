@@ -8,7 +8,9 @@ import im.model.Notice;
 
 import java.util.List;
 
+import tools.DateUtil;
 import tools.Logger;
+import tools.StringUtils;
 
 import bean.JsonMessage;
 import bean.UserInfo;
@@ -27,8 +29,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -54,6 +59,8 @@ public class Chating extends AChating{
 	private String to_name;
 	private Notice notice;
 	
+	private int firstVisibleItem;
+	private int currentPage = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +77,42 @@ public class Chating extends AChating{
 		adapter = new MessageListAdapter(Chating.this, getMessages(),
 				listView);
 		listView.setAdapter(adapter);
+		
+		listView.setOnScrollListener(new OnScrollListener() {
+			
+			@Override
+			public void onScrollStateChanged(AbsListView view, int scrollState) {
+				switch (scrollState) {
+				case SCROLL_STATE_FLING:
+					break;
+				case SCROLL_STATE_IDLE:
+					if (firstVisibleItem == 0) {
+						int num = addNewMessage(++currentPage);
+						if (num > 0) {
+							adapter.refreshList(getMessages());
+							listView.setSelection(num-1);
+						}
+					}
+					break;
+				case SCROLL_STATE_TOUCH_SCROLL:
+					closeInput();
+					break;
+				}
+			}
+			
+			@Override
+			public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+				Chating.this.firstVisibleItem = firstVisibleItem;
+			}
+		});
 
 		messageInput = (EditText) findViewById(R.id.chat_content);
+		messageInput.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				listView.setSelection(getMessages().size()-1);
+			}
+		});
 		messageSendBtn = (Button) findViewById(R.id.chat_sendbtn);
 		messageSendBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -92,6 +133,7 @@ public class Chating extends AChating{
 					}
 					closeInput();
 				}
+				listView.setSelection(getMessages().size()-1);
 			}
 		});
 	}
@@ -114,9 +156,11 @@ public class Chating extends AChating{
 	@Override
 	protected void onResume() {
 		super.onResume();
+		
 		recordCount = MessageManager.getInstance(context)
 				.getChatCountWithSb(to);
 		adapter.refreshList(getMessages());
+		listView.setSelection(getMessages().size()-1);
 	}
 	
 	private class MessageListAdapter extends BaseAdapter {
@@ -136,7 +180,7 @@ public class Chating extends AChating{
 		public void refreshList(List<IMMessage> items) {
 			this.items = items;
 			this.notifyDataSetChanged();
-			adapterList.setSelection(items.size() - 1);
+			
 		}
 
 		@Override
@@ -179,10 +223,23 @@ public class Chating extends AChating{
 				JsonMessage msg = JsonMessage.parse(content);
 				msgView.setText(msg.text);
 			} catch (Exception e) {
-				Logger.i(e);
 				msgView.setText(content);
 			}
-			dateView.setText(message.getTime());
+			String currentTime = message.getTime();
+			String previewTime = (position - 1) >= 0 ? items.get(position-1).getTime() : "0";
+			try {
+				long time1 = Long.valueOf(currentTime);
+				long time2 = Long.valueOf(previewTime);
+				if ((time1-time2) >= 5 * 60 ) {
+					dateView.setVisibility(View.VISIBLE);
+					dateView.setText(DateUtil.wechat_time(message.getTime()));
+				}
+				else {
+					dateView.setVisibility(View.GONE);
+				}
+			} catch (Exception e) {
+				Logger.i(e);
+			}
 			return convertView;
 		}
 

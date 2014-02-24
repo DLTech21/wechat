@@ -4,6 +4,7 @@ import im.model.HistoryChatBean;
 
 import java.util.List;
 
+import tools.DateUtil;
 import tools.Logger;
 import tools.StringUtils;
 import ui.adapter.FriendCardAdapter.CellHolder;
@@ -28,6 +29,7 @@ import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -38,11 +40,13 @@ public class WeChatAdapter extends BaseAdapter {
 	private List<HistoryChatBean> inviteUsers;
 	private Context context;
 	private OnClickListener contacterOnClick;
+	private OnLongClickListener contacterOnLongClick;
 
 	static class CellHolder {
 		TextView alpha;
 		ImageView avatarImageView;
 		TextView titleView;
+		TextView timeView;
 		TextView desView;
 		TextView paopao;
 		TextView newDate;
@@ -82,20 +86,19 @@ public class WeChatAdapter extends BaseAdapter {
 			convertView = mInflater.inflate(R.layout.friend_card_cell, null);
 			cell.alpha = (TextView) convertView.findViewById(R.id.alpha);
 			cell.avatarImageView = (ImageView) convertView.findViewById(R.id.avatarImageView);
+			cell.timeView = (TextView) convertView.findViewById(R.id.time);
 			cell.titleView = (TextView) convertView.findViewById(R.id.title);
 			cell.desView = (TextView) convertView.findViewById(R.id.des);
 			cell.paopao = (TextView) convertView.findViewById(R.id.paopao);
-			cell.newDate = (TextView) convertView.findViewById(R.id.role);
 			convertView.setTag(cell);
 		} else {
 			cell = (CellHolder) convertView.getTag();
 		}
 		String jid = notice.getFrom();
 		cell.desView.setTag(jid);
-		
 		getUserInfo(jid, cell, notice);
 		convertView.setOnClickListener(contacterOnClick);
-
+		convertView.setOnLongClickListener(contacterOnLongClick);
 		return convertView;
 	}
 
@@ -104,7 +107,12 @@ public class WeChatAdapter extends BaseAdapter {
 		this.contacterOnClick = contacterOnClick;
 	}
 	
+	public void setOnLongClickListener(OnLongClickListener contacterOnLongClick ) {
+		this.contacterOnLongClick = contacterOnLongClick;
+	}
+	
 	private void getUserInfo(final String userId, final CellHolder holder, HistoryChatBean notice) {
+		holder.timeView.setText(DateUtil.wechat_time(notice.getNoticeTime()));
 		Integer ppCount = notice.getNoticeSum();
 		if (ppCount != null && ppCount > 0) {
 			holder.paopao.setText(ppCount + "");
@@ -115,12 +123,14 @@ public class WeChatAdapter extends BaseAdapter {
 		}
 		
 		String content = notice.getContent();
-		JsonMessage msg = JsonMessage.parse(content);
-		if (msg.messageType == CommonValue.kWCMessageTypePlain) {
-			holder.desView.setText(msg.text);
+		try {
+			JsonMessage msg = JsonMessage.parse(content);
+			if (msg.messageType == CommonValue.kWCMessageTypePlain) {
+				holder.desView.setText(msg.text);
+			}
+		} catch(Exception e) {
+			holder.desView.setText(content);
 		}
-		holder.newDate.setText(notice.getNoticeTime().substring(5, 16));
-		
 		UserInfo friend = FriendManager.getInstance(context).getFriend(userId.split("@")[0]);
 		if (friend != null && StringUtils.notEmpty(friend.userHead)) {
 			ImageLoader.getInstance().displayImage(CommonValue.BASE_URL+friend.userHead, holder.avatarImageView, CommonValue.DisplayOptions.default_options);

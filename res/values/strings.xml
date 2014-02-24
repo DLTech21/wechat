@@ -18,7 +18,7 @@
 	<string name="cancel">取消</string>
 	
 	<!-- 数据库和文件路径 -->
-	<string name="dir">/eim</string>
+	<string name="dir">/wechat</string>
 	<string name="app_dir">/app</string>
 	<string name="db_dir">/database</string>
 	<string name="img_dir">/img</string>  

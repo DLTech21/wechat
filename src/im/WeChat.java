@@ -22,12 +22,15 @@ import bean.UserInfo;
 
 import com.donal.wechat.R;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
@@ -58,7 +61,10 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wechat);
 		initUI();
-		connect2xmpp();
+		XMPPConnection connection = XmppConnectionManager.getInstance().getConnection();
+		if (!connection.isConnected()) {
+			connect2xmpp();
+		}
 	}
 	
 	@Override
@@ -67,6 +73,7 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 				.getRecentContactsWithLastMsg();
 		noticeAdapter.setNoticeList(inviteNotices);
 		noticeAdapter.notifyDataSetChanged();
+		setPaoPao();
 		super.onResume();
 	}
 	
@@ -95,6 +102,7 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 		noticeAdapter = new WeChatAdapter(this, inviteNotices);
 		xlistView.setAdapter(noticeAdapter);
 		noticeAdapter.setOnClickListener(contacterOnClickJ);
+		noticeAdapter.setOnLongClickListener(contacterOnLongClickJ);
 	}
 	
 	private void connect2xmpp()  {
@@ -169,15 +177,15 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 
 	@Override
 	protected void msgReceive(Notice notice) {
+		inviteNotices = MessageManager.getInstance(context).getRecentContactsWithLastMsg();
 		for (HistoryChatBean ch : inviteNotices) {
 			if (ch.getFrom().equals(notice.getFrom())) {
 				ch.setContent(notice.getContent());
 				ch.setNoticeTime(notice.getNoticeTime());
 				Integer x = ch.getNoticeSum() == null ? 0 : ch.getNoticeSum();
-				ch.setNoticeSum(x + 1);
+				ch.setNoticeSum(x);
 			}
 		}
-		Logger.i(inviteNotices.size()+""	);
 		noticeAdapter.setNoticeList(inviteNotices);
 		noticeAdapter.notifyDataSetChanged();
 		setPaoPao();
@@ -227,5 +235,31 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 		}
 	};
 	
+	private OnLongClickListener contacterOnLongClickJ = new OnLongClickListener() {
+
+		@Override
+		public boolean onLongClick(View v) {
+			String userId = (String) v.findViewById(R.id.des).getTag();
+			showDelChatOptionsDialog(new String[]{"删除对话"}, userId);
+			return false;
+		}
+	};
+	
+	public void showDelChatOptionsDialog(final String[] arg ,final String userId){
+		new AlertDialog.Builder(context).setTitle(null).setItems(arg,
+				new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int which){
+				switch(which){
+				case 0:
+					MessageManager.getInstance(context).delChatHisWithSb(userId);
+					inviteNotices = MessageManager.getInstance(context)
+							.getRecentContactsWithLastMsg();
+					noticeAdapter.setNoticeList(inviteNotices);
+					noticeAdapter.notifyDataSetChanged();
+					break;
+				}
+			}
+		}).show();
+	}
 	
 }

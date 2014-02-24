@@ -3,6 +3,7 @@ package tools;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * 日期操作工具类.
@@ -121,4 +122,47 @@ public class DateUtil {
 		return new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss-SSS").format(time);
 
 	}
+	
+	/**
+	 * 微信方式显示时间
+	 * @param sdate
+	 * @return
+	 */
+	public static String wechat_time(String sdate) {
+		Date time = new Date(Long.valueOf(sdate)*1000);
+		String ftime = "";
+		Calendar cal = Calendar.getInstance();
+		int hour = time.getHours();
+		String apm;
+		if(hour >= 12) {
+			apm = "下午";
+		}
+		else if (hour >= 6) {
+		    apm = "上午";
+		} 
+		else  {
+		    apm = "凌晨";
+		} 
+		SimpleDateFormat df=new SimpleDateFormat("h:mm", Locale.CHINESE); 
+		long lt = time.getTime()/86400000;
+		long ct = cal.getTimeInMillis()/86400000;
+		int days = (int)(ct - lt);	
+		if(days == 0){
+			ftime = apm + df.format(time);
+		}
+		else if(days == 1){
+			ftime = "昨天 " + apm + df.format(time);
+		}
+		else if(days >= 2 && days <= 6){ 
+			SimpleDateFormat wf = new SimpleDateFormat("E ", Locale.CHINESE); 
+			ftime = wf.format(time) + apm + df.format(time);
+		}
+		else if(days >= 7){		
+			SimpleDateFormat yf = new SimpleDateFormat("yyyy-MM-dd ", Locale.CHINESE);
+			ftime = yf.format(time) + apm + df.format(time);
+		}
+		return ftime;
+	}
+	
+	
 }

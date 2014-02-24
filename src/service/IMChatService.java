@@ -68,11 +68,11 @@ public class IMChatService extends Service {
 	@Override
 	public void onDestroy() {
 		Logger.i("d");
-		XMPPConnection conn = XmppConnectionManager.getInstance()
-				.getConnection();
-		if (cListener != null) {
-			conn.removePacketListener(cListener);
-		}
+//		XMPPConnection conn = XmppConnectionManager.getInstance()
+//				.getConnection();
+//		if (cListener != null) {
+//			conn.removePacketListener(cListener);
+//		}
 		super.onDestroy();
 	}
 
@@ -155,8 +155,7 @@ public class IMChatService extends Service {
 				IMMessage msg = new IMMessage();
 				// String time = (String)
 				// message.getProperty(IMMessage.KEY_TIME);
-				String time = DateUtil.date2Str(Calendar.getInstance(),
-						Constant.MS_FORMART);
+				String time = (System.currentTimeMillis()/1000)+"";//DateUtil.date2Str(Calendar.getInstance(), Constant.MS_FORMART);
 				msg.setTime(time);
 				msg.setContent(message.getBody());
 				if (Message.Type.error == message.getType()) {

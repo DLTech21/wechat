@@ -4,36 +4,37 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
         android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/formclient_row_userid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1111111"
-            android:textColor="#FF666666" />
+            android:layout_marginLeft="15.0dp"
+            android:textColor="#FF666666"
+            />
 
         <TextView
             android:id="@+id/formclient_row_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5.0dp"
-            android:layout_marginRight="20.0dip"
-            android:text="1111111"
-            android:textColor="#FF666666" />
-    </LinearLayout>
+            android:textColor="#FF666666" 
+            android:layout_centerHorizontal="true"
+            />
+        
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:paddingBottom="3.0dip"
+        android:paddingBottom="8dip"
         android:paddingLeft="10.0dip"
-        android:paddingTop="3.0dip" 
+        android:paddingTop="8dip" 
         android:layout_marginRight="10dp"
         android:layout_marginLeft="50dp"
         >

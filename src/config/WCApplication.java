@@ -67,7 +67,7 @@ public class WCApplication extends AppContext {
 	}
 	
 	public void exit() {
-		XmppConnectionManager.getInstance().disconnect();
+//		XmppConnectionManager.getInstance().disconnect();
 		AppManager.getAppManager().finishAllActivity();
 	}
 	
