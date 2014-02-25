@@ -4,13 +4,13 @@ import tools.AppManager;
 import tools.ImageUtils;
 import android.graphics.Bitmap;
 
+import com.donal.wechat.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.LoadedFrom;
 import com.nostra13.universalimageloader.core.display.BitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.imageaware.ImageAware;
-import com.vikaa.baseapp.R;
 
 /**
  * wechat

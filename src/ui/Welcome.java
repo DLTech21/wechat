@@ -21,8 +21,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 
-import cn.sharesdk.framework.ShareSDK;
-
 import config.AppActivity;
 import config.CommonValue;
 

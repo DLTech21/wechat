@@ -12,7 +12,6 @@ import ui.adapter.FriendCardAdapter.CellHolder;
 import bean.JsonMessage;
 import bean.UserDetail;
 import bean.UserInfo;
-import cn.sharesdk.wechat.friends.Wechat;
 
 import com.donal.wechat.R;
 import com.nostra13.universalimageloader.core.ImageLoader;

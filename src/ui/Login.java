@@ -52,13 +52,13 @@ public class Login extends AppActivity{
 	@Override
 	public void onStart() {
 	    super.onStart();
-	    EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+	    EasyTracker.getInstance(this).activityStart(this);
 	}
 
 	  @Override
 	public void onStop() {
 	    super.onStop();
-	    EasyTracker.getInstance(this).activityStop(this);  // Add this method.
+	    EasyTracker.getInstance(this).activityStop(this);  
 	}
 	  
 	@Override

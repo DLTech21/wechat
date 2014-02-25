@@ -10,8 +10,8 @@ import java.util.List;
 
 import tools.UIHelper;
 import ui.adapter.FriendCardAdapter;
-import widget.XListView;
-import widget.XListView.IXListViewListener;
+import xlistview.XListView;
+import xlistview.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;

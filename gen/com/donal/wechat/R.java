@@ -125,93 +125,48 @@ public final class R {
         public static final int standard_padding=0x7f070001;
     }
     public static final class drawable {
-        public static final int auth_follow_cb_chd=0x7f020000;
-        public static final int auth_follow_cb_unc=0x7f020001;
-        public static final int auth_title_back=0x7f020002;
-        public static final int btn_back_nor=0x7f020003;
-        public static final int btn_cancel_back=0x7f020004;
-        public static final int clearwords_bg=0x7f020005;
-        public static final int clearwords_bg_nor=0x7f020006;
-        public static final int clearwords_bg_sel=0x7f020007;
-        public static final int clearwords_icon=0x7f020008;
-        public static final int content_image_loading=0x7f020009;
-        public static final int edittext_back=0x7f02000a;
-        public static final int gray_point=0x7f02000b;
-        public static final int ic_launcher=0x7f02000c;
-        public static final int ic_pulltorefresh_arrow=0x7f02000d;
-        public static final int img_cancel=0x7f02000e;
-        public static final int incoming=0x7f02000f;
-        public static final int loading_page_loading0=0x7f020010;
-        public static final int loading_page_loading1=0x7f020011;
-        public static final int loading_page_loading2=0x7f020012;
-        public static final int loading_page_loading3=0x7f020013;
-        public static final int logo_douban=0x7f020014;
-        public static final int logo_dropbox=0x7f020015;
-        public static final int logo_email=0x7f020016;
-        public static final int logo_evernote=0x7f020017;
-        public static final int logo_facebook=0x7f020018;
-        public static final int logo_flickr=0x7f020019;
-        public static final int logo_foursquare=0x7f02001a;
-        public static final int logo_googleplus=0x7f02001b;
-        public static final int logo_instagram=0x7f02001c;
-        public static final int logo_kaixin=0x7f02001d;
-        public static final int logo_linkedin=0x7f02001e;
-        public static final int logo_neteasemicroblog=0x7f02001f;
-        public static final int logo_pinterest=0x7f020020;
-        public static final int logo_qq=0x7f020021;
-        public static final int logo_qzone=0x7f020022;
-        public static final int logo_renren=0x7f020023;
-        public static final int logo_shortmessage=0x7f020024;
-        public static final int logo_sinaweibo=0x7f020025;
-        public static final int logo_sohumicroblog=0x7f020026;
-        public static final int logo_sohusuishenkan=0x7f020027;
-        public static final int logo_tencentweibo=0x7f020028;
-        public static final int logo_tumblr=0x7f020029;
-        public static final int logo_twitter=0x7f02002a;
-        public static final int logo_vkontakte=0x7f02002b;
-        public static final int logo_wechat=0x7f02002c;
-        public static final int logo_wechatmoments=0x7f02002d;
-        public static final int logo_youdao=0x7f02002e;
-        public static final int nav_refresh=0x7f02002f;
-        public static final int new_data_toast=0x7f020030;
-        public static final int outgoing=0x7f020031;
-        public static final int pin=0x7f020032;
-        public static final int refreshlistview_arrow=0x7f020033;
-        public static final int review_bg_blue=0x7f020034;
-        public static final int round_1=0x7f020035;
-        public static final int round_10=0x7f020036;
-        public static final int round_2=0x7f020037;
-        public static final int round_3=0x7f020038;
-        public static final int round_4=0x7f020039;
-        public static final int round_5=0x7f02003a;
-        public static final int round_6=0x7f02003b;
-        public static final int round_7=0x7f02003c;
-        public static final int round_8=0x7f02003d;
-        public static final int round_9=0x7f02003e;
-        public static final int sc_message_box_bubble=0x7f02003f;
-        public static final int share_tb_back=0x7f020040;
-        public static final int share_vp_back=0x7f020041;
-        public static final int ssdk_auth_title_back=0x7f020042;
-        public static final int ssdk_back_arr=0x7f020043;
-        public static final int ssdk_logo=0x7f020044;
-        public static final int ssdk_title_div=0x7f020045;
-        public static final int tabbar_button1=0x7f020046;
-        public static final int tabbar_button2=0x7f020047;
-        public static final int tabbar_button3=0x7f020048;
-        public static final int tabbar_button4=0x7f020049;
-        public static final int tabbar_contacts=0x7f02004a;
-        public static final int tabbar_contacts_highlighted=0x7f02004b;
-        public static final int tabbar_discover=0x7f02004c;
-        public static final int tabbar_discover_highlighted=0x7f02004d;
-        public static final int tabbar_mainframe=0x7f02004e;
-        public static final int tabbar_mainframe_highlighted=0x7f02004f;
-        public static final int tabbar_me=0x7f020050;
-        public static final int tabbar_me_highlighted=0x7f020051;
-        public static final int title_back=0x7f020052;
-        public static final int title_shadow=0x7f020053;
-        public static final int welcome=0x7f020054;
-        public static final int white_point=0x7f020055;
-        public static final int xlistview_arrow=0x7f020056;
+        public static final int clearwords_bg=0x7f020000;
+        public static final int clearwords_bg_nor=0x7f020001;
+        public static final int clearwords_bg_sel=0x7f020002;
+        public static final int clearwords_icon=0x7f020003;
+        public static final int content_image_loading=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int ic_pulltorefresh_arrow=0x7f020006;
+        public static final int incoming=0x7f020007;
+        public static final int loading_page_loading0=0x7f020008;
+        public static final int loading_page_loading1=0x7f020009;
+        public static final int loading_page_loading2=0x7f02000a;
+        public static final int loading_page_loading3=0x7f02000b;
+        public static final int nav_refresh=0x7f02000c;
+        public static final int new_data_toast=0x7f02000d;
+        public static final int outgoing=0x7f02000e;
+        public static final int refreshlistview_arrow=0x7f02000f;
+        public static final int review_bg_blue=0x7f020010;
+        public static final int round_1=0x7f020011;
+        public static final int round_10=0x7f020012;
+        public static final int round_2=0x7f020013;
+        public static final int round_3=0x7f020014;
+        public static final int round_4=0x7f020015;
+        public static final int round_5=0x7f020016;
+        public static final int round_6=0x7f020017;
+        public static final int round_7=0x7f020018;
+        public static final int round_8=0x7f020019;
+        public static final int round_9=0x7f02001a;
+        public static final int sc_message_box_bubble=0x7f02001b;
+        public static final int tabbar_button1=0x7f02001c;
+        public static final int tabbar_button2=0x7f02001d;
+        public static final int tabbar_button3=0x7f02001e;
+        public static final int tabbar_button4=0x7f02001f;
+        public static final int tabbar_contacts=0x7f020020;
+        public static final int tabbar_contacts_highlighted=0x7f020021;
+        public static final int tabbar_discover=0x7f020022;
+        public static final int tabbar_discover_highlighted=0x7f020023;
+        public static final int tabbar_mainframe=0x7f020024;
+        public static final int tabbar_mainframe_highlighted=0x7f020025;
+        public static final int tabbar_me=0x7f020026;
+        public static final int tabbar_me_highlighted=0x7f020027;
+        public static final int welcome=0x7f020028;
+        public static final int xlistview_arrow=0x7f020029;
     }
     public static final class id {
         public static final int alpha=0x7f08001b;
@@ -333,7 +288,7 @@ public final class R {
         public static final int Cancel=0x7f0900b3;
         public static final int Ensure=0x7f0900b2;
         public static final int already_registered=0x7f0900b6;
-        public static final int app_dir=0x7f090110;
+        public static final int app_dir=0x7f0900e3;
         public static final int app_error=0x7f09000e;
         public static final int app_error_message=0x7f09000f;
         public static final int app_menu_surelogout=0x7f09000a;
@@ -371,15 +326,15 @@ public final class R {
         public static final int button_sms=0x7f090045;
         public static final int button_web_search=0x7f090046;
         public static final int button_wifi=0x7f090047;
-        public static final int cancel=0x7f0900fa;
+        public static final int cancel=0x7f0900e1;
         public static final int cancle=0x7f09000c;
         public static final int charsetHint=0x7f0900ae;
-        public static final int check_connection=0x7f09010a;
-        public static final int check_sdcard=0x7f09010b;
+        public static final int check_connection=0x7f0900dc;
+        public static final int check_sdcard=0x7f0900dd;
         public static final int check_sign_failed=0x7f0900b4;
         public static final int clearwords=0x7f090001;
-        public static final int close=0x7f09010c;
-        public static final int confirm=0x7f09010e;
+        public static final int close=0x7f0900de;
+        public static final int confirm=0x7f0900e0;
         public static final int confirm_install=0x7f0900b1;
         public static final int confirm_install_hint=0x7f0900b0;
         public static final int contents_contact=0x7f090048;
@@ -388,29 +343,19 @@ public final class R {
         public static final int contents_phone=0x7f09004b;
         public static final int contents_sms=0x7f09004c;
         public static final int contents_text=0x7f09004d;
-        public static final int db_dir=0x7f090111;
+        public static final int db_dir=0x7f0900e4;
         /**  数据库和文件路径 
          */
-        public static final int dir=0x7f09010f;
-        public static final int douban=0x7f0900ed;
-        public static final int dropbox=0x7f0900f7;
+        public static final int dir=0x7f0900e2;
         public static final int edit=0x7f09000d;
-        public static final int email=0x7f0900e8;
         public static final int error_config=0x7f0900b5;
-        public static final int evernote=0x7f0900ef;
-        public static final int exit=0x7f09010d;
-        public static final int facebook=0x7f0900e4;
-        public static final int finish=0x7f0900fb;
-        public static final int flickr=0x7f0900f5;
-        public static final int foursquare=0x7f0900f2;
+        public static final int exit=0x7f0900df;
         public static final int gcm_deleted=0x7f0900bc;
         public static final int gcm_error=0x7f0900ba;
         public static final int gcm_message=0x7f0900b9;
         public static final int gcm_recoverable_error=0x7f0900bb;
         public static final int gcm_registered=0x7f0900b7;
         public static final int gcm_unregistered=0x7f0900b8;
-        public static final int google_plus_client_inavailable=0x7f0900db;
-        public static final int googleplus=0x7f0900f1;
         public static final int history_clear_one_history_text=0x7f09004e;
         public static final int history_clear_text=0x7f09004f;
         public static final int history_email_title=0x7f090050;
@@ -420,13 +365,8 @@ public final class R {
         public static final int history_title=0x7f090054;
         public static final int http_exception_error=0x7f090007;
         public static final int http_status_code_error=0x7f090006;
-        public static final int img_dir=0x7f090112;
-        public static final int instagram=0x7f0900f9;
-        public static final int instagram_client_inavailable=0x7f0900de;
+        public static final int img_dir=0x7f0900e5;
         public static final int io_exception_error=0x7f090005;
-        public static final int kaixin=0x7f0900e7;
-        public static final int linkedin=0x7f0900f0;
-        public static final int list_friends=0x7f090103;
         public static final int load_empty=0x7f090014;
         public static final int load_error=0x7f090015;
         public static final int load_full=0x7f090013;
@@ -441,10 +381,10 @@ public final class R {
         public static final int login_check_password=0x7f090027;
         public static final int login_check_server=0x7f090028;
         public static final int logout=0x7f090025;
-        public static final int main_find_friend=0x7f090107;
-        public static final int main_friend=0x7f090106;
-        public static final int main_me=0x7f090108;
-        public static final int main_wechat=0x7f090105;
+        public static final int main_find_friend=0x7f0900d9;
+        public static final int main_friend=0x7f0900d8;
+        public static final int main_me=0x7f0900da;
+        public static final int main_wechat=0x7f0900d7;
         public static final int menu_encode_mecard=0x7f090055;
         public static final int menu_encode_vcard=0x7f090056;
         public static final int menu_help=0x7f090057;
@@ -489,8 +429,6 @@ public final class R {
         public static final int msg_share_text=0x7f090073;
         public static final int msg_sure=0x7f090074;
         public static final int msg_unmount_usb=0x7f090075;
-        public static final int multi_share=0x7f0900ff;
-        public static final int neteasemicroblog=0x7f0900ec;
         public static final int network_not_connected=0x7f090003;
         public static final int new_data_toast_message=0x7f090016;
         public static final int new_data_toast_none=0x7f090017;
@@ -503,8 +441,6 @@ public final class R {
         public static final int options_unregister=0x7f0900c3;
         public static final int out_trade_noHint=0x7f0900a9;
         public static final int partnerHint=0x7f0900a7;
-        public static final int pinterest=0x7f0900f4;
-        public static final int pinterest_client_inavailable=0x7f0900dd;
         public static final int preferences_actions_title=0x7f090076;
         public static final int preferences_auto_focus_title=0x7f090077;
         public static final int preferences_bulk_mode_summary=0x7f090078;
@@ -539,7 +475,7 @@ public final class R {
         public static final int preferences_vibrate_title=0x7f090095;
         /**  网络和内存卡提示 
          */
-        public static final int prompt=0x7f090109;
+        public static final int prompt=0x7f0900db;
         public static final int pull_to_refresh_footer_pull_label=0x7f0900ca;
         public static final int pull_to_refresh_footer_refreshing_label=0x7f0900cb;
         public static final int pull_to_refresh_footer_release_label=0x7f0900c9;
@@ -550,9 +486,6 @@ public final class R {
          */
         public static final int pull_to_refresh_tap_label=0x7f09002a;
         public static final int pull_to_refresh_update=0x7f09002b;
-        public static final int qq=0x7f0900f3;
-        public static final int qq_client_inavailable=0x7f0900dc;
-        public static final int qzone=0x7f0900e1;
         public static final int refreshlistview_arrow=0x7f0900cc;
         public static final int refreshlistview_no_update=0x7f0900d0;
         public static final int refreshlistview_pulldown=0x7f0900cf;
@@ -561,7 +494,6 @@ public final class R {
         /**  支付宝 
          */
         public static final int remote_call_failed=0x7f0900a6;
-        public static final int renren=0x7f0900e6;
         public static final int result_address_book=0x7f090096;
         public static final int result_calendar=0x7f090097;
         public static final int result_email_address=0x7f090098;
@@ -574,40 +506,19 @@ public final class R {
         public static final int result_uri=0x7f09009f;
         public static final int result_wifi=0x7f0900a0;
         public static final int sbc_name=0x7f0900a1;
-        public static final int select_one_plat_at_least=0x7f090102;
         public static final int sellerHint=0x7f0900a8;
         public static final int server_register_error=0x7f0900c0;
         public static final int server_registered=0x7f0900be;
         public static final int server_registering=0x7f0900bd;
         public static final int server_unregister_error=0x7f0900c1;
         public static final int server_unregistered=0x7f0900bf;
-        public static final int share=0x7f0900fe;
-        public static final int share_canceled=0x7f090101;
-        public static final int share_completed=0x7f090100;
-        public static final int share_failed=0x7f090104;
         public static final int share_name=0x7f0900a2;
-        public static final int share_to=0x7f0900fd;
-        public static final int sharing=0x7f0900fc;
-        public static final int shortmessage=0x7f0900e9;
         public static final int signTypeHint=0x7f0900af;
-        public static final int sinaweibo=0x7f0900df;
         public static final int socket_exception_error=0x7f090008;
-        public static final int sohumicroblog=0x7f0900ea;
-        public static final int sohusuishenkan=0x7f0900eb;
         public static final int subjectHint=0x7f0900aa;
         public static final int submit_report=0x7f090010;
         public static final int sure=0x7f09000b;
-        public static final int tencentweibo=0x7f0900e0;
         public static final int total_feeHint=0x7f0900ac;
-        public static final int tumblr=0x7f0900f6;
-        public static final int twitter=0x7f0900e5;
-        public static final int vkontakte=0x7f0900f8;
-        public static final int website=0x7f0900d8;
-        public static final int wechat=0x7f0900e2;
-        public static final int wechat_client_inavailable=0x7f0900da;
-        public static final int wechatmoments=0x7f0900e3;
-        public static final int weibo_oauth_regiseter=0x7f0900d7;
-        public static final int weibo_upload_content=0x7f0900d9;
         public static final int wifi_changing_network=0x7f0900a3;
         public static final int wifi_ssid_label=0x7f0900a4;
         public static final int wifi_type_label=0x7f0900a5;
@@ -618,7 +529,6 @@ public final class R {
         public static final int xlistview_header_hint_ready=0x7f0900d2;
         public static final int xlistview_header_last_time=0x7f0900d4;
         public static final int xml_parser_failed=0x7f090004;
-        public static final int youdao=0x7f0900ee;
     }
     public static final class style {
         public static final int Animation=0x7f0a000a;
@@ -638,15 +548,6 @@ public final class R {
     
  API 14 theme customizations can go here. 
 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
     
@@ -659,10 +560,6 @@ public final class R {
  API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f0a001d;
-        /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
-         */
-        public static final int AppTheme=0x7f0a001e;
         public static final int PopupWindowAnimation=0x7f0a0016;
         public static final int Theme_FullTranslucent=0x7f0a000e;
         public static final int Theme_HalfTranslucent=0x7f0a000d;

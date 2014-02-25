@@ -28,7 +28,7 @@
             android:layout_toRightOf="@+id/titleBarView"
             android:layout_marginLeft="8dp"
             android:visibility="invisible"
-            android:background="@drawable/round_1"/>
+           />
         
         <View 
         android:layout_width="match_parent"
@@ -38,7 +38,7 @@
         />
     </RelativeLayout>
     
-    <widget.XListView
+   	<xlistview.XListView
         android:id="@+id/xlistview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

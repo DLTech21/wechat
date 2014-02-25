@@ -35,7 +35,7 @@ import android.os.Bundle;
 public abstract class AWechatActivity extends AppActivity {
 
 	private ChatterReceiver receiver = null;
-	protected int noticeNum = 0;// 通知数量，未读消息数量
+	protected int noticeNum = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +56,7 @@ public abstract class AWechatActivity extends AppActivity {
 	@Override
 	protected void onResume() {
 		IntentFilter filter = new IntentFilter();
-
-		filter.addAction(Constant.ROSTER_ADDED);
-		filter.addAction(Constant.ROSTER_DELETED);
-		filter.addAction(Constant.ROSTER_PRESENCE_CHANGED);
-		filter.addAction(Constant.ROSTER_UPDATED);
-		filter.addAction(Constant.ROSTER_SUBSCRIPTION);
-		// 好友请求
 		filter.addAction(Constant.NEW_MESSAGE_ACTION);
-		filter.addAction(Constant.NEW_NOTICE_ACTION);
-		filter.addAction(Constant.ACTION_SYS_MSG);
-
-		filter.addAction(Constant.ACTION_RECONNECT_STATE);
-		filter.setPriority(1000);
 		registerReceiver(receiver, filter);
 		super.onResume();
 	}
@@ -77,11 +65,8 @@ public abstract class AWechatActivity extends AppActivity {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			Logger.i("new no");
 			String action = intent.getAction();
-
 			Notice notice = (Notice) intent.getSerializableExtra("notice");
-
 			if (Constant.NEW_MESSAGE_ACTION.equals(action)) {
 				msgReceive(notice);
 			} else if (Constant.ACTION_RECONNECT_STATE.equals(action)) {
@@ -112,7 +97,7 @@ public abstract class AWechatActivity extends AppActivity {
 	}
 
 	/**
-	 * 冲连接返回
+	 * 连接返回
 	 * 
 	 * @param isSuccess
 	 */

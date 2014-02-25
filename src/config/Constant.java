@@ -38,7 +38,7 @@ public class Constant {
 	public static final String NOTICE_ID = "notice.id";
 
 	public static final String NEW_MESSAGE_ACTION = "roster.newmessage";
-	public static final String NEW_NOTICE_ACTION = "roster.newnotice";
+
 	/**
 	 * 我的消息
 	 */

@@ -115,7 +115,7 @@ public abstract class AChating extends AppActivity{
 		Gson gson = new Gson();
 		String json = gson.toJson(msg);
 		
-		String time = (System.currentTimeMillis()/1000)+"";//DateUtil.date2Str(Calendar.getInstance(),Constant.MS_FORMART);
+		String time = (System.currentTimeMillis()/1000)+"";
 		Message message = new Message();
 		message.setProperty(IMMessage.KEY_TIME, time);
 		message.setBody(json);

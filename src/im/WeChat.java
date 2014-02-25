@@ -14,17 +14,14 @@ import org.jivesoftware.smack.packet.XMPPError;
 
 import tools.Logger;
 import ui.adapter.WeChatAdapter;
-import widget.XListView;
-import widget.XListView.IXListViewListener;
+import xlistview.XListView;
+import xlistview.XListView.IXListViewListener;
 
-
-import bean.UserInfo;
 
 import com.donal.wechat.R;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -246,8 +243,7 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 	};
 	
 	public void showDelChatOptionsDialog(final String[] arg ,final String userId){
-		new AlertDialog.Builder(context).setTitle(null).setItems(arg,
-				new DialogInterface.OnClickListener(){
+		new AlertDialog.Builder(context).setTitle(null).setItems(arg, new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int which){
 				switch(which){
 				case 0:
