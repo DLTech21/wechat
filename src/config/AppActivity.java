@@ -243,16 +243,6 @@ public class AppActivity extends BaseActivity implements AppActivitySupport{
 	}
 
 	@Override
-	public boolean getUserOnlineState() {
-		return preferences.getBoolean(Constant.IS_ONLINE, true);
-	}
-
-	@Override
-	public void setUserOnlineState(boolean isOnline) {
-		preferences.edit().putBoolean(Constant.IS_ONLINE, isOnline).commit();
-	}
-
-	@Override
 	public void setNotiType(int iconId, String contentTitle,
 			String contentText, Class activity, String from) {
 		/*

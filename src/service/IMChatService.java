@@ -85,66 +85,6 @@ public class IMChatService extends Service {
 				Message.Type.chat));
 	}
 
-	PacketListener pListener = new PacketListener() {
-
-		@Override
-		public void processPacket(Packet arg0) {
-			Message message = (Message) arg0;
-			if (message != null && message.getBody() != null
-					&& !message.getBody().equals("null")) {
-				IMMessage msg = new IMMessage();
-				// String time = (String)
-				// message.getProperty(IMMessage.KEY_TIME);
-				String time = DateUtil.date2Str(Calendar.getInstance(),
-						Constant.MS_FORMART);
-				msg.setTime(time);
-				msg.setContent(message.getBody());
-				if (Message.Type.error == message.getType()) {
-					msg.setType(IMMessage.ERROR);
-				} else {
-					msg.setType(IMMessage.SUCCESS);
-				}
-				String from = message.getFrom().split("/")[0];
-				msg.setFromSubJid(from);
-				// 生成通知
-				NoticeManager noticeManager = NoticeManager
-						.getInstance(context);
-				Notice notice = new Notice();
-				notice.setTitle("会话信息");
-				notice.setNoticeType(Notice.CHAT_MSG);
-				notice.setContent(message.getBody());
-				notice.setFrom(from);
-				notice.setStatus(Notice.UNREAD);
-				notice.setNoticeTime(time);
-
-				// 历史记录
-				IMMessage newMessage = new IMMessage();
-				newMessage.setMsgType(0);
-				newMessage.setFromSubJid(from);
-				newMessage.setContent(message.getBody());
-				newMessage.setTime(time);
-				MessageManager.getInstance(context).saveIMMessage(newMessage);
-				long noticeId = -1;
-
-				noticeId = noticeManager.saveNotice(notice);
-				Logger.i(from);
-				if (noticeId != -1) {
-					Intent intent = new Intent(Constant.NEW_MESSAGE_ACTION);
-					intent.putExtra(IMMessage.IMMESSAGE_KEY, msg);
-					intent.putExtra("notice", notice);
-					sendBroadcast(intent);
-					setNotiType(R.drawable.ic_launcher,
-							"新消息",
-							notice.getContent(), Chating.class, from);
-
-				}
-
-			}
-
-		}
-
-	};
-	
 	class ChatListener implements PacketListener {
 
 		@Override

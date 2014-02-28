@@ -128,20 +128,6 @@ public interface AppActivitySupport {
 
 	/**
 	 * 
-	 * 用户是否在线（当前网络是否重连成功）
-	 * 
-	 * @param loginConfig
-	 */
-	public boolean getUserOnlineState();
-
-	/**
-	 * 设置用户在线状态 true 在线 false 不在线
-	 * 
-	 */
-	public void setUserOnlineState(boolean isOnline);
-
-	/**
-	 * 
 	 * 发出Notification的method.
 	 * 
 	 * @param iconId

@@ -12,7 +12,7 @@ import tools.AppManager;
 import tools.ImageUtils;
 import tools.UIHelper;
 import ui.adapter.TextAdapter;
-import widget.XListView;
+import xlistview.XListView;
 
 import bean.UserEntity;
 

@@ -21,7 +21,7 @@ import android.database.Cursor;
 
 /**
  * 
- * 消息历史记录
+ * 消息管理
  * 
  */
 public class MessageManager {

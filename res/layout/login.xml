@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical" >
     
-    <widget.XListView
+    <xlistview.XListView
         android:id="@+id/xlistview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
