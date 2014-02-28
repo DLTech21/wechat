@@ -10,7 +10,7 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/formclient_row_userid"
+            android:id="@+id/row_userid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15.0dp"
@@ -18,7 +18,7 @@
             />
 
         <TextView
-            android:id="@+id/formclient_row_date"
+            android:id="@+id/row_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5.0dp"
@@ -41,15 +41,14 @@
          >
 
         <ImageView
-            android:id="@+id/from_head"
+            android:id="@+id/avatar"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_alignParentLeft="true" 
-            android:src="@drawable/ic_launcher"
             />
 
         <TextView
-            android:id="@+id/formclient_row_msg"
+            android:id="@+id/row_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"

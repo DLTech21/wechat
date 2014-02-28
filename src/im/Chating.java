@@ -203,14 +203,14 @@ public class Chating extends AChating{
 			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			IMMessage message = items.get(position);
 			if (message.getMsgType() == 0) {
-				convertView = this.inflater.inflate(R.layout.formclient_chat_in, null);
+				convertView = this.inflater.inflate(R.layout.chating_in, null);
 			} else {
-				convertView = this.inflater.inflate(R.layout.formclient_chat_out, null);
+				convertView = this.inflater.inflate(R.layout.chating_out, null);
 			}
-			ImageView avatar = (ImageView) convertView.findViewById(R.id.from_head);
-			TextView useridView = (TextView) convertView.findViewById(R.id.formclient_row_userid);
-			TextView dateView = (TextView) convertView.findViewById(R.id.formclient_row_date);
-			TextView msgView = (TextView) convertView.findViewById(R.id.formclient_row_msg);
+			ImageView avatar = (ImageView) convertView.findViewById(R.id.avatar);
+			TextView useridView = (TextView) convertView.findViewById(R.id.row_userid);
+			TextView dateView = (TextView) convertView.findViewById(R.id.row_date);
+			TextView msgView = (TextView) convertView.findViewById(R.id.row_msg);
 			
 			useridView.setVisibility(View.GONE);
 			String content = message.getContent();
