@@ -27,8 +27,8 @@ public class FriendManager {
 	
 	private FriendManager(Context context) {
 		SharedPreferences sharedPre = context.getSharedPreferences(
-				Constant.LOGIN_SET, Context.MODE_PRIVATE);
-		String databaseName = sharedPre.getString(Constant.USERID, null);
+				CommonValue.LOGIN_SET, Context.MODE_PRIVATE);
+		String databaseName = sharedPre.getString(CommonValue.USERID, null);
 		Logger.i(databaseName);
 		manager = DBManager.getInstance(context, databaseName);
 	}

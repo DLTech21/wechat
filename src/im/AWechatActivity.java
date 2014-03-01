@@ -12,7 +12,7 @@ import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
 
 import config.AppActivity;
-import config.Constant;
+import config.CommonValue;
 import config.XmppConnectionManager;
 
 import bean.UserInfo;
@@ -56,7 +56,7 @@ public abstract class AWechatActivity extends AppActivity {
 	@Override
 	protected void onResume() {
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(Constant.NEW_MESSAGE_ACTION);
+		filter.addAction(CommonValue.NEW_MESSAGE_ACTION);
 		registerReceiver(receiver, filter);
 		super.onResume();
 	}
@@ -67,11 +67,11 @@ public abstract class AWechatActivity extends AppActivity {
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
 			Notice notice = (Notice) intent.getSerializableExtra("notice");
-			if (Constant.NEW_MESSAGE_ACTION.equals(action)) {
+			if (CommonValue.NEW_MESSAGE_ACTION.equals(action)) {
 				msgReceive(notice);
-			} else if (Constant.ACTION_RECONNECT_STATE.equals(action)) {
+			} else if (CommonValue.ACTION_RECONNECT_STATE.equals(action)) {
 				boolean isSuccess = intent.getBooleanExtra(
-						Constant.RECONNECT_STATE, true);
+						CommonValue.RECONNECT_STATE, true);
 				handReConnect(isSuccess);
 			}
 

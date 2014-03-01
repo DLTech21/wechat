@@ -46,7 +46,7 @@ public class AppActivity extends BaseActivity implements AppActivitySupport{
 		super.onCreate(savedInstanceState);
 		appContext =  (WCApplication)getApplication();
 		context = this;
-		preferences = getSharedPreferences(Constant.LOGIN_SET, 0);
+		preferences = getSharedPreferences(CommonValue.LOGIN_SET, 0);
 		notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		pg = new ProgressDialog(context);
 	}
@@ -230,14 +230,14 @@ public class AppActivity extends BaseActivity implements AppActivitySupport{
 	}
 	
 	public void saveLoginConfig(UserEntity loginConfig) {
-		preferences.edit().putString(Constant.USERID, loginConfig.userInfo.userId).commit();
-		preferences.edit().putString(Constant.APIKEY, loginConfig.apiKey).commit();
+		preferences.edit().putString(CommonValue.USERID, loginConfig.userInfo.userId).commit();
+		preferences.edit().putString(CommonValue.APIKEY, loginConfig.apiKey).commit();
 	}
 	
 	public UserEntity getLoginConfig() {
 		UserEntity user = new UserEntity();
 		UserInfo loginConfig = new UserInfo();
-		loginConfig.userId = (preferences.getString(Constant.USERID, null));
+		loginConfig.userId = (preferences.getString(CommonValue.USERID, null));
 		user.userInfo = loginConfig;
 		return user;
 	}

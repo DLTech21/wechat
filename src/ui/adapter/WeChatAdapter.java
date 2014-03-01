@@ -19,7 +19,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import config.ApiClent;
 import config.ApiClent.ClientCallback;
 import config.CommonValue;
-import config.Constant;
+import config.CommonValue;
 import config.FriendManager;
 import config.WCApplication;
 
@@ -137,8 +137,8 @@ public class WeChatAdapter extends BaseAdapter {
 			return;
 		}
 		SharedPreferences sharedPre = context.getSharedPreferences(
-				Constant.LOGIN_SET, Context.MODE_PRIVATE);
-		String apiKey = sharedPre.getString(Constant.APIKEY, null);
+				CommonValue.LOGIN_SET, Context.MODE_PRIVATE);
+		String apiKey = sharedPre.getString(CommonValue.APIKEY, null);
 		
 		ApiClent.getUserInfo(apiKey, userId.split("@")[0], new ClientCallback() {
 			

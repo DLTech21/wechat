@@ -98,9 +98,9 @@ public class Login extends AppActivity{
 	}
 	
 	public void ButtonClick(View v) {
-		Intent intent;
 		switch (v.getId()) {
 		case R.id.registerButton:
+			register();
 			break;
 
 		case R.id.loginButton:
@@ -110,11 +110,16 @@ public class Login extends AppActivity{
 		}
 	}
 	
+	private void register() {
+		Intent intent = new Intent(Login.this, Register1.class);
+		startActivity(intent);
+	}
+	
 	private void login() {
 		String account = accountET.getText().toString();
 		final String password = passwordET.getText().toString();
 		if (account.length() == 0 ||  password.length() ==0) {
-			UIHelper.ToastMessage(this, "请输入账号和密码", Toast.LENGTH_SHORT);
+			showToast("请输入账号和密码");
 		}
 		else {
 			loadingPd = UIHelper.showProgress(this, null, null, true);

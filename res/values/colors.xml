@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="border_line">#ffd7dadc</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="blue">#0000FF</color>
+    <color name="orangered">#ff5900</color>
+    <color name="gray">#ff666666</color>
+    <color name="yello">#fff9bf16</color>
+    <color name="red">#ffff0000</color>
+    <color name="Silver">#c0c0c0</color>
+    <color name="readed">#ffc05500</color>
+    <color name="noread">#ff4b4b4b</color>
+    <color name="transparent01">#9000</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray_bold">#FF606060</color>
+    <color name="movie_name">#FF371A12</color>
+    <color name="TextColorBlack">#FF000000</color>
+    <color name="TextColorBlue">#0066CC</color>
+    <color name="TextColorGray">#FF505050</color>
+    <color name="TextColorRed">#FFE26926</color>
+    <color name="TextColorGreen">#FF00FF00</color>
+    <color name="TextColorRed1">#FFFF0000</color>
+    <color name="TextColorYellow1">#FFFFFF00</color>
+    <color name="TextColorBlue1">#FF080ad3</color>
+    <color name="TextColorGreen1">#FF336619</color>
+    <color name="zzblue">#3f5c84</color>
+    <color name="zzyellow">#c06622</color>
+    <color name="zzblack">#000</color>
+    <color name="window_bg">#fff0f3f6</color>
+    <color name="title_bg">#ff54acea</color>
+    <color name="button_unselected">#ff54acea</color>
+    <color name="button_selected">#ff419de4</color>
+    <color name="info_panel_bg">#ffeeeeee</color>
+    <color name="traffic_bg">#ffecf0f1</color>
+    <color name="traffic_txt">#ff414141</color>
+    <color name="traffic_data">#ff666666</color>
+    <color name="background_color">#f1f1f1</color>
+    
+    <color name="nav_color">#088ec1</color>
+
+</resources>

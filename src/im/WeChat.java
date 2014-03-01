@@ -33,7 +33,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-import config.Constant;
+import config.CommonValue;
 import config.MessageManager;
 import config.XmppConnectionManager;
 
@@ -212,10 +212,10 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 	
 	@Override
 	protected void handReConnect(boolean isSuccess) {
-		if (Constant.RECONNECT_STATE_SUCCESS == isSuccess) {
+		if (CommonValue.RECONNECT_STATE_SUCCESS == isSuccess) {
 			titleBarView.setText("微信");
 
-		} else if (Constant.RECONNECT_STATE_FAIL == isSuccess) {
+		} else if (CommonValue.RECONNECT_STATE_FAIL == isSuccess) {
 			titleBarView.setText("未连接");
 		}
 	}

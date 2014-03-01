@@ -18,7 +18,6 @@ import bean.UserInfo;
 import com.donal.wechat.R;
 
 import config.CommonValue;
-import config.Constant;
 import config.FriendManager;
 import config.MessageManager;
 import config.NoticeManager;

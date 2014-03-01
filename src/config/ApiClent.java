@@ -11,17 +11,19 @@ import tools.AppException;
 import tools.Logger;
 import tools.StringUtils;
 
+import android.content.Entity;
 import bean.StrangerEntity;
 import bean.Update;
 import bean.UserDetail;
 import bean.UserEntity;
 import bean.UserInfo;
 
+import com.google.gson.JsonObject;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class ApiClent {
-	public final static String message_error = "";
+	public final static String message_error = "服务器连接有问题";
 	public interface ClientCallback{
         abstract void onSuccess(Object data);
         abstract void onFailure(String message);
@@ -48,6 +50,37 @@ public class ApiClent {
 					e.printStackTrace();
 				} catch (AppException e) {
 					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] responseBody, Throwable error) {
+				callback.onFailure(message_error);
+			}
+		});
+	}
+	
+	public static void register(WCApplication appContext, String mobile, String password, String nickname, String intro, String avatar, final ClientCallback callback) {
+		RequestParams params = new RequestParams();
+		params.add("mobile", mobile);
+		params.add("uPass", password);
+		params.add("nickName", nickname);
+		params.add("description", intro);
+		params.add("userHead", avatar);
+		QYRestClient.post("register.do", params, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+				try {
+					bean.Entity data = new bean.Entity() {
+					};
+					JSONObject json = new JSONObject(new String(responseBody));
+					data.setError_code(json.getInt("status"));
+					data.setMessage(json.getString("msg"));
+					callback.onSuccess(data);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					callback.onError(e);
 				}
 			}
 			

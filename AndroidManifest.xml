@@ -94,6 +94,12 @@
         <activity android:name="ui.Login" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing" >           
         </activity>
         
+        <activity android:name="ui.Register1" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing" >           
+        </activity>
+        
+        <activity android:name="ui.Register2" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing" >           
+        </activity>
+        
         <!-- 聊天服务 -->
 		<service android:name="service.IMChatService"></service>  
 		

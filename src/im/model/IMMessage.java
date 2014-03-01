@@ -1,10 +1,5 @@
 package im.model;
 
-import java.util.Date;
-
-import config.Constant;
-
-import tools.DateUtil;
 
 import android.os.Parcel;
 import android.os.Parcelable;

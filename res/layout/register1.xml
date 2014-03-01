@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical" >
+    <RelativeLayout 
+        android:layout_height="44dp"
+        android:layout_width="match_parent"
+        android:background="@color/nav_color"
+        >
+        
+        <TextView 
+            android:layout_width="wrap_content"
+      		android:layout_height="wrap_content"
+            android:text="注册"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/navbar_title_size"
+            />
+        
+        <Button
+            android:id="@+id/rightBarButton"
+            android:layout_width="80dp"
+            android:layout_height="44dp"
+            android:drawableRight="@drawable/btn_next_normal"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="@dimen/navbar_button_text_size"
+           	android:layout_alignParentRight="true"
+           	android:drawablePadding="2dp"
+			android:paddingRight="12dp"
+			android:onClick="ButtonClick"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginLeft="25dp"
+        android:text="您的手机号码："
+        android:textSize="@dimen/navbar_button_text_size" 
+        android:textColor="#222222"/>
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginTop="18dp"
+        android:layout_height="45dp"
+        android:ems="11"
+        android:hint="请输入你的手机号码"
+        android:textColorHint="#8f8f8f"
+        android:textColor="#222222"
+        android:textSize="@dimen/navbar_title_size" 
+        android:inputType="phone" >
+        <requestFocus />
+    </EditText>
+
+</LinearLayout>

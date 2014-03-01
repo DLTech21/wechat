@@ -29,7 +29,6 @@ import android.os.Bundle;
 
 import config.AppActivity;
 import config.CommonValue;
-import config.Constant;
 import config.MessageManager;
 import config.NoticeManager;
 import config.XmppConnectionManager;
@@ -71,7 +70,7 @@ public abstract class AChating extends AppActivity{
 		if (null != message_pool && message_pool.size() > 0)
 			Collections.sort(message_pool);
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(Constant.NEW_MESSAGE_ACTION);
+		filter.addAction(CommonValue.NEW_MESSAGE_ACTION);
 		registerReceiver(receiver, filter);
 		// 跟新某人所有通知
 		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
@@ -85,7 +84,7 @@ public abstract class AChating extends AppActivity{
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
 			Notice notice = (Notice) intent.getSerializableExtra("notice");
-			if (Constant.NEW_MESSAGE_ACTION.equals(action)) {
+			if (CommonValue.NEW_MESSAGE_ACTION.equals(action)) {
 				IMMessage message = intent
 						.getParcelableExtra(IMMessage.IMMESSAGE_KEY);
 				message_pool.add(message);

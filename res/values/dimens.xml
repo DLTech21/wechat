@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+	<dimen name="navbar_height">50dp</dimen>
+	
+	<!-- textsize normal -->
+	<dimen name="navbar_title_size">20dp</dimen>
+	<dimen name="navbar_button_text_size">17dp</dimen>
+	<dimen name="cell_title_size">16dp</dimen>
+	<dimen name="cell_subtitle_size">14dp</dimen>
+	<dimen name="section_title_size">16dp</dimen>
+	<dimen name="message_count_size">13dp</dimen>
+</resources>

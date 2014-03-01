@@ -18,7 +18,7 @@ import bean.JsonMessage;
 import com.donal.wechat.R;
 import com.google.gson.Gson;
 
-import config.Constant;
+import config.CommonValue;
 import config.MessageManager;
 import config.NoticeManager;
 import config.XmppConnectionManager;
@@ -128,7 +128,7 @@ public class IMChatService extends Service {
 				noticeId = noticeManager.saveNotice(notice);
 				Logger.i(from);
 				if (noticeId != -1) {
-					Intent intent = new Intent(Constant.NEW_MESSAGE_ACTION);
+					Intent intent = new Intent(CommonValue.NEW_MESSAGE_ACTION);
 					intent.putExtra(IMMessage.IMMESSAGE_KEY, msg);
 					intent.putExtra("notice", notice);
 					sendBroadcast(intent);

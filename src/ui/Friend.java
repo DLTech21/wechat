@@ -65,15 +65,6 @@ public class Friend extends AppActivity implements IXListViewListener{
 	}
 	
 	private void getFriendCardFromCache() {
-//		String key = String.format("%s-%s", CommonValue.CacheKey.FriendCardList1, appContext.getLoginUid());
-//		FriendCardListEntity entity = (FriendCardListEntity) appContext.readObject(key);
-//		if(entity == null){
-//			currentPage = 1;
-//			lvDataState = UIHelper.LISTVIEW_DATA_EMPTY;
-//			xlistView.startLoadMore();
-//			return;
-//		}
-//		handleFriends(entity, UIHelper.LISTVIEW_ACTION_INIT);
 		currentPage = 1;
 		getMyFriend(currentPage, UIHelper.LISTVIEW_ACTION_REFRESH);
 	}
@@ -89,7 +80,7 @@ public class Friend extends AppActivity implements IXListViewListener{
 					handleFriends(entity, action);
 					break;
 				default:
-					UIHelper.ToastMessage(getApplicationContext(), entity.msg, Toast.LENGTH_SHORT);
+					showToast(entity.msg);
 					break;
 				}
 			}
@@ -98,7 +89,7 @@ public class Friend extends AppActivity implements IXListViewListener{
 			public void onFailure(String message) {
 				xlistView.stopLoadMore();
 				xlistView.stopRefresh();
-				UIHelper.ToastMessage(getApplicationContext(), message, Toast.LENGTH_SHORT);
+				showToast(message);
 			}
 			
 			@Override

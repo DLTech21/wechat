@@ -89,7 +89,7 @@ public class FindFriend extends AppActivity implements IXListViewListener{
 					handleFriends(entity, action);
 					break;
 				default:
-					UIHelper.ToastMessage(getApplicationContext(), entity.msg, Toast.LENGTH_SHORT);
+					showToast(entity.msg);
 					break;
 				}
 			}
@@ -98,7 +98,7 @@ public class FindFriend extends AppActivity implements IXListViewListener{
 			public void onFailure(String message) {
 				xlistView.stopLoadMore();
 				xlistView.stopRefresh();
-				UIHelper.ToastMessage(getApplicationContext(), message, Toast.LENGTH_SHORT);
+				showToast(message);
 			}
 			
 			@Override
