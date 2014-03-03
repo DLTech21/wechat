@@ -42,7 +42,7 @@ import config.XmppConnectionManager;
 public abstract class AChating extends AppActivity{
 	private Chat chat = null;
 	private List<IMMessage> message_pool = null;
-	protected String to;// 聊天人
+	protected String to;
 	private static int pageSize = 10;
 	private List<Notice> noticeList;
 	
@@ -64,7 +64,6 @@ public abstract class AChating extends AppActivity{
 
 	@Override
 	protected void onResume() {
-		// 第一次查询
 		message_pool = MessageManager.getInstance(context)
 				.getMessageListByFrom(to, 1, pageSize);
 		if (null != message_pool && message_pool.size() > 0)
@@ -72,7 +71,6 @@ public abstract class AChating extends AppActivity{
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(CommonValue.NEW_MESSAGE_ACTION);
 		registerReceiver(receiver, filter);
-		// 跟新某人所有通知
 		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
 		super.onResume();
 
@@ -127,16 +125,9 @@ public abstract class AChating extends AppActivity{
 		newMessage.setTime(time);
 		message_pool.add(newMessage);
 		MessageManager.getInstance(context).saveIMMessage(newMessage);
-		// 刷新视图
 		refreshMessage(message_pool);
-
 	}
 	
-	/**
-	 * 下滑加载信息,true 返回成功，false 数据已经全部加载，全部查完了，
-	 * 
-	 * @param message
-	 */
 	protected Boolean addNewMessage() {
 		List<IMMessage> newMsgList = MessageManager.getInstance(context)
 				.getMessageListByFrom(to, message_pool.size(), pageSize);
@@ -160,7 +151,6 @@ public abstract class AChating extends AppActivity{
 	}
 
 	protected void resh() {
-		// 刷新视图
 		refreshMessage(message_pool);
 	}
 	
@@ -168,7 +158,6 @@ public abstract class AChating extends AppActivity{
 
 		@Override
 		public void processMessage(Chat arg0, Message message) {
-			// TODO Auto-generated method stub
 			
 		}
 		

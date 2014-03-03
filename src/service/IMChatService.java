@@ -105,7 +105,6 @@ public class IMChatService extends Service {
 				}
 				String from = message.getFrom().split("/")[0];
 				msg.setFromSubJid(from);
-				// 生成通知
 				NoticeManager noticeManager = NoticeManager
 						.getInstance(context);
 				Notice notice = new Notice();
@@ -116,7 +115,6 @@ public class IMChatService extends Service {
 				notice.setStatus(Notice.UNREAD);
 				notice.setNoticeTime(time);
 
-				// 历史记录
 				IMMessage newMessage = new IMMessage();
 				newMessage.setMsgType(0);
 				newMessage.setFromSubJid(from);
@@ -142,49 +140,20 @@ public class IMChatService extends Service {
 		
 	}
 
-	/**
-	 * 
-	 * 发出Notification的method.
-	 * 
-	 * @param iconId
-	 *            图标
-	 * @param contentTitle
-	 *            标题
-	 * @param contentText
-	 *            你内容
-	 * @param activity
-	 */
 	private void setNotiType(int iconId, String contentTitle,
 			String contentText, Class activity, String from) {
-		
-//        解析json
 		JsonMessage msg = new JsonMessage();
 		Gson gson = new Gson();
 		msg = gson.fromJson(contentText, JsonMessage.class);
-		/*
-		 * 创建新的Intent，作为点击Notification留言条时， 会运行的Activity
-		 */
 		Intent notifyIntent = new Intent(this, activity);
 		notifyIntent.putExtra("to", from);
-//		 notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-		/* 创建PendingIntent作为设置递延运行的Activity */
 		PendingIntent appIntent = PendingIntent.getActivity(this, 0,
 				notifyIntent, 0);
-
-		/* 创建Notication，并设置相关参数 */
 		Notification myNoti = new Notification();
-		// 点击自动消失
 		myNoti.flags = Notification.FLAG_AUTO_CANCEL;
-		/* 设置statusbar显示的icon */
 		myNoti.icon = iconId;
-		/* 设置statusbar显示的文字信息 */
 		myNoti.tickerText = contentTitle;
-		/* 设置notification发生时同时发出默认声音 */
-//		myNoti.defaults = Notification.DEFAULT_SOUND;
-		/* 设置Notification留言条的参数 */
 		myNoti.setLatestEventInfo(this, contentTitle, msg.text, appIntent);
-		/* 送出Notification */
 		notificationManager.notify(0, myNoti);
 	}
 }

@@ -78,28 +78,13 @@ public abstract class AWechatActivity extends AppActivity {
 		}
 	}
 	
-	/**
-	 * 有新消息进来
-	 * 
-	 * @param user
-	 */
 	protected abstract void msgReceive(Notice notice);
 	
-	/**
-	 * 创建一个聊天
-	 * 
-	 * @param user
-	 */
 	protected void createChat(String userId) {
 		Intent intent = new Intent(context, Chating.class);
 		intent.putExtra("to", userId);
 		startActivity(intent);
 	}
 
-	/**
-	 * 连接返回
-	 * 
-	 * @param isSuccess
-	 */
 	protected abstract void handReConnect(boolean isSuccess);
 }

@@ -19,21 +19,21 @@ public class Notice implements Serializable, Comparable<Notice> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final int ADD_FRIEND = 1;// 好友请求
-	public static final int SYS_MSG = 2; // 系统消息
-	public static final int CHAT_MSG = 3;// 聊天消息
+	public static final int ADD_FRIEND = 1;
+	public static final int SYS_MSG = 2; 
+	public static final int CHAT_MSG = 3;
 	public static final int READ = 0;
 	public static final int UNREAD = 1;
 	public static final int All = 2;
 
-	private String id; // 主键
-	private String title; // 标题
-	private String content; // 内容
+	private String id; 
+	private String title; 
+	private String content; 
 	private Integer status; // 状态 0已读 1未读
-	private String from; // 通知来源
-	private String to; // 通知去想
-	private String noticeTime; // 通知时间
-	private Integer noticeType; // 消息类型 1.好友请求 2.系统消息
+	private String from; 
+	private String to; 
+	private String noticeTime; 
+	private Integer noticeType; 
 
 	public Integer getNoticeType() {
 		return noticeType;

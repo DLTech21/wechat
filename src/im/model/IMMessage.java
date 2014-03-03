@@ -12,14 +12,8 @@ public class IMMessage implements Parcelable, Comparable<IMMessage> {
 	private int type;
 	private String content;
 	private String time;
-	/**
-	 * 存在本地，表示与谁聊天
-	 */
 	private String fromSubJid;
-	/**
-	 * 0:接受 1：发送
-	 */
-	private int msgType = 0;
+	private int msgType = 0;//0:接受 1：发送
 
 	public IMMessage() {
 		this.type = SUCCESS;
@@ -99,12 +93,6 @@ public class IMMessage implements Parcelable, Comparable<IMMessage> {
 
 	};
 
-	/**
-	 * 新消息的构造方法.
-	 * 
-	 * @param content
-	 * @param time
-	 */
 	public IMMessage(String content, String time, String withSb, int msgType) {
 		super();
 		this.content = content;
@@ -114,9 +102,6 @@ public class IMMessage implements Parcelable, Comparable<IMMessage> {
 
 	}
 
-	/**
-	 * 按时间降序排列
-	 */
 	@Override
 	public int compareTo(IMMessage oth) {
 		if (null == this.getTime() || null == oth.getTime()) {

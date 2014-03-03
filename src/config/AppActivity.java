@@ -245,38 +245,19 @@ public class AppActivity extends BaseActivity implements AppActivitySupport{
 	@Override
 	public void setNotiType(int iconId, String contentTitle,
 			String contentText, Class activity, String from) {
-		/*
-		 * 创建新的Intent，作为点击Notification留言条时， 会运行的Activity
-		 */
 		Intent notifyIntent = new Intent(this, activity);
 		notifyIntent.putExtra("to", from);
-		// notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-		/* 创建PendingIntent作为设置递延运行的Activity */
 		PendingIntent appIntent = PendingIntent.getActivity(this, 0,
 				notifyIntent, 0);
-
-		/* 创建Notication，并设置相关参数 */
 		Notification myNoti = new Notification();
-		// 点击自动消失
 		myNoti.flags = Notification.FLAG_AUTO_CANCEL;
-		/* 设置statusbar显示的icon */
 		myNoti.icon = iconId;
-		/* 设置statusbar显示的文字信息 */
 		myNoti.tickerText = contentTitle;
-		/* 设置notification发生时同时发出默认声音 */
 		myNoti.defaults = Notification.DEFAULT_SOUND;
-		/* 设置Notification留言条的参数 */
 		myNoti.setLatestEventInfo(this, contentTitle, contentText, appIntent);
-		/* 送出Notification */
 		notificationManager.notify(0, myNoti);
 	}
 	
-	/**
-	 * 
-	 * 关闭键盘事件
-	 * 
-	 */
 	public void closeInput() {
 		InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (inputMethodManager != null && this.getCurrentFocus() != null) {
