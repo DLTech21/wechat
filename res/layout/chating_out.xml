@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/from_head"
+            android:layout_toLeftOf="@+id/avatar"
             android:background="@drawable/outgoing"
             android:layout_marginRight="3dip"
             android:textColor="#FF000000"
