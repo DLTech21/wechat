@@ -78,8 +78,7 @@
         <activity
             android:name="im.Chating" 
             android:screenOrientation="portrait"
-            android:launchMode="standard"
-            android:windowSoftInputMode="stateHidden|adjustPan" >
+            >
         </activity>
         
         <activity android:name="ui.Friend" android:screenOrientation="portrait" android:launchMode="singleTask" >           

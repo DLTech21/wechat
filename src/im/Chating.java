@@ -60,7 +60,7 @@ public class Chating extends AChating{
 	
 	private int firstVisibleItem;
 	private int currentPage = 1;
-	
+	private int objc;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -196,7 +196,7 @@ public class Chating extends AChating{
 		public long getItemId(int position) {
 			return position;
 		}
-
+		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

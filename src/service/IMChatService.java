@@ -67,7 +67,6 @@ public class IMChatService extends Service {
 
 	@Override
 	public void onDestroy() {
-		Logger.i("d");
 //		XMPPConnection conn = XmppConnectionManager.getInstance()
 //				.getConnection();
 //		if (cListener != null) {

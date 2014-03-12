@@ -64,6 +64,7 @@ public class XmppConnectionManager {
 		connectionConfig.setSendPresence(true);
 //		Roster.setDefaultSubscriptionMode(Roster.SubscriptionMode.manual);
 		connection = new XMPPConnection(connectionConfig);
+		
 		return connection;
 	}
 

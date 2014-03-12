@@ -26,6 +26,7 @@
         android:cacheColorHint="@null"
         android:divider="@null"
         android:listSelector="@android:color/transparent"
+        android:transcriptMode="normal"
         />
 
     <LinearLayout
