@@ -83,12 +83,14 @@ public abstract class AChating extends AppActivity{
 			String action = intent.getAction();
 			Notice notice = (Notice) intent.getSerializableExtra("notice");
 			if (CommonValue.NEW_MESSAGE_ACTION.equals(action)) {
-				IMMessage message = intent
-						.getParcelableExtra(IMMessage.IMMESSAGE_KEY);
+				IMMessage message = intent.getParcelableExtra(IMMessage.IMMESSAGE_KEY);
+				
+				if (!message.getFromSubJid().equals(to)) {
+					return;
+				}
 				message_pool.add(message);
 				receiveNewMessage(message);
 				refreshMessage(message_pool);
-				receiveNotice(notice);
 			}
 		}
 

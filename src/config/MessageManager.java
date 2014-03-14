@@ -72,12 +72,12 @@ public class MessageManager {
 	 * 
 	 * @param status
 	 */
-	public void updateStatus(String id, Integer status) {
-		SQLiteTemplate st = SQLiteTemplate.getInstance(manager, false);
-		ContentValues contentValues = new ContentValues();
-		contentValues.put("status", status);
-		st.updateById("im_msg_his", id, contentValues);
-	}
+//	public void updateStatus(String id, Integer status) {
+//		SQLiteTemplate st = SQLiteTemplate.getInstance(manager, false);
+//		ContentValues contentValues = new ContentValues();
+//		contentValues.put("status", status);
+//		st.updateById("im_msg_his", id, contentValues);
+//	}
 
 	/**
 	 * 
