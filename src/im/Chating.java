@@ -10,25 +10,21 @@ import java.util.List;
 
 import tools.DateUtil;
 import tools.Logger;
-import tools.StringUtils;
-
 import bean.JsonMessage;
 import bean.UserInfo;
 
 import com.donal.wechat.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 
 import config.CommonValue;
 import config.FriendManager;
 import config.MessageManager;
 import config.NoticeManager;
-
-
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
@@ -36,9 +32,10 @@ import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -164,16 +161,43 @@ public class Chating extends AChating{
 	
 	private class MessageListAdapter extends BaseAdapter {
 
+		class ViewHoler {
+			TextView timeTV;
+			
+			RelativeLayout leftLayout;
+			ImageView leftAvatar;
+			TextView leftNickname;
+			TextView leftText;
+			
+			RelativeLayout rightLayout;
+			RelativeLayout rightFrame;
+			ImageView rightAvatar;
+			TextView rightNickname;
+			TextView rightText;
+			ProgressBar rightProgress;
+		}
+		
 		private List<IMMessage> items;
 		private Context context;
 		private ListView adapterList;
 		private LayoutInflater inflater;
 
+		DisplayImageOptions options;
+		
 		public MessageListAdapter(Context context, List<IMMessage> items,
 				ListView adapterList) {
 			this.context = context;
 			this.items = items;
 			this.adapterList = adapterList;
+			inflater = LayoutInflater.from(context);
+			options = new DisplayImageOptions.Builder()
+			.showImageOnLoading(R.drawable.avatar_placeholder)
+			.showImageForEmptyUri(R.drawable.avatar_placeholder)
+			.showImageOnFail(R.drawable.avatar_placeholder)
+			.cacheInMemory(true)
+			.cacheOnDisc(true)
+			.bitmapConfig(Bitmap.Config.RGB_565)
+			.build();
 		}
 
 		public void refreshList(List<IMMessage> items) {
@@ -199,30 +223,41 @@ public class Chating extends AChating{
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			ViewHoler cell = null;
+			if (convertView == null) {
+				cell = new ViewHoler();
+				convertView = inflater.inflate(R.layout.listviewcell_chat_normal, null);
+				cell.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
+				cell.leftLayout = (RelativeLayout) convertView.findViewById(R.id.layout_left);
+				cell.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
+				cell.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
+				cell.leftText = (TextView) convertView.findViewById(R.id.textview_content_l);
+						
+				cell.rightLayout = (RelativeLayout) convertView.findViewById(R.id.layout_right);
+				cell.rightFrame = (RelativeLayout) convertView.findViewById(R.id.layout_content_r);
+				cell.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
+				cell.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
+				cell.rightText = (TextView) convertView.findViewById(R.id.textview_content_r);
+				cell.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
+				convertView.setTag(cell);
+			}
+			else {
+				cell = (ViewHoler) convertView.getTag();
+			}
 			IMMessage message = items.get(position);
-			if (message.getMsgType() == 0) {
-				convertView = this.inflater.inflate(R.layout.chating_in, null);
-			} else {
-				convertView = this.inflater.inflate(R.layout.chating_out, null);
-			}
-			ImageView avatar = (ImageView) convertView.findViewById(R.id.avatar);
-			TextView useridView = (TextView) convertView.findViewById(R.id.row_userid);
-			TextView dateView = (TextView) convertView.findViewById(R.id.row_date);
-			TextView msgView = (TextView) convertView.findViewById(R.id.row_msg);
-			
-			useridView.setVisibility(View.GONE);
+			cell.leftLayout.setVisibility(message.getMsgType() == 0? View.VISIBLE:View.INVISIBLE);
+			cell.rightLayout.setVisibility(message.getMsgType() == 0? View.INVISIBLE:View.VISIBLE);
 			String content = message.getContent();
-			if (message.getMsgType() == 0) {
-				imageLoader.displayImage(CommonValue.BASE_URL+user.userHead, avatar, CommonValue.DisplayOptions.default_options);
-			} else {
-				imageLoader.displayImage(CommonValue.BASE_URL+appContext.getLoginUserHead(), avatar, CommonValue.DisplayOptions.default_options);
-			}
+			imageLoader.displayImage(CommonValue.BASE_URL+user.userHead, cell.leftAvatar, options);
+			imageLoader.displayImage(CommonValue.BASE_URL+ appContext.getLoginUserHead(), cell.rightAvatar, options);
 			try {
 				JsonMessage msg = JsonMessage.parse(content);
-				msgView.setText(msg.text);
+				cell.leftText.setText(msg.text);
+				cell.rightText.setText(msg.text);
 			} catch (Exception e) {
-				msgView.setText(content);
+				cell.leftText.setText(content);
+				cell.rightText.setText(content);
+				
 			}
 			String currentTime = message.getTime();
 			String previewTime = (position - 1) >= 0 ? items.get(position-1).getTime() : "0";
@@ -230,11 +265,11 @@ public class Chating extends AChating{
 				long time1 = Long.valueOf(currentTime);
 				long time2 = Long.valueOf(previewTime);
 				if ((time1-time2) >= 5 * 60 ) {
-					dateView.setVisibility(View.VISIBLE);
-					dateView.setText(DateUtil.wechat_time(message.getTime()));
+					cell.timeTV.setVisibility(View.VISIBLE);
+					cell.timeTV.setText(DateUtil.wechat_time(message.getTime()));
 				}
 				else {
-					dateView.setVisibility(View.GONE);
+					cell.timeTV.setVisibility(View.GONE);
 				}
 			} catch (Exception e) {
 				Logger.i(e);

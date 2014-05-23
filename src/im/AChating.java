@@ -6,6 +6,7 @@ package im;
 import im.model.IMMessage;
 import im.model.Notice;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
@@ -17,16 +18,13 @@ import org.jivesoftware.smack.packet.Message;
 import com.google.gson.Gson;
 
 import bean.JsonMessage;
-
 import tools.DateUtil;
 import tools.Logger;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-
 import config.AppActivity;
 import config.CommonValue;
 import config.MessageManager;
@@ -41,7 +39,7 @@ import config.XmppConnectionManager;
  */
 public abstract class AChating extends AppActivity{
 	private Chat chat = null;
-	private List<IMMessage> message_pool = null;
+	protected List<IMMessage> message_pool = new ArrayList<IMMessage>();
 	protected String to;
 	private static int pageSize = 10;
 	private List<Notice> noticeList;
