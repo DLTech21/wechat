@@ -18,6 +18,7 @@ import org.jivesoftware.smack.packet.Message;
 import com.google.gson.Gson;
 
 import bean.JsonMessage;
+import swipeback.SwipeBackActivity;
 import tools.DateUtil;
 import tools.Logger;
 import android.content.BroadcastReceiver;
@@ -37,7 +38,7 @@ import config.XmppConnectionManager;
  * @author donal
  *
  */
-public abstract class AChating extends AppActivity{
+public abstract class AChating extends SwipeBackActivity{
 	private Chat chat = null;
 	protected List<IMMessage> message_pool = new ArrayList<IMMessage>();
 	protected String to;

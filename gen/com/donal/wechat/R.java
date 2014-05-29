@@ -40,6 +40,155 @@ public final class R {
         public static final int preferences_front_light_values=0x7f050009;
     }
     public static final class attr {
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int SwipeBackLayoutStyle=0x7f010011;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int barColor=0x7f010004;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int barLength=0x7f01000b;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int barWidth=0x7f01000a;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int circleColor=0x7f010009;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int delayMillis=0x7f010008;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>left</code></td><td>0</td><td></td></tr>
+<tr><td><code>right</code></td><td>1</td><td></td></tr>
+<tr><td><code>bottom</code></td><td>2</td><td></td></tr>
+<tr><td><code>all</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static final int edge_flag=0x7f01000d;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int edge_size=0x7f01000c;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int foldNumber=0x7f010000;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int progress=0x7f010001;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int rimColor=0x7f010005;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int rimWidth=0x7f010006;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int shadow_bottom=0x7f010010;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int shadow_left=0x7f01000e;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int shadow_right=0x7f01000f;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int spinSpeed=0x7f010007;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textColor=0x7f010002;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int textSize=0x7f010003;
     }
     public static final class color {
         public static final int Silver=0x7f060046;
@@ -87,6 +236,7 @@ public final class R {
         public static final int help_button_view=0x7f060007;
         public static final int help_view=0x7f060008;
         public static final int info_panel_bg=0x7f06005c;
+        public static final int left_drawer_item_bg_normal=0x7f060062;
         public static final int listitem_black=0x7f06002c;
         public static final int listitem_blue=0x7f06002e;
         public static final int listitem_gray=0x7f06002f;
@@ -129,7 +279,7 @@ public final class R {
         public static final int share_view=0x7f060016;
         public static final int status_text=0x7f060018;
         public static final int status_view=0x7f060017;
-        public static final int tabbar_text=0x7f060062;
+        public static final int tabbar_text=0x7f060063;
         public static final int tell_story_default=0x7f060035;
         public static final int tell_story_pressed=0x7f060036;
         public static final int text_color_big_title=0x7f060000;
@@ -164,159 +314,178 @@ public final class R {
          */
         public static final int navbar_title_size=0x7f070004;
         public static final int section_title_size=0x7f070008;
+        public static final int shadow_width=0x7f07000b;
+        public static final int slidingmenu_offset=0x7f07000a;
         public static final int standard_padding=0x7f070001;
     }
     public static final class drawable {
         public static final int avatar_placeholder=0x7f020000;
-        public static final int btn_back_normal=0x7f020001;
-        public static final int btn_next_normal=0x7f020002;
-        public static final int chat_from_bg_normal=0x7f020003;
-        public static final int chat_from_bg_pressed=0x7f020004;
-        public static final int chat_to_bg_normal=0x7f020005;
-        public static final int chat_to_bg_pressed=0x7f020006;
-        public static final int clearwords_bg=0x7f020007;
-        public static final int clearwords_bg_nor=0x7f020008;
-        public static final int clearwords_bg_sel=0x7f020009;
-        public static final int clearwords_icon=0x7f02000a;
-        public static final int content_image_loading=0x7f02000b;
-        public static final int ic_launcher=0x7f02000c;
-        public static final int ic_pulltorefresh_arrow=0x7f02000d;
-        public static final int incoming=0x7f02000e;
-        public static final int loading_page_loading0=0x7f02000f;
-        public static final int loading_page_loading1=0x7f020010;
-        public static final int loading_page_loading2=0x7f020011;
-        public static final int loading_page_loading3=0x7f020012;
-        public static final int nav_refresh=0x7f020013;
-        public static final int new_data_toast=0x7f020014;
-        public static final int outgoing=0x7f020015;
-        public static final int refreshlistview_arrow=0x7f020016;
-        public static final int review_bg_blue=0x7f020017;
-        public static final int round_1=0x7f020018;
-        public static final int round_10=0x7f020019;
-        public static final int round_2=0x7f02001a;
-        public static final int round_3=0x7f02001b;
-        public static final int round_4=0x7f02001c;
-        public static final int round_5=0x7f02001d;
-        public static final int round_6=0x7f02001e;
-        public static final int round_7=0x7f02001f;
-        public static final int round_8=0x7f020020;
-        public static final int round_9=0x7f020021;
-        public static final int sc_message_box_bubble=0x7f020022;
-        public static final int tabbar_button1=0x7f020023;
-        public static final int tabbar_button2=0x7f020024;
-        public static final int tabbar_button3=0x7f020025;
-        public static final int tabbar_button4=0x7f020026;
-        public static final int tabbar_contacts=0x7f020027;
-        public static final int tabbar_contacts_highlighted=0x7f020028;
-        public static final int tabbar_discover=0x7f020029;
-        public static final int tabbar_discover_highlighted=0x7f02002a;
-        public static final int tabbar_mainframe=0x7f02002b;
-        public static final int tabbar_mainframe_highlighted=0x7f02002c;
-        public static final int tabbar_me=0x7f02002d;
-        public static final int tabbar_me_highlighted=0x7f02002e;
-        public static final int view_progress=0x7f02002f;
-        public static final int welcome=0x7f020030;
-        public static final int xlistview_arrow=0x7f020031;
+        public static final int bg_head=0x7f020001;
+        public static final int bg_head_normal=0x7f020002;
+        public static final int bg_head_pressed=0x7f020003;
+        public static final int btn_back_normal=0x7f020004;
+        public static final int btn_next_normal=0x7f020005;
+        public static final int chat_from_bg_normal=0x7f020006;
+        public static final int chat_from_bg_pressed=0x7f020007;
+        public static final int chat_to_bg_normal=0x7f020008;
+        public static final int chat_to_bg_pressed=0x7f020009;
+        public static final int clearwords_bg=0x7f02000a;
+        public static final int clearwords_bg_nor=0x7f02000b;
+        public static final int clearwords_bg_sel=0x7f02000c;
+        public static final int clearwords_icon=0x7f02000d;
+        public static final int content_image_loading=0x7f02000e;
+        public static final int default_round_head=0x7f02000f;
+        public static final int ic_launcher=0x7f020010;
+        public static final int ic_pulltorefresh_arrow=0x7f020011;
+        public static final int incoming=0x7f020012;
+        public static final int loading_page_loading0=0x7f020013;
+        public static final int loading_page_loading1=0x7f020014;
+        public static final int loading_page_loading2=0x7f020015;
+        public static final int loading_page_loading3=0x7f020016;
+        public static final int nav_refresh=0x7f020017;
+        public static final int new_data_toast=0x7f020018;
+        public static final int outgoing=0x7f020019;
+        public static final int refreshlistview_arrow=0x7f02001a;
+        public static final int review_bg_blue=0x7f02001b;
+        public static final int round_1=0x7f02001c;
+        public static final int round_10=0x7f02001d;
+        public static final int round_2=0x7f02001e;
+        public static final int round_3=0x7f02001f;
+        public static final int round_4=0x7f020020;
+        public static final int round_5=0x7f020021;
+        public static final int round_6=0x7f020022;
+        public static final int round_7=0x7f020023;
+        public static final int round_8=0x7f020024;
+        public static final int round_9=0x7f020025;
+        public static final int sc_message_box_bubble=0x7f020026;
+        public static final int shadow=0x7f020027;
+        public static final int shadow_bottom=0x7f020028;
+        public static final int shadow_left=0x7f020029;
+        public static final int shadow_right=0x7f02002a;
+        public static final int tabbar_button1=0x7f02002b;
+        public static final int tabbar_button2=0x7f02002c;
+        public static final int tabbar_button3=0x7f02002d;
+        public static final int tabbar_button4=0x7f02002e;
+        public static final int tabbar_contacts=0x7f02002f;
+        public static final int tabbar_contacts_highlighted=0x7f020030;
+        public static final int tabbar_discover=0x7f020031;
+        public static final int tabbar_discover_highlighted=0x7f020032;
+        public static final int tabbar_mainframe=0x7f020033;
+        public static final int tabbar_mainframe_highlighted=0x7f020034;
+        public static final int tabbar_me=0x7f020035;
+        public static final int tabbar_me_highlighted=0x7f020036;
+        public static final int view_progress=0x7f020037;
+        public static final int welcome=0x7f020038;
+        public static final int xlistview_arrow=0x7f020039;
     }
     public static final class id {
-        public static final int alpha=0x7f080017;
-        public static final int arrow=0x7f080028;
+        public static final int all=0x7f08000f;
+        public static final int alpha=0x7f08001b;
+        public static final int arrow=0x7f08002c;
         /**  Messages IDs 
          */
         public static final int auto_focus=0x7f080000;
-        public static final int avatarImageView=0x7f080018;
-        public static final int back_button=0x7f08001e;
-        public static final int bookmark_title=0x7f08000c;
-        public static final int bookmark_url=0x7f08000d;
-        public static final int chat_content=0x7f080010;
-        public static final int chat_list=0x7f08000f;
-        public static final int chat_sendbtn=0x7f080011;
-        public static final int comment=0x7f08002a;
-        public static final int contents_text_view=0x7f080013;
-        public static final int date=0x7f08002b;
+        public static final int avatarImageView=0x7f08001c;
+        public static final int back_button=0x7f080022;
+        public static final int bookmark_title=0x7f080010;
+        public static final int bookmark_url=0x7f080011;
+        public static final int bottom=0x7f08000e;
+        public static final int chat_content=0x7f080014;
+        public static final int chat_list=0x7f080013;
+        public static final int chat_sendbtn=0x7f080015;
+        public static final int comment=0x7f08002e;
+        public static final int contents_text_view=0x7f080017;
+        public static final int date=0x7f08002f;
         public static final int decode=0x7f080001;
         public static final int decode_failed=0x7f080002;
         public static final int decode_succeeded=0x7f080003;
-        public static final int des=0x7f08001b;
-        public static final int done_button=0x7f08001f;
-        public static final int editTextAccount=0x7f080039;
-        public static final int editTextIntro=0x7f080049;
-        public static final int editTextNickName=0x7f080048;
-        public static final int editTextPass=0x7f080047;
-        public static final int editTextPassword=0x7f08003a;
-        public static final int editTextPhone=0x7f080045;
+        public static final int des=0x7f08001f;
+        public static final int done_button=0x7f080023;
+        public static final int editTextAccount=0x7f08003e;
+        public static final int editTextIntro=0x7f080050;
+        public static final int editTextNickName=0x7f08004f;
+        public static final int editTextPass=0x7f08004e;
+        public static final int editTextPassword=0x7f08003f;
+        public static final int editTextPhone=0x7f08004c;
         public static final int encode_failed=0x7f080004;
         public static final int encode_succeeded=0x7f080005;
-        public static final int formclient_pb=0x7f08000e;
-        public static final int head_arrowImageView=0x7f08003d;
-        public static final int header=0x7f080027;
-        public static final int help_contents=0x7f08001d;
-        public static final int history_detail=0x7f080021;
-        public static final int history_title=0x7f080020;
-        public static final int image_portrait_l=0x7f08002e;
-        public static final int image_portrait_r=0x7f080033;
-        public static final int image_view=0x7f080012;
+        public static final int formclient_pb=0x7f080012;
+        public static final int head_arrowImageView=0x7f080044;
+        public static final int header=0x7f08002b;
+        public static final int help_contents=0x7f080021;
+        public static final int history_detail=0x7f080025;
+        public static final int history_title=0x7f080024;
+        public static final int image_portrait_l=0x7f080033;
+        public static final int image_portrait_r=0x7f080038;
+        public static final int image_view=0x7f080016;
         public static final int launch_product_query=0x7f080006;
-        public static final int layout=0x7f080038;
-        public static final int layout_content_l=0x7f080030;
-        public static final int layout_content_r=0x7f080035;
-        public static final int layout_left=0x7f08002d;
-        public static final int layout_right=0x7f080032;
-        public static final int leftBarButton=0x7f080046;
-        public static final int listview_head_loading=0x7f08003e;
-        public static final int loginButton=0x7f08003b;
-        public static final int main_tab=0x7f080022;
-        public static final int page_number_view=0x7f08004d;
-        public static final int paopao=0x7f08001c;
-        public static final int progress=0x7f080029;
-        public static final int pull_to_load_text=0x7f080041;
-        public static final int pull_to_refresh_header=0x7f08003f;
-        public static final int pull_to_refresh_text=0x7f080042;
-        public static final int pull_to_refresh_updated_at=0x7f080043;
-        public static final int query_button=0x7f08004b;
-        public static final int query_text_view=0x7f08004a;
+        public static final int layout=0x7f08003d;
+        public static final int layout_content_l=0x7f080035;
+        public static final int layout_content_r=0x7f08003a;
+        public static final int layout_left=0x7f080032;
+        public static final int layout_right=0x7f080037;
+        public static final int left=0x7f08000c;
+        public static final int leftBarButton=0x7f08004d;
+        public static final int leftListView=0x7f080030;
+        public static final int listview_head_loading=0x7f080045;
+        public static final int loginButton=0x7f080040;
+        public static final int main_tab=0x7f080026;
+        public static final int optionName=0x7f08005b;
+        public static final int page_number_view=0x7f080054;
+        public static final int paopao=0x7f080020;
+        public static final int progress=0x7f08002d;
+        public static final int pull_to_load_text=0x7f080048;
+        public static final int pull_to_refresh_header=0x7f080046;
+        public static final int pull_to_refresh_text=0x7f080049;
+        public static final int pull_to_refresh_updated_at=0x7f08004a;
+        public static final int query_button=0x7f080052;
+        public static final int query_text_view=0x7f080051;
         public static final int quit=0x7f080007;
-        public static final int radio_button1=0x7f080023;
-        public static final int radio_button2=0x7f080024;
-        public static final int radio_button3=0x7f080025;
-        public static final int radio_button4=0x7f080026;
-        public static final int refreshIV=0x7f080040;
-        public static final int registerButton=0x7f08003c;
+        public static final int radio_button1=0x7f080027;
+        public static final int radio_button2=0x7f080028;
+        public static final int radio_button3=0x7f080029;
+        public static final int radio_button4=0x7f08002a;
+        public static final int refreshIV=0x7f080047;
+        public static final int registerButton=0x7f080041;
         public static final int restart_preview=0x7f080008;
-        public static final int result_list_view=0x7f08004c;
+        public static final int result_list_view=0x7f080053;
         public static final int return_scan_result=0x7f080009;
-        public static final int rightBarButton=0x7f080044;
+        public static final int right=0x7f08000d;
+        public static final int rightBarButton=0x7f08004b;
         public static final int search_book_contents_failed=0x7f08000a;
         public static final int search_book_contents_succeeded=0x7f08000b;
-        public static final int share_app_button=0x7f08004f;
-        public static final int share_bookmark_button=0x7f080050;
-        public static final int share_clipboard_button=0x7f080052;
-        public static final int share_contact_button=0x7f080051;
-        public static final int share_text_view=0x7f080053;
-        public static final int snippet_view=0x7f08004e;
-        public static final int textview_content_l=0x7f080031;
-        public static final int textview_content_r=0x7f080036;
-        public static final int textview_name_l=0x7f08002f;
-        public static final int textview_name_r=0x7f080034;
-        public static final int textview_time=0x7f08002c;
-        public static final int time=0x7f08001a;
-        public static final int title=0x7f080019;
-        public static final int titleBarView=0x7f080014;
-        public static final int tv=0x7f080054;
-        public static final int update_progress=0x7f080055;
-        public static final int update_progress_text=0x7f080056;
-        public static final int view_progress_r=0x7f080037;
-        public static final int xindicator=0x7f080015;
-        public static final int xlistview=0x7f080016;
-        public static final int xlistview_footer_content=0x7f080057;
-        public static final int xlistview_footer_hint_textview=0x7f080059;
-        public static final int xlistview_footer_progressbar=0x7f080058;
-        public static final int xlistview_header_arrow=0x7f08005e;
-        public static final int xlistview_header_content=0x7f08005a;
-        public static final int xlistview_header_hint_textview=0x7f08005c;
-        public static final int xlistview_header_progressbar=0x7f08005f;
-        public static final int xlistview_header_text=0x7f08005b;
-        public static final int xlistview_header_time=0x7f08005d;
+        public static final int share_app_button=0x7f080056;
+        public static final int share_bookmark_button=0x7f080057;
+        public static final int share_clipboard_button=0x7f080059;
+        public static final int share_contact_button=0x7f080058;
+        public static final int share_text_view=0x7f08005a;
+        public static final int snippet_view=0x7f080055;
+        public static final int swipe=0x7f08005c;
+        public static final int textview_content_l=0x7f080036;
+        public static final int textview_content_r=0x7f08003b;
+        public static final int textview_name_l=0x7f080034;
+        public static final int textview_name_r=0x7f080039;
+        public static final int textview_time=0x7f080031;
+        public static final int time=0x7f08001e;
+        public static final int title=0x7f08001d;
+        public static final int titleBarView=0x7f080018;
+        public static final int top_head=0x7f080043;
+        public static final int top_head_container=0x7f080042;
+        public static final int tv=0x7f08005d;
+        public static final int update_progress=0x7f08005e;
+        public static final int update_progress_text=0x7f08005f;
+        public static final int view_progress_r=0x7f08003c;
+        public static final int xindicator=0x7f080019;
+        public static final int xlistview=0x7f08001a;
+        public static final int xlistview_footer_content=0x7f080060;
+        public static final int xlistview_footer_hint_textview=0x7f080062;
+        public static final int xlistview_footer_progressbar=0x7f080061;
+        public static final int xlistview_header_arrow=0x7f080067;
+        public static final int xlistview_header_content=0x7f080063;
+        public static final int xlistview_header_hint_textview=0x7f080065;
+        public static final int xlistview_header_progressbar=0x7f080068;
+        public static final int xlistview_header_text=0x7f080064;
+        public static final int xlistview_header_time=0x7f080066;
     }
     public static final class layout {
         public static final int bookmark_picker_list_item=0x7f030000;
@@ -329,24 +498,28 @@ public final class R {
         public static final int history_list_item=0x7f030007;
         public static final int index=0x7f030008;
         public static final int layout_refreshlistview_header=0x7f030009;
-        public static final int listviewcell_chat_normal=0x7f03000a;
-        public static final int login=0x7f03000b;
-        public static final int login_header=0x7f03000c;
-        public static final int pull_to_refresh_head=0x7f03000d;
-        public static final int refresh_footer=0x7f03000e;
-        public static final int refresh_header=0x7f03000f;
-        public static final int register1=0x7f030010;
-        public static final int register2=0x7f030011;
-        public static final int search_book_contents=0x7f030012;
-        public static final int search_book_contents_header=0x7f030013;
-        public static final int search_book_contents_list_item=0x7f030014;
-        public static final int share=0x7f030015;
-        public static final int toastmessage_text=0x7f030016;
-        public static final int update_dialog=0x7f030017;
-        public static final int wechat=0x7f030018;
-        public static final int welcome_page=0x7f030019;
-        public static final int xlistview_footer=0x7f03001a;
-        public static final int xlistview_header=0x7f03001b;
+        public static final int left_slide_drawer=0x7f03000a;
+        public static final int listviewcell_chat_normal=0x7f03000b;
+        public static final int login=0x7f03000c;
+        public static final int login_header=0x7f03000d;
+        public static final int main=0x7f03000e;
+        public static final int pull_to_refresh_head=0x7f03000f;
+        public static final int refresh_footer=0x7f030010;
+        public static final int refresh_header=0x7f030011;
+        public static final int register1=0x7f030012;
+        public static final int register2=0x7f030013;
+        public static final int search_book_contents=0x7f030014;
+        public static final int search_book_contents_header=0x7f030015;
+        public static final int search_book_contents_list_item=0x7f030016;
+        public static final int share=0x7f030017;
+        public static final int slide_draw_cell=0x7f030018;
+        public static final int swipeback_layout=0x7f030019;
+        public static final int toastmessage_text=0x7f03001a;
+        public static final int update_dialog=0x7f03001b;
+        public static final int wechat=0x7f03001c;
+        public static final int welcome_page=0x7f03001d;
+        public static final int xlistview_footer=0x7f03001e;
+        public static final int xlistview_header=0x7f03001f;
     }
     public static final class string {
         public static final int Cancel=0x7f0900b3;
@@ -625,6 +798,7 @@ public final class R {
          */
         public static final int AppBaseTheme=0x7f0a001d;
         public static final int PopupWindowAnimation=0x7f0a0016;
+        public static final int SwipeBackLayout=0x7f0a001f;
         public static final int Theme_FullTranslucent=0x7f0a000e;
         public static final int Theme_HalfTranslucent=0x7f0a000d;
         public static final int Theme_IOSched=0x7f0a000b;
@@ -632,6 +806,7 @@ public final class R {
         public static final int Theme_SlideTop=0x7f0a000f;
         public static final int Theme_ZoomLight=0x7f0a0011;
         public static final int Theme_ZoomLight_Fullscreen=0x7f0a0012;
+        public static final int TranslucentTheme=0x7f0a001e;
         public static final int capture_input_button=0x7f0a0006;
         public static final int capture_text_style=0x7f0a0007;
         /**  cart checkout edittext 
@@ -653,4 +828,323 @@ public final class R {
         public static final int refreshlistview_header=0x7f0a001c;
         public static final int refreshlistview_progress=0x7f0a0019;
     }
+    public static final class styleable {
+        /** Attributes that can be used with a FoldingMenu.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #FoldingMenu_foldNumber com.donal.wechat:foldNumber}</code></td><td></td></tr>
+           </table>
+           @see #FoldingMenu_foldNumber
+         */
+        public static final int[] FoldingMenu = {
+            0x7f010000
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#foldNumber}
+          attribute's value can be found in the {@link #FoldingMenu} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:foldNumber
+        */
+        public static final int FoldingMenu_foldNumber = 0;
+        /** Attributes that can be used with a ProgressWheel.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ProgressWheel_barColor com.donal.wechat:barColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_barLength com.donal.wechat:barLength}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_barWidth com.donal.wechat:barWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_circleColor com.donal.wechat:circleColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_delayMillis com.donal.wechat:delayMillis}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_progress com.donal.wechat:progress}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_rimColor com.donal.wechat:rimColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_rimWidth com.donal.wechat:rimWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_spinSpeed com.donal.wechat:spinSpeed}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_textColor com.donal.wechat:textColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #ProgressWheel_textSize com.donal.wechat:textSize}</code></td><td></td></tr>
+           </table>
+           @see #ProgressWheel_barColor
+           @see #ProgressWheel_barLength
+           @see #ProgressWheel_barWidth
+           @see #ProgressWheel_circleColor
+           @see #ProgressWheel_delayMillis
+           @see #ProgressWheel_progress
+           @see #ProgressWheel_rimColor
+           @see #ProgressWheel_rimWidth
+           @see #ProgressWheel_spinSpeed
+           @see #ProgressWheel_textColor
+           @see #ProgressWheel_textSize
+         */
+        public static final int[] ProgressWheel = {
+            0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004,
+            0x7f010005, 0x7f010006, 0x7f010007, 0x7f010008,
+            0x7f010009, 0x7f01000a, 0x7f01000b
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#barColor}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:barColor
+        */
+        public static final int ProgressWheel_barColor = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#barLength}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:barLength
+        */
+        public static final int ProgressWheel_barLength = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#barWidth}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:barWidth
+        */
+        public static final int ProgressWheel_barWidth = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#circleColor}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:circleColor
+        */
+        public static final int ProgressWheel_circleColor = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#delayMillis}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:delayMillis
+        */
+        public static final int ProgressWheel_delayMillis = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#progress}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:progress
+        */
+        public static final int ProgressWheel_progress = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#rimColor}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:rimColor
+        */
+        public static final int ProgressWheel_rimColor = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#rimWidth}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:rimWidth
+        */
+        public static final int ProgressWheel_rimWidth = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#spinSpeed}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:spinSpeed
+        */
+        public static final int ProgressWheel_spinSpeed = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#textColor}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:textColor
+        */
+        public static final int ProgressWheel_textColor = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#textSize}
+          attribute's value can be found in the {@link #ProgressWheel} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:textSize
+        */
+        public static final int ProgressWheel_textSize = 2;
+        /** Attributes that can be used with a SwipeBackLayout.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SwipeBackLayout_edge_flag com.donal.wechat:edge_flag}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwipeBackLayout_edge_size com.donal.wechat:edge_size}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwipeBackLayout_shadow_bottom com.donal.wechat:shadow_bottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwipeBackLayout_shadow_left com.donal.wechat:shadow_left}</code></td><td></td></tr>
+           <tr><td><code>{@link #SwipeBackLayout_shadow_right com.donal.wechat:shadow_right}</code></td><td></td></tr>
+           </table>
+           @see #SwipeBackLayout_edge_flag
+           @see #SwipeBackLayout_edge_size
+           @see #SwipeBackLayout_shadow_bottom
+           @see #SwipeBackLayout_shadow_left
+           @see #SwipeBackLayout_shadow_right
+         */
+        public static final int[] SwipeBackLayout = {
+            0x7f01000c, 0x7f01000d, 0x7f01000e, 0x7f01000f,
+            0x7f010010
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#edge_flag}
+          attribute's value can be found in the {@link #SwipeBackLayout} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>left</code></td><td>0</td><td></td></tr>
+<tr><td><code>right</code></td><td>1</td><td></td></tr>
+<tr><td><code>bottom</code></td><td>2</td><td></td></tr>
+<tr><td><code>all</code></td><td>3</td><td></td></tr>
+</table>
+          @attr name com.donal.wechat:edge_flag
+        */
+        public static final int SwipeBackLayout_edge_flag = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#edge_size}
+          attribute's value can be found in the {@link #SwipeBackLayout} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.donal.wechat:edge_size
+        */
+        public static final int SwipeBackLayout_edge_size = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#shadow_bottom}
+          attribute's value can be found in the {@link #SwipeBackLayout} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.donal.wechat:shadow_bottom
+        */
+        public static final int SwipeBackLayout_shadow_bottom = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#shadow_left}
+          attribute's value can be found in the {@link #SwipeBackLayout} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.donal.wechat:shadow_left
+        */
+        public static final int SwipeBackLayout_shadow_left = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.donal.wechat.R.attr#shadow_right}
+          attribute's value can be found in the {@link #SwipeBackLayout} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.donal.wechat:shadow_right
+        */
+        public static final int SwipeBackLayout_shadow_right = 3;
+    };
 }

@@ -3,6 +3,8 @@ package ui;
 
 
 
+import im.WeChat;
+
 import com.baidu.android.pushservice.PushConstants;
 import com.baidu.android.pushservice.PushManager;
 import com.donal.wechat.R;
@@ -20,7 +22,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
-
 import config.AppActivity;
 import config.CommonValue;
 

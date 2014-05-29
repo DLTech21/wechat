@@ -6,7 +6,6 @@ import im.model.Notice;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
 import org.jivesoftware.smack.packet.Presence;
@@ -14,9 +13,9 @@ import org.jivesoftware.smack.packet.XMPPError;
 
 import tools.Logger;
 import ui.adapter.WeChatAdapter;
+import ui.view.SlideDrawerView;
 import xlistview.XListView;
 import xlistview.XListView.IXListViewListener;
-
 
 import com.donal.wechat.R;
 

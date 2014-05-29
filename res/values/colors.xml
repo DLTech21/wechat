@@ -39,5 +39,7 @@
     <color name="background_color">#f1f1f1</color>
     
     <color name="nav_color">#088ec1</color>
+    
+    <color name="left_drawer_item_bg_normal">#ff393939</color>
 
 </resources>

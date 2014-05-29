@@ -3,6 +3,8 @@
  */
 package ui;
 
+import im.WeChat;
+
 import java.util.ArrayList;
 
 import org.jivesoftware.smack.XMPPException;
@@ -13,7 +15,6 @@ import tools.ImageUtils;
 import tools.UIHelper;
 import ui.adapter.TextAdapter;
 import xlistview.XListView;
-
 import bean.UserEntity;
 
 import com.donal.wechat.R;

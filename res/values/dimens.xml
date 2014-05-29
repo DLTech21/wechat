@@ -9,4 +9,7 @@
 	<dimen name="cell_subtitle_size">14dp</dimen>
 	<dimen name="section_title_size">16dp</dimen>
 	<dimen name="message_count_size">13dp</dimen>
+	
+	<dimen name="slidingmenu_offset">50.0dip</dimen>
+    <dimen name="shadow_width">15.0dip</dimen>
 </resources>
