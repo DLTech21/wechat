@@ -342,9 +342,9 @@ public class Chating extends AChating{
 			.bitmapConfig(Bitmap.Config.RGB_565)
 			.build();
 			photooptions = new DisplayImageOptions.Builder()
-			.showImageOnLoading(R.drawable.content_image_loading)
-			.showImageForEmptyUri(R.drawable.content_image_loading)
-			.showImageOnFail(R.drawable.content_image_loading)
+//			.showImageOnLoading(R.drawable.content_image_loading)
+//			.showImageForEmptyUri(R.drawable.content_image_loading)
+//			.showImageOnFail(R.drawable.content_image_loading)
 			.cacheInMemory(true)
 			.cacheOnDisc(true)
 			.considerExifParams(true)
@@ -431,6 +431,7 @@ public class Chating extends AChating{
 					if (message.getType() == CommonValue.kWCMessageStatusWait) {
 						message.setType(CommonValue.kWCMessageStatusSending);
 						cell.photoProgress.setVisibility(View.VISIBLE);
+						imageLoader.displayImage("file:///"+msg.file, cell.rightPhoto, photooptions);
 						uploadQiniu(message, msg.file, cell);
 					}
 					else if (message.getType() == 0) {

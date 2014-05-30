@@ -59,17 +59,16 @@ public abstract class AChating extends SwipeBackActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		to = getIntent().getStringExtra("to");
-		if (to == null)
-			return;
-		chat = XmppConnectionManager.getInstance().getConnection()
-				.getChatManager().createChat(to, null);
-		
 		message_pool = MessageManager.getInstance(context)
 				.getMessageListByFrom(to, 1, pageSize);
 		if (null != message_pool && message_pool.size() > 0)
 			Collections.sort(message_pool);
 		
 		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
+		if (to == null)
+			return;
+		chat = XmppConnectionManager.getInstance().getConnection()
+				.getChatManager().createChat(to, null);
 	}
 	
 	@Override

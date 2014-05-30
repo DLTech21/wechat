@@ -125,8 +125,8 @@
 		       />
            <TextView 
                android:id="@+id/photo_content_progress"
-		       android:layout_width="match_parent"
-		       android:layout_height="match_parent"
+		       android:layout_width="50dp"
+		       android:layout_height="50dp"
 		       android:textSize="18dp"
 		       android:layout_centerInParent="true"
 		       android:textColor="@color/white"
