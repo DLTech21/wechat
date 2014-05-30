@@ -10,12 +10,11 @@ import java.util.List;
 
 import tools.UIHelper;
 import ui.adapter.FriendCardAdapter;
-import xlistview.XListView;
-import xlistview.XListView.IXListViewListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.widget.Toast;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.ListView;
 import bean.StrangerEntity;
 import bean.UserInfo;
 
@@ -31,12 +30,12 @@ import config.ApiClent.ClientCallback;
  * @author donal
  *
  */
-public class Friend extends AppActivity implements IXListViewListener{
+public class Friend extends AppActivity implements OnScrollListener{
 	
 	private int lvDataState;
 	private int currentPage;
 	
-	private XListView xlistView;
+	private ListView xlistView;
 	private List<UserInfo> datas;
 	private FriendCardAdapter mAdapter;
 	
@@ -45,19 +44,12 @@ public class Friend extends AppActivity implements IXListViewListener{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend);
 		initUI();
-		Handler jumpHandler = new Handler();
-		jumpHandler.postDelayed(new Runnable() {
-			public void run() {
-				getFriendCardFromCache();
-			}
-		}, 100);
+		getFriendCardFromCache();
 	}
 	
 	private void initUI() {
-		xlistView = (XListView)findViewById(R.id.xlistview);
-		xlistView.setXListViewListener(this, 0);
-        xlistView.setRefreshTime();
-        xlistView.setPullLoadEnable(false);
+		xlistView = (ListView)findViewById(R.id.xlistview);
+		xlistView.setOnScrollListener(this);
         xlistView.setDividerHeight(0);
         datas = new ArrayList<UserInfo>();
 		mAdapter = new FriendCardAdapter(this, datas);
@@ -87,22 +79,16 @@ public class Friend extends AppActivity implements IXListViewListener{
 			
 			@Override
 			public void onFailure(String message) {
-				xlistView.stopLoadMore();
-				xlistView.stopRefresh();
 				showToast(message);
 			}
 			
 			@Override
 			public void onError(Exception e) {
-				xlistView.stopLoadMore();
-				xlistView.stopRefresh();
 			}
 		});
 	}
 	
 	private void handleFriends(StrangerEntity entity, int action) {
-		xlistView.stopLoadMore();
-		xlistView.stopRefresh();
 		switch (action) {
 		case UIHelper.LISTVIEW_ACTION_INIT:
 		case UIHelper.LISTVIEW_ACTION_REFRESH:
@@ -115,37 +101,17 @@ public class Friend extends AppActivity implements IXListViewListener{
 		}
 		if(entity.userList.size() == UIHelper.LISTVIEW_COUNT){					
 			lvDataState = UIHelper.LISTVIEW_DATA_MORE;
-			xlistView.setPullLoadEnable(true);
 			mAdapter.notifyDataSetChanged();
 		}
 		else {
 			lvDataState = UIHelper.LISTVIEW_DATA_FULL;
-			xlistView.setPullLoadEnable(false);
 			mAdapter.notifyDataSetChanged();
 		}
 		if(datas.isEmpty()){
 			lvDataState = UIHelper.LISTVIEW_DATA_EMPTY;
-			xlistView.setPullLoadEnable(false);
 		}
 	}
 
-	@Override
-	public void onRefresh(int id) {
-		currentPage = 1;
-		getMyFriend(currentPage, UIHelper.LISTVIEW_ACTION_REFRESH);
-	}
-
-	@Override
-	public void onLoadMore(int id) {
-		if (lvDataState == UIHelper.LISTVIEW_DATA_EMPTY) {
-			getMyFriend(currentPage, UIHelper.LISTVIEW_ACTION_INIT);
-		}
-		if (lvDataState == UIHelper.LISTVIEW_DATA_MORE) {
-			currentPage ++;
-			getMyFriend(currentPage, UIHelper.LISTVIEW_ACTION_SCROLL);
-		}
-	}
-	
 	@Override
 	public void onBackPressed() {
 		isExit();
@@ -155,5 +121,24 @@ public class Friend extends AppActivity implements IXListViewListener{
 		Intent intent = new Intent(context, Chating.class);
 		intent.putExtra("to", userId);
 		startActivity(intent);
+	}
+
+	@Override
+	public void onScroll(AbsListView view, int firstVisibleItem,
+			int visibleItemCount, int totalItemCount) {
+		if (lvDataState != UIHelper.LISTVIEW_DATA_MORE) {
+            return;
+        }
+        if (firstVisibleItem + visibleItemCount >= totalItemCount
+                && totalItemCount != 0) {
+        	lvDataState = UIHelper.LISTVIEW_DATA_LOADING;
+        	currentPage++;
+        	getMyFriend(currentPage, UIHelper.LISTVIEW_ACTION_SCROLL);
+        }
+	}
+
+	@Override
+	public void onScrollStateChanged(AbsListView view, int scrollState) {
+		
 	}
 }

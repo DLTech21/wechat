@@ -66,6 +66,12 @@
 		        android:textSize="18dp"
 		        android:layout_gravity="center_horizontal"
 		        android:textColor="#000000"/>
+            <ImageView
+		       android:id="@+id/photo_content_l"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:scaleType="centerCrop"
+		       />
        </RelativeLayout>
        
     </RelativeLayout>
@@ -111,6 +117,12 @@
 		       android:textSize="18dp"
 		       android:layout_gravity="center_horizontal"
 		       android:textColor="#000000"/>
+           <ImageView
+		       android:id="@+id/photo_content_r"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:scaleType="centerCrop"
+		       />
        </RelativeLayout>
        <ProgressBar
             android:id="@+id/view_progress_r"

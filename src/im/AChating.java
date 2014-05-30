@@ -6,14 +6,24 @@ package im;
 import im.model.IMMessage;
 import im.model.Notice;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import org.jivesoftware.smack.Chat;
 import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
+import org.json.JSONObject;
+
+import qiniu.auth.JSONObjectRet;
+import qiniu.io.IO;
+import qiniu.io.PutExtra;
+import qiniu.utils.Config;
+import qiniu.utils.Mac;
+import qiniu.utils.PutPolicy;
 
 import com.google.gson.Gson;
 
@@ -129,6 +139,30 @@ public abstract class AChating extends SwipeBackActivity{
 		refreshMessage(message_pool);
 	}
 	
+	protected void sendMediaMessage(String url) throws Exception {
+		JsonMessage msg = new JsonMessage();
+		msg.file = url;
+		msg.messageType = CommonValue.kWCMessageTypePlain;
+		msg.text = "[图片]";
+		Gson gson = new Gson();
+		String json = gson.toJson(msg);
+		
+		String time = (System.currentTimeMillis()/1000)+"";
+		Message message = new Message();
+		message.setProperty(IMMessage.KEY_TIME, time);
+		message.setBody(json);
+		chat.sendMessage(message);
+
+		IMMessage newMessage = new IMMessage();
+		newMessage.setMsgType(1);
+		newMessage.setFromSubJid(chat.getParticipant());
+		newMessage.setContent(json);
+		newMessage.setTime(time);
+		message_pool.add(newMessage);
+		MessageManager.getInstance(context).saveIMMessage(newMessage);
+		refreshMessage(message_pool);
+	}
+	
 	protected Boolean addNewMessage() {
 		List<IMMessage> newMsgList = MessageManager.getInstance(context)
 				.getMessageListByFrom(to, message_pool.size(), pageSize);
@@ -161,6 +195,44 @@ public abstract class AChating extends SwipeBackActivity{
 		public void processMessage(Chat arg0, Message message) {
 			
 		}
-		
+	}
+	
+	protected void uploadPhotoToQiniu(String filePath) {
+		String bucketName = "dchat";
+        PutPolicy putPolicy = new PutPolicy(bucketName);
+		Config.ACCESS_KEY = "5e71GMRBlrPS5pjETWcgElaH-uvhGRsWRGMR_Pfs";
+        Config.SECRET_KEY = "cqzLJe_hA4YO33Oobp7AF0Fhca4q3EQ2rAfwS2YB";
+        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+        String auploadToken = null;
+		try {
+			auploadToken = putPolicy.token(mac);
+			Logger.i(auploadToken);
+		} catch (Exception e) {
+			Logger.i(e);
+		}
+		String key = IO.UNDEFINED_KEY; 
+		PutExtra extra = new PutExtra();
+		extra.params = new HashMap<String, String>();
+		IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
+			@Override
+			public void onProcess(long current, long total) {
+				
+			}
+
+			@Override
+			public void onSuccess(JSONObject resp) {
+				String key = resp.optString("hash", "");
+				try {
+					sendMediaMessage("http://dchat.qiniudn.com/"+key);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onFailure(Exception ex) {
+				Logger.i(ex.toString());
+			}
+		});
 	}
 }

@@ -97,7 +97,7 @@ public class ApiClent {
 		params.add("apiKey", apiKey);
 		params.add("pageIndex", page);
 		params.add("pageSize", pageSize);
-		if (!StringUtils.isEmpty(nickName)) {
+		if (!StringUtils.empty(nickName)) {
 			params.add("nickName", nickName);
 		}
 		QYRestClient.post("findFriend.do", params, new AsyncHttpResponseHandler() {

@@ -6,23 +6,41 @@ package im;
 import im.model.IMMessage;
 import im.model.Notice;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import tools.AppManager;
 import tools.DateUtil;
+import tools.ImageUtils;
 import tools.Logger;
+import tools.StringUtils;
+import tools.UIHelper;
 import bean.JsonMessage;
 import bean.UserInfo;
 
 import com.donal.wechat.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import config.CommonValue;
 import config.FriendManager;
 import config.MessageManager;
 import config.NoticeManager;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.media.ExifInterface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +48,6 @@ import android.view.View.OnClickListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -48,7 +65,6 @@ import android.widget.Toast;
 public class Chating extends AChating{
 	private MessageListAdapter adapter = null;
 	private EditText messageInput = null;
-	private Button messageSendBtn = null;
 	private ListView listView;
 	private int recordCount;
 	private UserInfo user;// 聊天人
@@ -109,29 +125,33 @@ public class Chating extends AChating{
 				listView.setSelection(getMessages().size()-1);
 			}
 		});
-		messageSendBtn = (Button) findViewById(R.id.chat_sendbtn);
-		messageSendBtn.setOnClickListener(new View.OnClickListener() {
+	}
+	
+	public void ButtonClick(View v) {
+		switch (v.getId()) {
+		case R.id.chat_sendbtn:
+			String message = messageInput.getText().toString();
+			if ("".equals(message)) {
+				Toast.makeText(Chating.this, "不能为空",
+						Toast.LENGTH_SHORT).show();
+			} else {
 
-			@Override
-			public void onClick(View v) {
-				String message = messageInput.getText().toString();
-				if ("".equals(message)) {
-					Toast.makeText(Chating.this, "不能为空",
-							Toast.LENGTH_SHORT).show();
-				} else {
-
-					try {
-						sendMessage(message);
-						messageInput.setText("");
-					} catch (Exception e) {
-						showToast("信息发送失败");
-						messageInput.setText(message);
-					}
-					closeInput();
+				try {
+					sendMessage(message);
+					messageInput.setText("");
+				} catch (Exception e) {
+					showToast("信息发送失败");
+					messageInput.setText(message);
 				}
-				listView.setSelection(getMessages().size()-1);
+				closeInput();
 			}
-		});
+			listView.setSelection(getMessages().size()-1);
+			break;
+
+		case R.id.cameraButton:
+			PhotoChooseOption();
+			break;
+		}
 	}
 
 	@Override
@@ -159,6 +179,115 @@ public class Chating extends AChating{
 		listView.setSelection(getMessages().size()-1);
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode != RESULT_OK) {
+			return;
+		}
+		String newPhotoPath;
+		switch (requestCode) {
+		case ImageUtils.REQUEST_CODE_GETIMAGE_BYCAMERA:
+			if (StringUtils.notEmpty(theLarge)) {
+				File file = new File(theLarge);
+				File dir = new File( ImageUtils.CACHE_IMAGE_FILE_PATH);
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+				String imagePathAfterCompass = ImageUtils.CACHE_IMAGE_FILE_PATH + file.getName();
+				try {
+					ExifInterface sourceExif = new ExifInterface(theLarge);
+					String orientation = sourceExif.getAttribute(ExifInterface.TAG_ORIENTATION);
+					ImageUtils.saveImageToSD(imagePathAfterCompass, ImageUtils.getSmallBitmap(theLarge, 200), 80);
+					ExifInterface exif = new ExifInterface(imagePathAfterCompass);
+					exif.setAttribute(ExifInterface.TAG_ORIENTATION, orientation);
+				    exif.saveAttributes();
+					newPhotoPath = imagePathAfterCompass;
+					uploadPhotoToQiniu(newPhotoPath);
+				} catch (IOException e) {
+//					Crashlytics.logException(e);
+				}
+				
+			}
+			break;
+		case ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD:
+			if(data == null)  return;
+			Uri thisUri = data.getData();
+        	String thePath = ImageUtils.getAbsolutePathFromNoStandardUri(thisUri);
+        	if(StringUtils.empty(thePath)) {
+        		newPhotoPath = ImageUtils.getAbsoluteImagePath(this,thisUri);
+        	}
+        	else {
+        		newPhotoPath = thePath;
+        	}
+        	File file = new File(newPhotoPath);
+			File dir = new File( ImageUtils.CACHE_IMAGE_FILE_PATH);
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
+			String imagePathAfterCompass = ImageUtils.CACHE_IMAGE_FILE_PATH + file.getName();
+			try {
+				ExifInterface sourceExif = new ExifInterface(newPhotoPath);
+				String orientation = sourceExif.getAttribute(ExifInterface.TAG_ORIENTATION);
+				ImageUtils.saveImageToSD(imagePathAfterCompass, ImageUtils.getSmallBitmap(newPhotoPath, 200), 80);
+				ExifInterface exif = new ExifInterface(imagePathAfterCompass);
+				exif.setAttribute(ExifInterface.TAG_ORIENTATION, orientation);
+			    exif.saveAttributes();
+				newPhotoPath = imagePathAfterCompass;
+				uploadPhotoToQiniu(newPhotoPath);
+			} catch (IOException e) {
+//				Crashlytics.logException(e);
+			}
+			break;
+		}
+	}
+	
+	private String theLarge;
+	private void PhotoChooseOption() {
+		closeInput();
+		CharSequence[] item = {"相册", "拍照"};
+		AlertDialog imageDialog = new AlertDialog.Builder(this).setTitle(null).setIcon(android.R.drawable.btn_star).setItems(item,
+				new DialogInterface.OnClickListener(){
+					public void onClick(DialogInterface dialog, int item)
+					{
+						//手机选图
+						if( item == 0 )
+						{
+							Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
+							intent.addCategory(Intent.CATEGORY_OPENABLE); 
+							intent.setType("image/*"); 
+							startActivityForResult(Intent.createChooser(intent, "选择图片"),ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD); 
+						}
+						//拍照
+						else if( item == 1 )
+						{	
+							String savePath = "";
+							//判断是否挂载了SD卡
+							String storageState = Environment.getExternalStorageState();		
+							if(storageState.equals(Environment.MEDIA_MOUNTED)){
+								savePath = Environment.getExternalStorageDirectory().getAbsolutePath() + ImageUtils.DCIM;//存放照片的文件夹
+								File savedir = new File(savePath);
+								if (!savedir.exists()) {
+									savedir.mkdirs();
+								}
+							}
+							//没有挂载SD卡，无法保存文件
+							if(StringUtils.empty(savePath)){
+								UIHelper.ToastMessage(Chating.this, "无法保存照片，请检查SD卡是否挂载", Toast.LENGTH_SHORT);
+								return;
+							}
+							String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+							String fileName = "c_" + timeStamp + ".jpg";//照片命名
+							File out = new File(savePath, fileName);
+							Uri uri = Uri.fromFile(out);
+							theLarge = savePath + fileName;//该照片的绝对路径
+							Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+							intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+							startActivityForResult(intent, ImageUtils.REQUEST_CODE_GETIMAGE_BYCAMERA);
+						}   
+					}}).create();
+			 imageDialog.show();
+	}
+	
 	private class MessageListAdapter extends BaseAdapter {
 
 		class ViewHoler {
@@ -168,12 +297,14 @@ public class Chating extends AChating{
 			ImageView leftAvatar;
 			TextView leftNickname;
 			TextView leftText;
+			ImageView leftPhoto;
 			
 			RelativeLayout rightLayout;
 			RelativeLayout rightFrame;
 			ImageView rightAvatar;
 			TextView rightNickname;
 			TextView rightText;
+			ImageView rightPhoto;
 			ProgressBar rightProgress;
 		}
 		
@@ -196,6 +327,7 @@ public class Chating extends AChating{
 			.showImageOnFail(R.drawable.avatar_placeholder)
 			.cacheInMemory(true)
 			.cacheOnDisc(true)
+			.considerExifParams(true)
 			.bitmapConfig(Bitmap.Config.RGB_565)
 			.build();
 		}
@@ -232,12 +364,14 @@ public class Chating extends AChating{
 				cell.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
 				cell.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
 				cell.leftText = (TextView) convertView.findViewById(R.id.textview_content_l);
+				cell.leftPhoto = (ImageView) convertView.findViewById(R.id.photo_content_l);
 						
 				cell.rightLayout = (RelativeLayout) convertView.findViewById(R.id.layout_right);
 				cell.rightFrame = (RelativeLayout) convertView.findViewById(R.id.layout_content_r);
 				cell.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
 				cell.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
 				cell.rightText = (TextView) convertView.findViewById(R.id.textview_content_r);
+				cell.rightPhoto = (ImageView) convertView.findViewById(R.id.photo_content_r);
 				cell.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
 				convertView.setTag(cell);
 			}
@@ -248,12 +382,26 @@ public class Chating extends AChating{
 			cell.leftLayout.setVisibility(message.getMsgType() == 0? View.VISIBLE:View.INVISIBLE);
 			cell.rightLayout.setVisibility(message.getMsgType() == 0? View.INVISIBLE:View.VISIBLE);
 			String content = message.getContent();
-			imageLoader.displayImage(CommonValue.BASE_URL+user.userHead, cell.leftAvatar, options);
-			imageLoader.displayImage(CommonValue.BASE_URL+ appContext.getLoginUserHead(), cell.rightAvatar, options);
 			try {
+				imageLoader.displayImage(CommonValue.BASE_URL+ user.userHead, cell.leftAvatar, options);
+				imageLoader.displayImage(CommonValue.BASE_URL+ appContext.getLoginUserHead(), cell.rightAvatar, options);
 				JsonMessage msg = JsonMessage.parse(content);
-				cell.leftText.setText(msg.text);
-				cell.rightText.setText(msg.text);
+				if (StringUtils.empty(msg.file)) {
+					cell.leftText.setVisibility(View.VISIBLE);
+					cell.rightText.setVisibility(View.VISIBLE);
+					cell.leftText.setText(msg.text);
+					cell.rightText.setText(msg.text);
+					cell.leftPhoto.setVisibility(View.GONE);
+					cell.rightPhoto.setVisibility(View.GONE);
+				}
+				else {
+					cell.leftText.setVisibility(View.GONE);
+					cell.rightText.setVisibility(View.GONE);
+					cell.leftPhoto.setVisibility(View.VISIBLE);
+					cell.rightPhoto.setVisibility(View.VISIBLE);
+					imageLoader.displayImage(msg.file, cell.leftPhoto, options);
+					imageLoader.displayImage(msg.file, cell.rightPhoto, options);
+				}
 			} catch (Exception e) {
 				cell.leftText.setText(content);
 				cell.rightText.setText(content);
@@ -276,7 +424,7 @@ public class Chating extends AChating{
 			}
 			return convertView;
 		}
-
+		
 	}
 	
 	@Override

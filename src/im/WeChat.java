@@ -31,6 +31,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import config.CommonValue;
 import config.MessageManager;
@@ -42,9 +43,9 @@ import config.XmppConnectionManager;
  * @author donal
  *
  */
-public class WeChat extends AWechatActivity implements IXListViewListener{
+public class WeChat extends AWechatActivity {
 	
-	private XListView xlistView;
+	private ListView xlistView;
 	private TextView titleBarView;
 	private ImageView indicatorImageView;
 	private Animation indicatorAnimation;
@@ -86,12 +87,7 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 		    }
 		});
 		
-		xlistView = (XListView)findViewById(R.id.xlistview);
-		xlistView.setXListViewListener(this, 0);
-        xlistView.setRefreshTime();
-        xlistView.setPullLoadEnable(false);
-        xlistView.setPullRefreshEnable(false);
-        xlistView.setDividerHeight(0);
+		xlistView = (ListView)findViewById(R.id.xlistview);
         inviteNotices = new ArrayList<HistoryChatBean>();
         inviteNotices = MessageManager.getInstance(context)
 				.getRecentContactsWithLastMsg();
@@ -159,13 +155,6 @@ public class WeChat extends AWechatActivity implements IXListViewListener{
 		}).start();
 	}
 
-	@Override
-	public void onRefresh(int id) {
-	}
-	@Override
-	public void onLoadMore(int id) {
-	}
-	
 	@Override
 	public void onBackPressed() {
 		isExit();

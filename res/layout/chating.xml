@@ -33,6 +33,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:background="#FFEEEEEE" >
 
         <EditText
@@ -50,7 +51,19 @@
             android:layout_marginLeft="5dip"
             android:layout_width="wrap_content"
             android:layout_height="45dip"
+            android:onClick="ButtonClick"
             android:text=" 发送 " />
+        
+        <Button 
+	        android:id="@+id/cameraButton"
+	        android:layout_below="@+id/menuView"
+	        android:layout_width="40dp"
+	        android:layout_height="40dp"
+	        android:background="@android:drawable/ic_menu_camera"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="10dp"
+	        android:onClick="ButtonClick"
+	        />
     </LinearLayout>
 
 </LinearLayout>

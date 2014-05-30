@@ -78,7 +78,7 @@ public class WCApplication extends AppContext {
 	public boolean isLogin() {
 		try {
 			String loginStr = getProperty("user.login");
-			if (StringUtils.isEmpty(loginStr)) {
+			if (StringUtils.empty(loginStr)) {
 				login = false;
 			}
 			else {
@@ -176,7 +176,7 @@ public class WCApplication extends AppContext {
 	public boolean isNeedCheckLogin() {
 		try {
 			String loginStr = getProperty("user.needchecklogin");
-			if (StringUtils.isEmpty(loginStr)) {
+			if (StringUtils.empty(loginStr)) {
 				return false;
 			}
 			else {
@@ -207,7 +207,7 @@ public class WCApplication extends AppContext {
 	public String getNotiWhen() {
 		try {
 			String loginStr = getProperty("noti.when");
-			if (StringUtils.isEmpty(loginStr)) {
+			if (StringUtils.empty(loginStr)) {
 				return "0";
 			}
 			else {
