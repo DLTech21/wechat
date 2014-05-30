@@ -142,7 +142,7 @@ public abstract class AChating extends SwipeBackActivity{
 	protected void sendMediaMessage(String url) throws Exception {
 		JsonMessage msg = new JsonMessage();
 		msg.file = url;
-		msg.messageType = CommonValue.kWCMessageTypePlain;
+		msg.messageType = CommonValue.kWCMessageTypeImage;
 		msg.text = "[图片]";
 		Gson gson = new Gson();
 		String json = gson.toJson(msg);

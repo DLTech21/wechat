@@ -314,6 +314,7 @@ public class Chating extends AChating{
 		private LayoutInflater inflater;
 
 		DisplayImageOptions options;
+		DisplayImageOptions photooptions;
 		
 		public MessageListAdapter(Context context, List<IMMessage> items,
 				ListView adapterList) {
@@ -325,6 +326,15 @@ public class Chating extends AChating{
 			.showImageOnLoading(R.drawable.avatar_placeholder)
 			.showImageForEmptyUri(R.drawable.avatar_placeholder)
 			.showImageOnFail(R.drawable.avatar_placeholder)
+			.cacheInMemory(true)
+			.cacheOnDisc(true)
+			.considerExifParams(true)
+			.bitmapConfig(Bitmap.Config.RGB_565)
+			.build();
+			photooptions = new DisplayImageOptions.Builder()
+			.showImageOnLoading(R.drawable.content_image_loading)
+			.showImageForEmptyUri(R.drawable.content_image_loading)
+			.showImageOnFail(R.drawable.content_image_loading)
 			.cacheInMemory(true)
 			.cacheOnDisc(true)
 			.considerExifParams(true)
@@ -385,8 +395,12 @@ public class Chating extends AChating{
 			try {
 				imageLoader.displayImage(CommonValue.BASE_URL+ user.userHead, cell.leftAvatar, options);
 				imageLoader.displayImage(CommonValue.BASE_URL+ appContext.getLoginUserHead(), cell.rightAvatar, options);
+			} catch (Exception e) {
+				
+			}
+			try {
 				JsonMessage msg = JsonMessage.parse(content);
-				if (StringUtils.empty(msg.file)) {
+				if (msg.messageType == CommonValue.kWCMessageTypePlain) {
 					cell.leftText.setVisibility(View.VISIBLE);
 					cell.rightText.setVisibility(View.VISIBLE);
 					cell.leftText.setText(msg.text);
@@ -399,13 +413,12 @@ public class Chating extends AChating{
 					cell.rightText.setVisibility(View.GONE);
 					cell.leftPhoto.setVisibility(View.VISIBLE);
 					cell.rightPhoto.setVisibility(View.VISIBLE);
-					imageLoader.displayImage(msg.file, cell.leftPhoto, options);
-					imageLoader.displayImage(msg.file, cell.rightPhoto, options);
+					imageLoader.displayImage(msg.file, cell.leftPhoto, photooptions);
+					imageLoader.displayImage(msg.file, cell.rightPhoto, photooptions);
 				}
 			} catch (Exception e) {
 				cell.leftText.setText(content);
 				cell.rightText.setText(content);
-				
 			}
 			String currentTime = message.getTime();
 			String previewTime = (position - 1) >= 0 ? items.get(position-1).getTime() : "0";

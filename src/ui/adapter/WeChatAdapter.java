@@ -124,9 +124,7 @@ public class WeChatAdapter extends BaseAdapter {
 		String content = notice.getContent();
 		try {
 			JsonMessage msg = JsonMessage.parse(content);
-			if (msg.messageType == CommonValue.kWCMessageTypePlain) {
-				holder.desView.setText(msg.text);
-			}
+			holder.desView.setText(msg.text);
 		} catch(Exception e) {
 			holder.desView.setText(content);
 		}
