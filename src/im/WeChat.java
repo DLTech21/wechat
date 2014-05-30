@@ -58,6 +58,11 @@ public class WeChat extends AWechatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wechat);
 		initUI();
+		
+		inviteNotices = MessageManager.getInstance(context)
+				.getRecentContactsWithLastMsg();
+		noticeAdapter.setNoticeList(inviteNotices);
+		noticeAdapter.notifyDataSetChanged();
 		XMPPConnection connection = XmppConnectionManager.getInstance().getConnection();
 		if (!connection.isConnected()) {
 			connect2xmpp();
@@ -66,11 +71,8 @@ public class WeChat extends AWechatActivity {
 	
 	@Override
 	protected void onResume() {
-		inviteNotices = MessageManager.getInstance(context)
-				.getRecentContactsWithLastMsg();
-		noticeAdapter.setNoticeList(inviteNotices);
-		noticeAdapter.notifyDataSetChanged();
-		setPaoPao();
+		
+//		setPaoPao();
 		super.onResume();
 	}
 	
@@ -215,8 +217,10 @@ public class WeChat extends AWechatActivity {
 
 		@Override
 		public void onClick(View v) {
-			String userId = (String) v.findViewById(R.id.des).getTag();
-			createChat(userId);
+			HistoryChatBean notice = (HistoryChatBean) v.findViewById(R.id.des).getTag();
+			createChat(notice.getFrom());
+			notice.setNoticeSum(0);
+			noticeAdapter.notifyDataSetChanged();
 		}
 	};
 	
@@ -224,22 +228,24 @@ public class WeChat extends AWechatActivity {
 
 		@Override
 		public boolean onLongClick(View v) {
-			String userId = (String) v.findViewById(R.id.des).getTag();
-			showDelChatOptionsDialog(new String[]{"删除对话"}, userId);
+			HistoryChatBean notice = (HistoryChatBean) v.findViewById(R.id.des).getTag();
+			showDelChatOptionsDialog(new String[]{"删除对话"}, notice);
 			return false;
 		}
 	};
 	
-	public void showDelChatOptionsDialog(final String[] arg ,final String userId){
+	public void showDelChatOptionsDialog(final String[] arg ,final HistoryChatBean notice){
 		new AlertDialog.Builder(context).setTitle(null).setItems(arg, new DialogInterface.OnClickListener(){
 			public void onClick(DialogInterface dialog, int which){
 				switch(which){
 				case 0:
-					MessageManager.getInstance(context).delChatHisWithSb(userId);
-					inviteNotices = MessageManager.getInstance(context)
-							.getRecentContactsWithLastMsg();
-					noticeAdapter.setNoticeList(inviteNotices);
+					inviteNotices.remove(notice);
 					noticeAdapter.notifyDataSetChanged();
+					MessageManager.getInstance(context).delChatHisWithSb(notice.getFrom());
+//					inviteNotices = MessageManager.getInstance(context)
+//							.getRecentContactsWithLastMsg();
+//					noticeAdapter.setNoticeList(inviteNotices);
+					
 					break;
 				}
 			}

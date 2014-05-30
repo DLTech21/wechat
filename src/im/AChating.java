@@ -217,6 +217,5 @@ public abstract class AChating extends SwipeBackActivity{
 		newMessage.setType(CommonValue.kWCMessageStatusWait);
 		message_pool.add(newMessage);
 		refreshMessage(message_pool);
-		Logger.i("aaa");
 	}
 }

@@ -353,8 +353,6 @@ public class Chating extends AChating{
 		}
 
 		public void refreshList(List<IMMessage> items) {
-			Logger.i("b");
-			Logger.i(items.size()+"");
 			this.items = items;
 			this.notifyDataSetChanged();
 			

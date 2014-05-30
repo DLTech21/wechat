@@ -175,7 +175,7 @@ public class MessageManager {
 								return notice;
 							}
 						},
-						"select m.[_id],m.[content],m.[msg_time],m.msg_from from im_msg_his  m join (select msg_from,max(msg_time) as time from im_msg_his group by msg_from) as tem  on  tem.time=m.msg_time and tem.msg_from=m.msg_from order by msg_time desc",
+						"select m.[_id],m.[content],m.[msg_time],m.msg_from from im_msg_his  m join (select msg_from,max(msg_time) as time from im_msg_his group by msg_from ) as tem  on  tem.time=m.msg_time and tem.msg_from=m.msg_from group by tem.msg_from order by msg_time desc",
 						null);
 		for (HistoryChatBean b : list) {
 			int count = st
