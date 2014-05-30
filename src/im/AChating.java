@@ -63,6 +63,13 @@ public abstract class AChating extends SwipeBackActivity{
 			return;
 		chat = XmppConnectionManager.getInstance().getConnection()
 				.getChatManager().createChat(to, null);
+		
+		message_pool = MessageManager.getInstance(context)
+				.getMessageListByFrom(to, 1, pageSize);
+		if (null != message_pool && message_pool.size() > 0)
+			Collections.sort(message_pool);
+		
+		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
 	}
 	
 	@Override
@@ -73,14 +80,9 @@ public abstract class AChating extends SwipeBackActivity{
 
 	@Override
 	protected void onResume() {
-		message_pool = MessageManager.getInstance(context)
-				.getMessageListByFrom(to, 1, pageSize);
-		if (null != message_pool && message_pool.size() > 0)
-			Collections.sort(message_pool);
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(CommonValue.NEW_MESSAGE_ACTION);
 		registerReceiver(receiver, filter);
-		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
 		super.onResume();
 
 	}
@@ -139,26 +141,26 @@ public abstract class AChating extends SwipeBackActivity{
 		refreshMessage(message_pool);
 	}
 	
-	protected void sendMediaMessage(String url) throws Exception {
-		JsonMessage msg = new JsonMessage();
-		msg.file = url;
-		msg.messageType = CommonValue.kWCMessageTypeImage;
-		msg.text = "[图片]";
-		Gson gson = new Gson();
-		String json = gson.toJson(msg);
-		
+	protected void sendMediaMessage(IMMessage newMessage) throws Exception {
+//		JsonMessage msg = new JsonMessage();
+//		msg.file = url;
+//		msg.messageType = CommonValue.kWCMessageTypeImage;
+//		msg.text = "[图片]";
+//		Gson gson = new Gson();
+//		String json = gson.toJson(msg);
+//		
 		String time = (System.currentTimeMillis()/1000)+"";
 		Message message = new Message();
 		message.setProperty(IMMessage.KEY_TIME, time);
-		message.setBody(json);
+		message.setBody(newMessage.getContent());
 		chat.sendMessage(message);
-
-		IMMessage newMessage = new IMMessage();
+//
+//		IMMessage newMessage = new IMMessage();
 		newMessage.setMsgType(1);
 		newMessage.setFromSubJid(chat.getParticipant());
-		newMessage.setContent(json);
 		newMessage.setTime(time);
-		message_pool.add(newMessage);
+		newMessage.setType(0); 
+//		message_pool.add(newMessage);
 		MessageManager.getInstance(context).saveIMMessage(newMessage);
 		refreshMessage(message_pool);
 	}
@@ -198,41 +200,24 @@ public abstract class AChating extends SwipeBackActivity{
 	}
 	
 	protected void uploadPhotoToQiniu(String filePath) {
-		String bucketName = "dchat";
-        PutPolicy putPolicy = new PutPolicy(bucketName);
-		Config.ACCESS_KEY = "5e71GMRBlrPS5pjETWcgElaH-uvhGRsWRGMR_Pfs";
-        Config.SECRET_KEY = "cqzLJe_hA4YO33Oobp7AF0Fhca4q3EQ2rAfwS2YB";
-        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
-        String auploadToken = null;
-		try {
-			auploadToken = putPolicy.token(mac);
-			Logger.i(auploadToken);
-		} catch (Exception e) {
-			Logger.i(e);
-		}
-		String key = IO.UNDEFINED_KEY; 
-		PutExtra extra = new PutExtra();
-		extra.params = new HashMap<String, String>();
-		IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
-			@Override
-			public void onProcess(long current, long total) {
-				
-			}
+		
+		JsonMessage msg = new JsonMessage();
+		msg.file = filePath;
+		msg.messageType = CommonValue.kWCMessageTypeImage;
+		msg.text = "[图片]";
+		Gson gson = new Gson();
+		String json = gson.toJson(msg);
+		
+		String time = (System.currentTimeMillis()/1000)+"";
 
-			@Override
-			public void onSuccess(JSONObject resp) {
-				String key = resp.optString("hash", "");
-				try {
-					sendMediaMessage("http://dchat.qiniudn.com/"+key);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-			@Override
-			public void onFailure(Exception ex) {
-				Logger.i(ex.toString());
-			}
-		});
+		IMMessage newMessage = new IMMessage();
+		newMessage.setMsgType(1);
+		newMessage.setFromSubJid(chat.getParticipant());
+		newMessage.setContent(json);
+		newMessage.setTime(time);
+		newMessage.setType(CommonValue.kWCMessageStatusWait);
+		message_pool.add(newMessage);
+		refreshMessage(message_pool);
+		Logger.i("aaa");
 	}
 }

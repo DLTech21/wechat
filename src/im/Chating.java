@@ -10,8 +10,17 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
+import org.json.JSONObject;
+
+import qiniu.auth.JSONObjectRet;
+import qiniu.io.IO;
+import qiniu.io.PutExtra;
+import qiniu.utils.Config;
+import qiniu.utils.Mac;
+import qiniu.utils.PutPolicy;
 import tools.AppManager;
 import tools.DateUtil;
 import tools.ImageUtils;
@@ -22,6 +31,7 @@ import bean.JsonMessage;
 import bean.UserInfo;
 
 import com.donal.wechat.R;
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
@@ -173,8 +183,8 @@ public class Chating extends AChating{
 	protected void onResume() {
 		super.onResume();
 		
-		recordCount = MessageManager.getInstance(context)
-				.getChatCountWithSb(to);
+//		recordCount = MessageManager.getInstance(context)
+//				.getChatCountWithSb(to);
 		adapter.refreshList(getMessages());
 		listView.setSelection(getMessages().size()-1);
 	}
@@ -206,7 +216,6 @@ public class Chating extends AChating{
 				} catch (IOException e) {
 //					Crashlytics.logException(e);
 				}
-				
 			}
 			break;
 		case ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD:
@@ -305,6 +314,7 @@ public class Chating extends AChating{
 			TextView rightNickname;
 			TextView rightText;
 			ImageView rightPhoto;
+			TextView photoProgress;
 			ProgressBar rightProgress;
 		}
 		
@@ -343,6 +353,8 @@ public class Chating extends AChating{
 		}
 
 		public void refreshList(List<IMMessage> items) {
+			Logger.i("b");
+			Logger.i(items.size()+"");
 			this.items = items;
 			this.notifyDataSetChanged();
 			
@@ -382,6 +394,7 @@ public class Chating extends AChating{
 				cell.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
 				cell.rightText = (TextView) convertView.findViewById(R.id.textview_content_r);
 				cell.rightPhoto = (ImageView) convertView.findViewById(R.id.photo_content_r);
+				cell.photoProgress = (TextView) convertView.findViewById(R.id.photo_content_progress);
 				cell.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
 				convertView.setTag(cell);
 			}
@@ -415,6 +428,14 @@ public class Chating extends AChating{
 					cell.rightPhoto.setVisibility(View.VISIBLE);
 					imageLoader.displayImage(msg.file, cell.leftPhoto, photooptions);
 					imageLoader.displayImage(msg.file, cell.rightPhoto, photooptions);
+					if (message.getType() == CommonValue.kWCMessageStatusWait) {
+						message.setType(CommonValue.kWCMessageStatusSending);
+						cell.photoProgress.setVisibility(View.VISIBLE);
+						uploadQiniu(message, msg.file, cell);
+					}
+					else if (message.getType() == 0) {
+						cell.photoProgress.setVisibility(View.GONE);
+					}
 				}
 			} catch (Exception e) {
 				cell.leftText.setText(content);
@@ -438,6 +459,57 @@ public class Chating extends AChating{
 			return convertView;
 		}
 		
+		private void uploadQiniu(final IMMessage message, String filePath, final ViewHoler cell) {
+			String bucketName = "dchat";
+	        PutPolicy putPolicy = new PutPolicy(bucketName);
+			Config.ACCESS_KEY = "5e71GMRBlrPS5pjETWcgElaH-uvhGRsWRGMR_Pfs";
+	        Config.SECRET_KEY = "cqzLJe_hA4YO33Oobp7AF0Fhca4q3EQ2rAfwS2YB";
+	        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+	        String auploadToken = null;
+			try {
+				auploadToken = putPolicy.token(mac);
+				Logger.i(auploadToken);
+			} catch (Exception e) {
+				Logger.i(e);
+			}
+			String key = IO.UNDEFINED_KEY; 
+			PutExtra extra = new PutExtra();
+			extra.params = new HashMap<String, String>();
+			IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
+				@Override
+				public void onProcess(long current, long total) {
+					float percent = (float) (current*1.0/total)*100;
+					if ((int)percent < 100) {
+						cell.photoProgress.setText((int)percent+"%");
+					}
+					else if ((int)percent == 100) {
+						cell.photoProgress.setText("处理中...");
+					}
+				}
+
+				@Override
+				public void onSuccess(JSONObject resp) {
+					String key = resp.optString("hash", "");
+					try {
+						JsonMessage msg = new JsonMessage();
+						msg.file = "http://dchat.qiniudn.com/"+key;
+						msg.messageType = CommonValue.kWCMessageTypeImage;
+						msg.text = "[图片]";
+						Gson gson = new Gson();
+						String json = gson.toJson(msg);
+						message.setContent(json);
+						sendMediaMessage(message);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+				@Override
+				public void onFailure(Exception ex) {
+					Logger.i(ex.toString());
+				}
+			});
+		}
 	}
 	
 	@Override

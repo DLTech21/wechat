@@ -119,6 +119,7 @@ public class IMChatService extends Service {
 				newMessage.setFromSubJid(from);
 				newMessage.setContent(message.getBody());
 				newMessage.setTime(time);
+				newMessage.setType(0); 
 				MessageManager.getInstance(context).saveIMMessage(newMessage);
 				long noticeId = -1;
 

@@ -30,6 +30,9 @@ public class CommonValue {
 	public static int kWCMessageTypeVoice =2;
 	public static int kWCMessageTypeLocation=3;
 	
+	public static int kWCMessageStatusWait = 1;
+	public static int kWCMessageStatusSending = 2;
+	
 	// auil options
 	public interface DisplayOptions {
 		public DisplayImageOptions default_options = new DisplayImageOptions.Builder()
