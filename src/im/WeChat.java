@@ -322,20 +322,19 @@ public class WeChat extends AWechatActivity {
 		singleThreadExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
-//				List<IMMessage> chats = MessageManager.getInstance(context).getMessageListByFrom(to, 1, 1);
-//				if (chats.size() < 1) {
-//					return;
-//				}
-//				for (HistoryChatBean ch : inviteNotices) {
-//					if (ch.getFrom().equals(chats.get(0).getFromSubJid())) {
-//						ch.setContent(chats.get(0).g);
-//						ch.setNoticeTime(notice.getNoticeTime());
-//						Integer x = ch.getNoticeSum() == null ? 0 : ch.getNoticeSum();
-//						ch.setNoticeSum(x);
-//					}
-//				}
-//				noticeAdapter.setNoticeList(inviteNotices);
-//				handler.sendEmptyMessage(0);
+				
+				List<IMMessage> chats = MessageManager.getInstance(context).getMessageListByFrom(to, 1, 1);
+				if (chats.size() < 1) {
+					return;
+				}
+				for (HistoryChatBean ch : inviteNotices) {
+					if (ch.getFrom().equals(chats.get(0).getFromSubJid())) {
+						ch.setContent(chats.get(0).getContent());
+						ch.setNoticeTime(chats.get(0).getTime());
+						ch.setNoticeSum(0);
+					}
+				}
+				handler.sendEmptyMessage(0);
 			}
 		});
 	}
