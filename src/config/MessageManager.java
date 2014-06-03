@@ -44,6 +44,12 @@ public class MessageManager {
 
 		return messageManager;
 	}
+	
+	public static void destroy() {
+		messageManager = null;
+		manager = null;
+	}
+	
 
 	/**
 	 * 

@@ -40,6 +40,10 @@ public class FriendManager {
 		return friendManager;
 	}
 	
+	public static void destroy() {
+		friendManager = null;
+		manager = null;
+	}
 	/**
 	 * 
 	 * 保存朋友信息 or 更新朋友信息

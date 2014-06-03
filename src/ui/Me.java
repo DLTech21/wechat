@@ -45,6 +45,9 @@ import config.ApiClent;
 import config.ApiClent.ClientCallback;
 import config.AppActivity;
 import config.CommonValue;
+import config.FriendManager;
+import config.MessageManager;
+import config.NoticeManager;
 
 /**
  * wechat
@@ -112,6 +115,9 @@ public class Me extends AppActivity{
 	public void ButtonClick(View v) {
 		switch (v.getId()) {
 		case R.id.exit:
+			MessageManager.destroy();
+			NoticeManager.destroy();
+			FriendManager.destroy();
 			AppManager.getAppManager().finishAllActivity();
 			startActivity(new Intent(this, Login.class));
 			break;

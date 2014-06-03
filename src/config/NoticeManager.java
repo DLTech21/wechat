@@ -40,6 +40,11 @@ public class NoticeManager {
 
 		return noticeManager;
 	}
+	
+	public static void destroy() {
+		noticeManager = null;
+		manager = null;
+	}
 
 	/**
 	 * 
