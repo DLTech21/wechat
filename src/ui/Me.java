@@ -89,7 +89,6 @@ public class Me extends AppActivity{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				Logger.i("aaa");
 				if (position == 1) {
 					textDialog.show();
 				}
@@ -237,16 +236,12 @@ public class Me extends AppActivity{
 	}
 	
 	private void uploadPhotoService(String file) {
-//		imageLoader.displayImage("file:///"+file, avatarView, CommonValue.DisplayOptions.avatar_options);
+		imageLoader.displayImage("file:///"+file, avatarView, CommonValue.DisplayOptions.avatar_options);
 		ApiClent.uploadFile(appContext.getLoginApiKey(), file, new ClientCallback() {
 			
 			@Override
 			public void onSuccess(Object data) {
 				String head = (String) data;
-				UserInfo user = new UserInfo();
-				user.userHead = head;
-				appContext.modifyLoginInfo(user);
-				imageLoader.displayImage(CommonValue.BASE_URL+head, avatarView, CommonValue.DisplayOptions.avatar_options);
 				modify("", head, "");
 			}
 			

@@ -261,11 +261,12 @@ public class ApiClent {
 			@Override
 			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 				try {
+					Logger.i(new String(responseBody));
 					JSONObject json = new JSONObject(new String(responseBody));
 					if (json.getInt("status") == 1) {
 						JSONArray file = json.getJSONArray("files");
 						JSONObject f = file.getJSONObject(0);
-						String head = f.getString("shortPath");
+						String head = f.getString("fileId");
 						callback.onSuccess(head);
 					}
 				} catch (Exception e) {
@@ -307,6 +308,7 @@ public class ApiClent {
 						UserInfo user = new UserInfo();
 						user.nickName = nickName;
 						user.description = description;
+						user.userHead = userHead;
 						appContext.modifyLoginInfo(user);
 						callback.onSuccess("修改成功");
 					}
