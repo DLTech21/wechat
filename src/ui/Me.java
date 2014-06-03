@@ -236,45 +236,47 @@ public class Me extends AppActivity{
 	}
 	
 	private void uploadPhotoService(String file) {
+		pg = UIHelper.showProgress(this, null, "上传头像");
 		imageLoader.displayImage("file:///"+file, avatarView, CommonValue.DisplayOptions.avatar_options);
 		ApiClent.uploadFile(appContext.getLoginApiKey(), file, new ClientCallback() {
 			
 			@Override
 			public void onSuccess(Object data) {
+				UIHelper.dismissProgress(pg);
 				String head = (String) data;
 				modify("", head, "");
 			}
 			
 			@Override
 			public void onFailure(String message) {
-				// TODO Auto-generated method stub
-				
+				UIHelper.dismissProgress(pg);
 			}
 			
 			@Override
 			public void onError(Exception e) {
-				// TODO Auto-generated method stub
-				
+				UIHelper.dismissProgress(pg);
 			}
 		});
 	}
 	
 	private void modify(String nickname, String head, String des) {
+		pg = UIHelper.showProgress(this, null, "保存中");
 		ApiClent.modifiedUser(appContext, appContext.getLoginApiKey(), nickname, head, des, new ClientCallback() {
 			
 			@Override
 			public void onSuccess(Object data) {
+				UIHelper.dismissProgress(pg);
 				showToast((String)data);
 			}
 			
 			@Override
 			public void onFailure(String message) {
-				
+				UIHelper.dismissProgress(pg);
 			}
 			
 			@Override
 			public void onError(Exception e) {
-				
+				UIHelper.dismissProgress(pg);
 			}
 		});
 	}
