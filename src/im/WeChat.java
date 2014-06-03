@@ -5,6 +5,7 @@ import im.model.IMMessage;
 import im.model.Notice;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -334,6 +335,7 @@ public class WeChat extends AWechatActivity {
 						ch.setNoticeSum(0);
 					}
 				}
+				Collections.sort(inviteNotices);
 				handler.sendEmptyMessage(0);
 			}
 		});

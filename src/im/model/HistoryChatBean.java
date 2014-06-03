@@ -5,7 +5,7 @@ package im.model;
  * 最近联系人显示的与某个的聊天记录
  * 
  */
-public class HistoryChatBean {
+public class HistoryChatBean implements Comparable<HistoryChatBean>{
 	public static final int ADD_FRIEND = 1;
 	public static final int SYS_MSG = 2; 
 	public static final int CHAT_MSG = 3;
@@ -92,6 +92,11 @@ public class HistoryChatBean {
 
 	public void setNoticeTime(String noticeTime) {
 		this.noticeTime = noticeTime;
+	}
+
+	@Override
+	public int compareTo(HistoryChatBean other) {
+		return other.noticeTime.compareTo(this.noticeTime);
 	}
 
 }
