@@ -112,6 +112,23 @@ public class WCApplication extends AppContext {
 			}
 		});		
 	}
+	
+	public void modifyLoginInfo(final UserInfo user) {
+		setProperties(new Properties(){
+			{
+				if (StringUtils.notEmpty(user.nickName)) {
+					setProperty("user.name", user.nickName);
+				}
+				if (StringUtils.notEmpty(user.userHead)) {
+					setProperty("user.face", user.userHead);
+				}
+				if (StringUtils.notEmpty(user.description)) {
+					setProperty("user.description", user.description);
+				}
+				
+			}
+		});		
+	}
 
 	/**
 	 * 获取登录用户id

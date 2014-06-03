@@ -138,6 +138,7 @@ public abstract class AChating extends SwipeBackActivity{
 		message_pool.add(newMessage);
 		MessageManager.getInstance(context).saveIMMessage(newMessage);
 		refreshMessage(message_pool);
+		setResult(RESULT_OK, new Intent().putExtra("to", to));
 	}
 	
 	protected void sendMediaMessage(IMMessage newMessage) throws Exception {
@@ -162,6 +163,7 @@ public abstract class AChating extends SwipeBackActivity{
 //		message_pool.add(newMessage);
 		MessageManager.getInstance(context).saveIMMessage(newMessage);
 		refreshMessage(message_pool);
+		setResult(RESULT_OK, new Intent().putExtra("to", to));
 	}
 	
 	protected Boolean addNewMessage() {

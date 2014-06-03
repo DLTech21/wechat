@@ -115,7 +115,6 @@ public class MessageManager {
 				"select content,msg_from, msg_type,msg_time from im_msg_his where msg_from=? order by msg_time desc limit ? , ? ",
 				new String[] { "" + fromUser, "" + fromIndex, "" + pageSize });
 		return list;
-
 	}
 
 	/**

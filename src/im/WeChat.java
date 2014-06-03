@@ -1,10 +1,13 @@
 package im;
 
 import im.model.HistoryChatBean;
+import im.model.IMMessage;
 import im.model.Notice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.XMPPException;
@@ -21,6 +24,7 @@ import com.donal.wechat.R;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -58,11 +62,7 @@ public class WeChat extends AWechatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.wechat);
 		initUI();
-		
-		inviteNotices = MessageManager.getInstance(context)
-				.getRecentContactsWithLastMsg();
-		noticeAdapter.setNoticeList(inviteNotices);
-		noticeAdapter.notifyDataSetChanged();
+		getHistoryChat();
 		XMPPConnection connection = XmppConnectionManager.getInstance().getConnection();
 		if (!connection.isConnected()) {
 			connect2xmpp();
@@ -97,6 +97,25 @@ public class WeChat extends AWechatActivity {
 		xlistView.setAdapter(noticeAdapter);
 		noticeAdapter.setOnClickListener(contacterOnClickJ);
 		noticeAdapter.setOnLongClickListener(contacterOnLongClickJ);
+	}
+	
+	private void getHistoryChat() {
+		final Handler handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				noticeAdapter.setNoticeList(inviteNotices);
+				noticeAdapter.notifyDataSetChanged();
+			}
+		};
+		ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+		singleThreadExecutor.execute(new Runnable() {
+			@Override
+			public void run() {
+				inviteNotices = MessageManager.getInstance(context)
+						.getRecentContactsWithLastMsg();
+				handler.sendEmptyMessage(1);
+			}
+		});
 	}
 	
 	private void connect2xmpp()  {
@@ -163,42 +182,54 @@ public class WeChat extends AWechatActivity {
 	}
 
 	@Override
-	protected void msgReceive(Notice notice) {
-		inviteNotices = MessageManager.getInstance(context).getRecentContactsWithLastMsg();
-		for (HistoryChatBean ch : inviteNotices) {
-			if (ch.getFrom().equals(notice.getFrom())) {
-				ch.setContent(notice.getContent());
-				ch.setNoticeTime(notice.getNoticeTime());
-				Integer x = ch.getNoticeSum() == null ? 0 : ch.getNoticeSum();
-				ch.setNoticeSum(x);
+	protected void msgReceive(final Notice notice) {
+		final Handler handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				noticeAdapter.notifyDataSetChanged();
 			}
-		}
-		noticeAdapter.setNoticeList(inviteNotices);
-		noticeAdapter.notifyDataSetChanged();
-		setPaoPao();
+		};
+		ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+		singleThreadExecutor.execute(new Runnable() {
+			@Override
+			public void run() {
+				inviteNotices = MessageManager.getInstance(context).getRecentContactsWithLastMsg();
+				for (HistoryChatBean ch : inviteNotices) {
+					if (ch.getFrom().equals(notice.getFrom())) {
+						ch.setContent(notice.getContent());
+						ch.setNoticeTime(notice.getNoticeTime());
+						Integer x = ch.getNoticeSum() == null ? 0 : ch.getNoticeSum();
+						ch.setNoticeSum(x);
+					}
+				}
+				noticeAdapter.setNoticeList(inviteNotices);
+				handler.sendEmptyMessage(0);
+			}
+		});
 	}
+	
 
-	/**
-	 * 上面滚动条上的气泡设置 有新消息来的通知气泡，数量设置,
-	 */
-	private void setPaoPao() {
-		if (null != inviteNotices && inviteNotices.size() > 0) {
-			int paoCount = 0;
-			for (HistoryChatBean c : inviteNotices) {
-				Integer countx = c.getNoticeSum();
-				paoCount += (countx == null ? 0 : countx);
-			}
-			if (paoCount == 0) {
-//				noticePaopao.setVisibility(View.GONE);
-				return;
-			}
-			Logger.i(paoCount+"");
-//			noticePaopao.setText(paoCount + "");
-//			noticePaopao.setVisibility(View.VISIBLE);
-		} else {
-//			noticePaopao.setVisibility(View.GONE);
-		}
-	}
+//	/**
+//	 * 上面滚动条上的气泡设置 有新消息来的通知气泡，数量设置,
+//	 */
+//	private void setPaoPao() {
+//		if (null != inviteNotices && inviteNotices.size() > 0) {
+//			int paoCount = 0;
+//			for (HistoryChatBean c : inviteNotices) {
+//				Integer countx = c.getNoticeSum();
+//				paoCount += (countx == null ? 0 : countx);
+//			}
+//			if (paoCount == 0) {
+////				noticePaopao.setVisibility(View.GONE);
+//				return;
+//			}
+//			Logger.i(paoCount+"");
+////			noticePaopao.setText(paoCount + "");
+////			noticePaopao.setVisibility(View.VISIBLE);
+//		} else {
+////			noticePaopao.setVisibility(View.GONE);
+//		}
+//	}
 	
 	@Override
 	protected void handReConnect(boolean isSuccess) {
@@ -219,10 +250,26 @@ public class WeChat extends AWechatActivity {
 		public void onClick(View v) {
 			HistoryChatBean notice = (HistoryChatBean) v.findViewById(R.id.des).getTag();
 			createChat(notice.getFrom());
-			notice.setNoticeSum(0);
-			noticeAdapter.notifyDataSetChanged();
+			removeSingelChatPao(notice);
 		}
 	};
+	
+	private void removeSingelChatPao(final HistoryChatBean notice) {
+		final Handler handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				noticeAdapter.notifyDataSetChanged();
+			}
+		};
+		ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+		singleThreadExecutor.execute(new Runnable() {
+			@Override
+			public void run() {
+				notice.setNoticeSum(0);
+				handler.sendEmptyMessage(0);
+			}
+		});
+	}
 	
 	private OnLongClickListener contacterOnLongClickJ = new OnLongClickListener() {
 
@@ -242,14 +289,54 @@ public class WeChat extends AWechatActivity {
 					inviteNotices.remove(notice);
 					noticeAdapter.notifyDataSetChanged();
 					MessageManager.getInstance(context).delChatHisWithSb(notice.getFrom());
-//					inviteNotices = MessageManager.getInstance(context)
-//							.getRecentContactsWithLastMsg();
-//					noticeAdapter.setNoticeList(inviteNotices);
-					
 					break;
 				}
 			}
 		}).show();
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode != RESULT_OK) {
+			return;
+		}
+		switch (requestCode) {
+		case CommonValue.REQUEST_OPEN_CHAT:
+			String to = data.getExtras().getString("to");
+			sortChat(to);
+			break;
+
+		default:
+			break;
+		}
+	}
+	
+	private void sortChat(final String to) {
+		final Handler handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				noticeAdapter.notifyDataSetChanged();
+			}
+		};
+		ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+		singleThreadExecutor.execute(new Runnable() {
+			@Override
+			public void run() {
+//				List<IMMessage> chats = MessageManager.getInstance(context).getMessageListByFrom(to, 1, 1);
+//				if (chats.size() < 1) {
+//					return;
+//				}
+//				for (HistoryChatBean ch : inviteNotices) {
+//					if (ch.getFrom().equals(chats.get(0).getFromSubJid())) {
+//						ch.setContent(chats.get(0).g);
+//						ch.setNoticeTime(notice.getNoticeTime());
+//						Integer x = ch.getNoticeSum() == null ? 0 : ch.getNoticeSum();
+//						ch.setNoticeSum(x);
+//					}
+//				}
+//				noticeAdapter.setNoticeList(inviteNotices);
+//				handler.sendEmptyMessage(0);
+			}
+		});
+	}
 }

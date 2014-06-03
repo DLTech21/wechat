@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+	<RelativeLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="89dp"
+	    android:background="@color/white"
+	    android:onClick="ButtonClick"
+	    >
+	    <TextView 
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:textSize="15dp"
+	        android:textColor="#2b2b2b"
+	        android:text="头像"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="10dp"
+	        />
+	    <ImageView 
+	        android:id="@+id/avatar"
+	        android:layout_marginRight="14dp"
+	        android:layout_centerVertical="true"
+	        android:layout_height="63dp"
+	        android:layout_width="63dp"
+	        android:layout_alignParentRight="true"
+	        />
+		
+	</RelativeLayout>
+	<View 
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e4e4e4"
+        />
+</LinearLayout>

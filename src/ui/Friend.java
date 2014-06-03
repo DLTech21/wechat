@@ -10,10 +10,16 @@ import java.util.List;
 
 import tools.UIHelper;
 import ui.adapter.FriendCardAdapter;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import bean.StrangerEntity;
 import bean.UserInfo;
@@ -22,6 +28,7 @@ import com.donal.wechat.R;
 
 import config.ApiClent;
 import config.AppActivity;
+import config.CommonValue;
 import config.ApiClent.ClientCallback;
 
 /**
@@ -54,6 +61,25 @@ public class Friend extends AppActivity implements OnScrollListener{
         datas = new ArrayList<UserInfo>();
 		mAdapter = new FriendCardAdapter(this, datas);
 		xlistView.setAdapter(mAdapter);
+	}
+	
+	public void show2OptionsDialog(final String[] arg ,final UserInfo model){
+		new AlertDialog.Builder(context).setTitle(null).setItems(arg,
+				new DialogInterface.OnClickListener(){
+			public void onClick(DialogInterface dialog, int which){
+				switch(which){
+				case 0:
+					try {
+						ApiClent.deleteFriend(appContext, appContext.getLoginApiKey(), model.userId, null);
+						datas.remove(model);
+						mAdapter.notifyDataSetChanged();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					break;
+				}
+			}
+		}).show();
 	}
 	
 	private void getFriendCardFromCache() {

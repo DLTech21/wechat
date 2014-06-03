@@ -42,6 +42,7 @@ public class CommonValue {
 				.showImageOnFail(R.drawable.content_image_loading)
 				.cacheInMemory(true)
 				.cacheOnDisc(true)
+				.considerExifParams(true)
 				.imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) 
 				.displayer(new BitmapDisplayer() {
 					@Override
@@ -59,6 +60,7 @@ public class CommonValue {
 		.showImageOnFail(R.drawable.content_image_loading)
 		.cacheInMemory(true)
 		.cacheOnDisc(true)
+		.considerExifParams(true)
 		.imageScaleType(ImageScaleType.EXACTLY_STRETCHED) 
 		.displayer(new RoundedBitmapDisplayer(ImageUtils.dip2px(AppManager.getAppManager().currentActivity(), 30)))
 		.build();
@@ -100,4 +102,9 @@ public class CommonValue {
 	 * 注册
 	 */
 	public static final int REQUEST_REGISTER_INFO = 1;
+	
+	/**
+	 * 打开会话
+	 */
+	public static final int REQUEST_OPEN_CHAT = 2;
 }

@@ -45,21 +45,26 @@ public abstract class AWechatActivity extends AppActivity {
 	
 	private void init() {
 		receiver = new ChatterReceiver();
-	}
-	
-	@Override
-	protected void onPause() {
-		unregisterReceiver(receiver);
-		super.onPause();
-	}
-	
-	@Override
-	protected void onResume() {
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(CommonValue.NEW_MESSAGE_ACTION);
 		registerReceiver(receiver, filter);
-		super.onResume();
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(receiver);
+	}
+//	@Override
+//	protected void onPause() {
+//		
+//		super.onPause();
+//	}
+//	
+//	@Override
+//	protected void onResume() {
+//		super.onResume();
+//	}
 	
 	private class ChatterReceiver extends BroadcastReceiver {
 
@@ -83,7 +88,7 @@ public abstract class AWechatActivity extends AppActivity {
 	protected void createChat(String userId) {
 		Intent intent = new Intent(context, Chating.class);
 		intent.putExtra("to", userId);
-		startActivity(intent);
+		startActivityForResult(intent, CommonValue.REQUEST_OPEN_CHAT);
 	}
 
 	protected abstract void handReConnect(boolean isSuccess);

@@ -1,16 +1,18 @@
 package config;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 
 import org.apache.http.Header;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import tools.AppException;
 import tools.Logger;
 import tools.StringUtils;
-
 import android.content.Entity;
 import bean.StrangerEntity;
 import bean.Update;
@@ -18,6 +20,7 @@ import bean.UserDetail;
 import bean.UserEntity;
 import bean.UserInfo;
 
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -241,6 +244,81 @@ public class ApiClent {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				
+			}
+		});
+	}
+	
+	public static void uploadFile(String apiKey, String filepath, final ClientCallback callback) {
+		RequestParams params = new RequestParams();
+		File myFile = new File(filepath);  
+		params.add("apiKey", apiKey);
+		try {
+			params.put("file", myFile);
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		QYRestClient.post("uploadFile.do", params, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+				try {
+					JSONObject json = new JSONObject(new String(responseBody));
+					if (json.getInt("status") == 1) {
+						JSONArray file = json.getJSONArray("files");
+						JSONObject f = file.getJSONObject(0);
+						String head = f.getString("shortPath");
+						callback.onSuccess(head);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] responseBody, Throwable error) {
+				callback.onFailure(message_error);
+			}
+		});
+	}
+	
+	public static void modifiedUser(final WCApplication appContext, String apiKey, String nickname, String head, String des, final ClientCallback callback) {
+		RequestParams params = new RequestParams();
+		params.add("apiKey", apiKey);
+		if (StringUtils.notEmpty(nickname)) {
+			params.add("nickName", nickname);
+		}
+		if (StringUtils.notEmpty(head)) {
+			params.add("userHead", head);
+		}
+		if (StringUtils.notEmpty(des)) {
+			params.add("description", des);
+		}
+		QYRestClient.post("modUserInfo.do", params, new AsyncHttpResponseHandler() {
+			@Override
+			public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+				try {
+					Logger.i(new String(responseBody));
+					JSONObject json = new JSONObject(new String(responseBody));
+					if (json.getInt("status") == 1) {
+						JSONObject userDetail = json.getJSONObject("userDetail");
+						String nickName = userDetail.getString("nickName");
+						String description = userDetail.getString("description");
+						String userHead = userDetail.getString("userHead");
+						UserInfo user = new UserInfo();
+						user.nickName = nickName;
+						user.description = description;
+						appContext.modifyLoginInfo(user);
+						callback.onSuccess("修改成功");
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void onFailure(int statusCode, Header[] headers,
+					byte[] responseBody, Throwable error) {
+				callback.onFailure(message_error);
 			}
 		});
 	}

@@ -10,13 +10,13 @@ import com.donal.wechat.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import config.CommonValue;
-
 import bean.UserInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.BaseAdapter;
@@ -81,6 +81,14 @@ public class FriendCardAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View arg0) {
 				((Friend)context).createChat(model.userId+CommonValue.BASE_XMPP_SERVER_NAME);
+			}
+		});
+		convertView.setOnLongClickListener(new OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View arg0) {
+				((Friend)context).show2OptionsDialog(new String[]{"删除好友"}, model);
+				return true;
 			}
 		});
 		return convertView;
