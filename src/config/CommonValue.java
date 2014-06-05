@@ -21,9 +21,12 @@ import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 public class CommonValue {
 	public static String PackageName = "com.donal.wechat";
 	
-	public static String BASE_API = "http://115.29.150.153/api/";
-	public static String BASE_URL = "http://115.29.150.153/";
-	public static String BASE_XMPP_SERVER_NAME = "@hcios.com";
+//	public static String BASE_API = "http://115.29.150.153/api/";
+//	public static String BASE_URL = "http://115.29.150.153/";
+//	public static String BASE_XMPP_SERVER_NAME = "@hcios.com";
+	public static String BASE_API = "http://192.168.1.147:8080/wechat/api/";
+	public static String BASE_URL = "http://192.168.1.147:8080/";
+	public static String BASE_XMPP_SERVER_NAME = "@donaldeimac.local";
 	
 	public static int kWCMessageTypePlain = 0;
 	public static int kWCMessageTypeImage = 1;

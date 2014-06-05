@@ -249,7 +249,7 @@ public class Me extends AppActivity{
 			
 			@Override
 			public void onFailure(String message) {
-				UIHelper.dismissProgress(pg);
+				UIHelper.dismissProgress(pg); 
 			}
 			
 			@Override
