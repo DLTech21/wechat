@@ -58,19 +58,18 @@ public class Friend extends AppActivity implements OnScrollListener, OnRefreshLi
 	}
 	
 	private void initUI() {
-		xlistView = (ListView)findViewById(R.id.xlistview);
-		xlistView.setEmptyView(findViewById(R.id.tv_empty));
-		xlistView.setOnScrollListener(this);
-        xlistView.setDividerHeight(0);
-        datas = new ArrayList<UserInfo>();
-		mAdapter = new FriendCardAdapter(this, datas);
-		xlistView.setAdapter(mAdapter);
 		swipeLayout = (SwipeRefreshLayout) findViewById(R.id.xrefresh);
 		swipeLayout.setOnRefreshListener(this);
 	    swipeLayout.setColorScheme(android.R.color.holo_blue_bright, 
 	            android.R.color.holo_green_light, 
 	            android.R.color.holo_orange_light, 
 	            android.R.color.holo_red_light);
+		xlistView = (ListView)findViewById(R.id.xlistview);
+		xlistView.setOnScrollListener(this);
+        xlistView.setDividerHeight(0);
+        datas = new ArrayList<UserInfo>();
+		mAdapter = new FriendCardAdapter(this, datas);
+		xlistView.setAdapter(mAdapter);
 	}
 	
 	public void show2OptionsDialog(final String[] arg ,final UserInfo model){

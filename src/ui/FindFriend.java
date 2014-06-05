@@ -51,19 +51,19 @@ public class FindFriend extends AppActivity implements OnScrollListener, OnRefre
 	}
 	
 	private void initUI() {
-		xlistView = (ListView)findViewById(R.id.xlistview);
-		xlistView.setEmptyView(findViewById(R.id.tv_empty));
-		xlistView.setOnScrollListener(this);
-        xlistView.setDividerHeight(0);
-        datas = new ArrayList<UserInfo>();
-		mAdapter = new StrangerAdapter(this, datas);
-		xlistView.setAdapter(mAdapter);
 		swipeLayout = (SwipeRefreshLayout) findViewById(R.id.xrefresh);
 		swipeLayout.setOnRefreshListener(this);
 	    swipeLayout.setColorScheme(android.R.color.holo_blue_bright, 
 	            android.R.color.holo_green_light, 
 	            android.R.color.holo_orange_light, 
 	            android.R.color.holo_red_light);
+		xlistView = (ListView)findViewById(R.id.xlistview);
+		xlistView.setOnScrollListener(this);
+        xlistView.setDividerHeight(0);
+        datas = new ArrayList<UserInfo>();
+		mAdapter = new StrangerAdapter(this, datas);
+		xlistView.setAdapter(mAdapter);
+		
 	}
 	
 	private void getFriendCardFromCache() {
@@ -182,13 +182,13 @@ public class FindFriend extends AppActivity implements OnScrollListener, OnRefre
 
 	@Override
 	public void onRefresh() {
-		if (lvDataState != UIHelper.LISTVIEW_DATA_LOADING) {
-			lvDataState = UIHelper.LISTVIEW_DATA_LOADING;
-			currentPage = 1;
-			findFriend(currentPage, "", UIHelper.LISTVIEW_ACTION_REFRESH);
-		}
-		else {
+//		if (lvDataState != UIHelper.LISTVIEW_DATA_LOADING) {
+//			lvDataState = UIHelper.LISTVIEW_DATA_LOADING;
+//			currentPage = 1;
+//			findFriend(currentPage, "", UIHelper.LISTVIEW_ACTION_REFRESH);
+//		}
+//		else {
 			swipeLayout.setRefreshing(false);
-		}
+//		}
 	}
 }
