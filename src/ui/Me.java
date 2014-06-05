@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.jivesoftware.smack.XMPPConnection;
+
 import tools.AppManager;
 import tools.ImageUtils;
 import tools.Logger;
@@ -48,6 +50,7 @@ import config.CommonValue;
 import config.FriendManager;
 import config.MessageManager;
 import config.NoticeManager;
+import config.XmppConnectionManager;
 
 /**
  * wechat
@@ -114,6 +117,11 @@ public class Me extends AppActivity{
 	public void ButtonClick(View v) {
 		switch (v.getId()) {
 		case R.id.exit:
+			XMPPConnection connection = XmppConnectionManager.getInstance().getConnection();
+			if (connection.isConnected()) {
+				connection.disconnect();
+			}
+			stopService();
 			MessageManager.destroy();
 			NoticeManager.destroy();
 			FriendManager.destroy();

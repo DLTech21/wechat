@@ -12,6 +12,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
@@ -30,7 +32,7 @@ import config.ApiClent.ClientCallback;
  * @author donal
  *
  */
-public class FindFriend extends AppActivity implements OnScrollListener{
+public class FindFriend extends AppActivity implements OnScrollListener, OnRefreshListener{
 	
 	private int lvDataState;
 	private int currentPage;
@@ -38,6 +40,7 @@ public class FindFriend extends AppActivity implements OnScrollListener{
 	private ListView xlistView;
 	private List<UserInfo> datas;
 	private StrangerAdapter mAdapter;
+	private SwipeRefreshLayout swipeLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,23 +52,21 @@ public class FindFriend extends AppActivity implements OnScrollListener{
 	
 	private void initUI() {
 		xlistView = (ListView)findViewById(R.id.xlistview);
+		xlistView.setEmptyView(findViewById(R.id.tv_empty));
 		xlistView.setOnScrollListener(this);
         xlistView.setDividerHeight(0);
         datas = new ArrayList<UserInfo>();
 		mAdapter = new StrangerAdapter(this, datas);
 		xlistView.setAdapter(mAdapter);
+		swipeLayout = (SwipeRefreshLayout) findViewById(R.id.xrefresh);
+		swipeLayout.setOnRefreshListener(this);
+	    swipeLayout.setColorScheme(android.R.color.holo_blue_bright, 
+	            android.R.color.holo_green_light, 
+	            android.R.color.holo_orange_light, 
+	            android.R.color.holo_red_light);
 	}
 	
 	private void getFriendCardFromCache() {
-//		String key = String.format("%s-%s", CommonValue.CacheKey.FriendCardList1, appContext.getLoginUid());
-//		FriendCardListEntity entity = (FriendCardListEntity) appContext.readObject(key);
-//		if(entity == null){
-//			currentPage = 1;
-//			lvDataState = UIHelper.LISTVIEW_DATA_EMPTY;
-//			xlistView.startLoadMore();
-//			return;
-//		}
-//		handleFriends(entity, UIHelper.LISTVIEW_ACTION_INIT);
 		currentPage = 1;
 		findFriend(currentPage, "", UIHelper.LISTVIEW_ACTION_REFRESH);
 	}
@@ -119,6 +120,7 @@ public class FindFriend extends AppActivity implements OnScrollListener{
 		if(datas.isEmpty()){
 			lvDataState = UIHelper.LISTVIEW_DATA_EMPTY;
 		}
+		swipeLayout.setRefreshing(false);
 	}
 
 	@Override
@@ -176,5 +178,17 @@ public class FindFriend extends AppActivity implements OnScrollListener{
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		
+	}
+
+	@Override
+	public void onRefresh() {
+		if (lvDataState != UIHelper.LISTVIEW_DATA_LOADING) {
+			lvDataState = UIHelper.LISTVIEW_DATA_LOADING;
+			currentPage = 1;
+			findFriend(currentPage, "", UIHelper.LISTVIEW_ACTION_REFRESH);
+		}
+		else {
+			swipeLayout.setRefreshing(false);
+		}
 	}
 }

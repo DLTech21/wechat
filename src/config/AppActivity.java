@@ -58,17 +58,14 @@ public class AppActivity extends BaseActivity implements AppActivitySupport{
 
 	@Override
 	public void stopService() {
-		// 聊天服务
-//		Intent chatServer = new Intent(context, IMChatService.class);
-//		context.stopService(chatServer);
+		Intent chatServer = new Intent(context, IMChatService.class);
+		context.stopService(chatServer);
 	}
 
 	@Override
 	public void startService() {
-		// 聊天服务
 		Intent chatServer = new Intent(context, IMChatService.class);
 		context.startService(chatServer);
-		
 	}
 
 	@Override
@@ -138,7 +135,6 @@ public class AppActivity extends BaseActivity implements AppActivitySupport{
 		.setNeutralButton("确定", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				stopService();
 				appContext.exit();
 			}
 		})

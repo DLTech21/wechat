@@ -34,8 +34,8 @@ import org.jivesoftware.smackx.search.UserSearch;
  * 
  */
 public class XmppConnectionManager {
-//	final String XmppHost = "115.29.150.153";
-	final String XmppHost = "192.168.1.147";
+	final String XmppHost = "115.29.150.153";
+//	final String XmppHost = "192.168.1.147";
 	final int XmppPort = 5222;
 	
 	private XMPPConnection connection;

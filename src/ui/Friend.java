@@ -14,6 +14,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
@@ -37,7 +39,7 @@ import config.ApiClent.ClientCallback;
  * @author donal
  *
  */
-public class Friend extends AppActivity implements OnScrollListener{
+public class Friend extends AppActivity implements OnScrollListener, OnRefreshListener{
 	
 	private int lvDataState;
 	private int currentPage;
@@ -45,6 +47,7 @@ public class Friend extends AppActivity implements OnScrollListener{
 	private ListView xlistView;
 	private List<UserInfo> datas;
 	private FriendCardAdapter mAdapter;
+	private SwipeRefreshLayout swipeLayout;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +59,18 @@ public class Friend extends AppActivity implements OnScrollListener{
 	
 	private void initUI() {
 		xlistView = (ListView)findViewById(R.id.xlistview);
+		xlistView.setEmptyView(findViewById(R.id.tv_empty));
 		xlistView.setOnScrollListener(this);
         xlistView.setDividerHeight(0);
         datas = new ArrayList<UserInfo>();
 		mAdapter = new FriendCardAdapter(this, datas);
 		xlistView.setAdapter(mAdapter);
+		swipeLayout = (SwipeRefreshLayout) findViewById(R.id.xrefresh);
+		swipeLayout.setOnRefreshListener(this);
+	    swipeLayout.setColorScheme(android.R.color.holo_blue_bright, 
+	            android.R.color.holo_green_light, 
+	            android.R.color.holo_orange_light, 
+	            android.R.color.holo_red_light);
 	}
 	
 	public void show2OptionsDialog(final String[] arg ,final UserInfo model){
@@ -136,6 +146,7 @@ public class Friend extends AppActivity implements OnScrollListener{
 		if(datas.isEmpty()){
 			lvDataState = UIHelper.LISTVIEW_DATA_EMPTY;
 		}
+		swipeLayout.setRefreshing(false);
 	}
 
 	@Override
@@ -166,5 +177,17 @@ public class Friend extends AppActivity implements OnScrollListener{
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState) {
 		
+	}
+
+	@Override
+	public void onRefresh() {
+		if (lvDataState != UIHelper.LISTVIEW_DATA_LOADING) {
+			lvDataState = UIHelper.LISTVIEW_DATA_LOADING;
+			currentPage = 1;
+			getMyFriend(currentPage, UIHelper.LISTVIEW_ACTION_REFRESH);
+		}
+		else {
+			swipeLayout.setRefreshing(false);
+		}
 	}
 }

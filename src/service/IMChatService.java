@@ -124,7 +124,6 @@ public class IMChatService extends Service {
 				long noticeId = -1;
 
 				noticeId = noticeManager.saveNotice(notice);
-				Logger.i(from);
 				if (noticeId != -1) {
 					Intent intent = new Intent(CommonValue.NEW_MESSAGE_ACTION);
 					intent.putExtra(IMMessage.IMMESSAGE_KEY, msg);
