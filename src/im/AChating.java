@@ -220,4 +220,25 @@ public abstract class AChating extends SwipeBackActivity{
 		message_pool.add(newMessage);
 		refreshMessage(message_pool);
 	}
+	
+	protected void uploadVoiceToQiniu(String filePath) {
+		
+		JsonMessage msg = new JsonMessage();
+		msg.file = filePath;
+		msg.messageType = CommonValue.kWCMessageTypeVoice;
+		msg.text = "[语音]";
+		Gson gson = new Gson();
+		String json = gson.toJson(msg);
+		
+		String time = (System.currentTimeMillis()/1000)+"";
+
+		IMMessage newMessage = new IMMessage();
+		newMessage.setMsgType(1);
+		newMessage.setFromSubJid(chat.getParticipant());
+		newMessage.setContent(json);
+		newMessage.setTime(time);
+		newMessage.setType(CommonValue.kWCMessageStatusWait);
+		message_pool.add(newMessage);
+		refreshMessage(message_pool);
+	}
 }

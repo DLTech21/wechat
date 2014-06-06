@@ -21,7 +21,7 @@ import qiniu.io.PutExtra;
 import qiniu.utils.Config;
 import qiniu.utils.Mac;
 import qiniu.utils.PutPolicy;
-import tools.AppManager;
+import tools.AudioRecoderManager;
 import tools.DateUtil;
 import tools.ImageUtils;
 import tools.Logger;
@@ -33,31 +33,36 @@ import bean.UserInfo;
 import com.donal.wechat.R;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.assist.FailReason;
-import com.nostra13.universalimageloader.core.assist.ImageLoadingListener;
 
 import config.CommonValue;
 import config.FriendManager;
-import config.MessageManager;
 import config.NoticeManager;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -72,7 +77,8 @@ import android.widget.Toast;
  * @author donal
  *
  */
-public class Chating extends AChating{
+public class Chating extends AChating implements OnTouchListener{
+	private Button voiceButton;
 	private MessageListAdapter adapter = null;
 	private EditText messageInput = null;
 	private ListView listView;
@@ -84,6 +90,7 @@ public class Chating extends AChating{
 	private int firstVisibleItem;
 	private int currentPage = 1;
 	private int objc;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -93,7 +100,8 @@ public class Chating extends AChating{
 	}
 	
 	private void init() {
-
+		voiceButton = (Button) findViewById(R.id.voiceButton);
+		voiceButton.setOnTouchListener(this);
 		listView = (ListView) findViewById(R.id.chat_list);
 		listView.setCacheColorHint(0);
 		adapter = new MessageListAdapter(Chating.this, getMessages(),
@@ -307,6 +315,7 @@ public class Chating extends AChating{
 			TextView leftNickname;
 			TextView leftText;
 			ImageView leftPhoto;
+			TextView leftVoice;
 			
 			RelativeLayout rightLayout;
 			RelativeLayout rightFrame;
@@ -316,6 +325,7 @@ public class Chating extends AChating{
 			ImageView rightPhoto;
 			TextView photoProgress;
 			ProgressBar rightProgress;
+			TextView rightVoice;
 		}
 		
 		private List<IMMessage> items;
@@ -385,7 +395,8 @@ public class Chating extends AChating{
 				cell.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
 				cell.leftText = (TextView) convertView.findViewById(R.id.textview_content_l);
 				cell.leftPhoto = (ImageView) convertView.findViewById(R.id.photo_content_l);
-						
+				cell.leftVoice = (TextView) convertView.findViewById(R.id.receiverVoiceNode);		
+				
 				cell.rightLayout = (RelativeLayout) convertView.findViewById(R.id.layout_right);
 				cell.rightFrame = (RelativeLayout) convertView.findViewById(R.id.layout_content_r);
 				cell.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
@@ -394,6 +405,7 @@ public class Chating extends AChating{
 				cell.rightPhoto = (ImageView) convertView.findViewById(R.id.photo_content_r);
 				cell.photoProgress = (TextView) convertView.findViewById(R.id.photo_content_progress);
 				cell.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
+				cell.rightVoice = (TextView) convertView.findViewById(R.id.senderVoiceNode);
 				convertView.setTag(cell);
 			}
 			else {
@@ -418,19 +430,39 @@ public class Chating extends AChating{
 					cell.rightText.setText(msg.text);
 					cell.leftPhoto.setVisibility(View.GONE);
 					cell.rightPhoto.setVisibility(View.GONE);
+					cell.leftVoice.setVisibility(View.GONE);
+					cell.rightVoice.setVisibility(View.GONE);
 				}
-				else {
+				else if (msg.messageType == CommonValue.kWCMessageTypeImage) {
 					cell.leftText.setVisibility(View.GONE);
 					cell.rightText.setVisibility(View.GONE);
 					cell.leftPhoto.setVisibility(View.VISIBLE);
 					cell.rightPhoto.setVisibility(View.VISIBLE);
+					cell.leftVoice.setVisibility(View.GONE);
+					cell.rightVoice.setVisibility(View.GONE);
 					imageLoader.displayImage(msg.file, cell.leftPhoto, photooptions);
 					imageLoader.displayImage(msg.file, cell.rightPhoto, photooptions);
 					if (message.getType() == CommonValue.kWCMessageStatusWait) {
 						message.setType(CommonValue.kWCMessageStatusSending);
 						cell.photoProgress.setVisibility(View.VISIBLE);
 						imageLoader.displayImage("file:///"+msg.file, cell.rightPhoto, photooptions);
-						uploadQiniu(message, msg.file, cell);
+						uploadQiniu(message, msg.file, cell, CommonValue.kWCMessageTypeImage);
+					}
+					else if (message.getType() == 0) {
+						cell.photoProgress.setVisibility(View.GONE);
+					}
+				}
+				else if (msg.messageType == CommonValue.kWCMessageTypeVoice) {
+					cell.leftText.setVisibility(View.GONE);
+					cell.rightText.setVisibility(View.GONE);
+					cell.leftPhoto.setVisibility(View.GONE);
+					cell.rightPhoto.setVisibility(View.GONE);
+					cell.leftVoice.setVisibility(View.VISIBLE);
+					cell.rightVoice.setVisibility(View.VISIBLE);
+					if (message.getType() == CommonValue.kWCMessageStatusWait) {
+						message.setType(CommonValue.kWCMessageStatusSending);
+						cell.photoProgress.setVisibility(View.VISIBLE);
+						uploadQiniu(message, msg.file, cell, CommonValue.kWCMessageTypeVoice);
 					}
 					else if (message.getType() == 0) {
 						cell.photoProgress.setVisibility(View.GONE);
@@ -458,7 +490,7 @@ public class Chating extends AChating{
 			return convertView;
 		}
 		
-		private void uploadQiniu(final IMMessage message, String filePath, final ViewHoler cell) {
+		private void uploadQiniu(final IMMessage message, String filePath, final ViewHoler cell, final int messageType) {
 			String bucketName = "dchat";
 	        PutPolicy putPolicy = new PutPolicy(bucketName);
 			Config.ACCESS_KEY = "5e71GMRBlrPS5pjETWcgElaH-uvhGRsWRGMR_Pfs";
@@ -477,12 +509,14 @@ public class Chating extends AChating{
 			IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
 				@Override
 				public void onProcess(long current, long total) {
-					float percent = (float) (current*1.0/total)*100;
-					if ((int)percent < 100) {
-						cell.photoProgress.setText((int)percent+"%");
-					}
-					else if ((int)percent == 100) {
-						cell.photoProgress.setText("处理中...");
+					if (messageType == CommonValue.kWCMessageTypePlain) {
+						float percent = (float) (current*1.0/total)*100;
+						if ((int)percent < 100) {
+							cell.photoProgress.setText((int)percent+"%");
+						}
+						else if ((int)percent == 100) {
+							cell.photoProgress.setText("处理中...");
+						}
 					}
 				}
 
@@ -492,8 +526,18 @@ public class Chating extends AChating{
 					try {
 						JsonMessage msg = new JsonMessage();
 						msg.file = "http://dchat.qiniudn.com/"+key;
-						msg.messageType = CommonValue.kWCMessageTypeImage;
-						msg.text = "[图片]";
+						Logger.i(msg.file);
+						switch (messageType) {
+						case CommonValue.kWCMessageTypeImage:
+							msg.messageType = CommonValue.kWCMessageTypeImage;
+							msg.text = "[图片]";
+							break;
+
+						case CommonValue.kWCMessageTypeVoice:
+							msg.messageType = CommonValue.kWCMessageTypeVoice;
+							msg.text = "[语音]";
+							break;
+						}
 						Gson gson = new Gson();
 						String json = gson.toJson(msg);
 						message.setContent(json);
@@ -516,4 +560,131 @@ public class Chating extends AChating{
 		NoticeManager.getInstance(context).updateStatusByFrom(to, Notice.READ);
 		super.onBackPressed();
 	}
+
+	@Override
+	public boolean onTouch(View view, MotionEvent event) {
+		switch (view.getId()) {
+		case R.id.voiceButton:
+			voiceTouch(event);
+			break;
+
+		default:
+			break;
+		}
+		return false;
+	}
+	
+	private double voiceValue;
+	private Dialog voiceDialog;
+	private ImageView voiceImage;
+	private static int MIN_TIME = 1;
+	private static float recodeTime = 0.0f;
+	private Thread recordThread;
+	private boolean isRecording = false;
+	void showVoiceDialog(){
+		voiceDialog = new Dialog(this,R.style.VoiceDialogStyle);
+		voiceDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+		voiceDialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		voiceDialog.setContentView(R.layout.voice_dialog);
+		voiceImage = (ImageView)voiceDialog.findViewById(R.id.dialog_img);
+		voiceDialog.show();
+	}
+	void mythread(){
+		recordThread = new Thread(ImgThread);
+		recordThread.start();
+	}
+	void setDialogImage(){
+		if (voiceValue < 200.0) {
+			voiceImage.setImageResource(R.drawable.record_animate_01);
+		}else if (voiceValue > 200.0 && voiceValue < 400) {
+			voiceImage.setImageResource(R.drawable.record_animate_02);
+		}else if (voiceValue > 400.0 && voiceValue < 800) {
+			voiceImage.setImageResource(R.drawable.record_animate_03);
+		}else if (voiceValue > 800.0 && voiceValue < 1600) {
+			voiceImage.setImageResource(R.drawable.record_animate_04);
+		}else if (voiceValue > 1600.0 && voiceValue < 3200) {
+			voiceImage.setImageResource(R.drawable.record_animate_05);
+		}else if (voiceValue > 3200.0 && voiceValue < 5000) {
+			voiceImage.setImageResource(R.drawable.record_animate_06);
+		}else if (voiceValue > 5000.0 && voiceValue < 7000) {
+			voiceImage.setImageResource(R.drawable.record_animate_07);
+		}else if (voiceValue > 7000.0 && voiceValue < 10000.0) {
+			voiceImage.setImageResource(R.drawable.record_animate_08);
+		}else if (voiceValue > 10000.0 && voiceValue < 14000.0) {
+			voiceImage.setImageResource(R.drawable.record_animate_09);
+		}else if (voiceValue > 14000.0 && voiceValue < 17000.0) {
+			voiceImage.setImageResource(R.drawable.record_animate_10);
+		}else if (voiceValue > 17000.0 && voiceValue < 20000.0) {
+			voiceImage.setImageResource(R.drawable.record_animate_11);
+		}else if (voiceValue > 20000.0 && voiceValue < 24000.0) {
+			voiceImage.setImageResource(R.drawable.record_animate_12);
+		}else if (voiceValue > 24000.0 && voiceValue < 28000.0) {
+			voiceImage.setImageResource(R.drawable.record_animate_13);
+		}else if (voiceValue > 28000.0) {
+			voiceImage.setImageResource(R.drawable.record_animate_14);
+		}
+	}
+	private void voiceTouch(MotionEvent event) {
+		switch (event.getAction()) {
+		case MotionEvent.ACTION_DOWN:
+			try {
+				isRecording = true;
+				showVoiceDialog();
+				AudioRecoderManager.getInstance(this).start();
+				mythread();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		case MotionEvent.ACTION_MOVE:
+			break;
+		case MotionEvent.ACTION_UP:
+			try {
+				isRecording = false;
+				if (voiceDialog.isShowing()) {
+					voiceDialog.dismiss();
+				}
+				String voicePath = AudioRecoderManager.getInstance(this).stop();
+				voiceValue = 0.0;
+				if (recodeTime < MIN_TIME) {
+					
+				}
+				else {
+					uploadVoiceToQiniu(voicePath);
+				}
+			} catch (IOException e) {
+					e.printStackTrace();
+			}
+			break;
+		}
+	}
+	private Runnable ImgThread = new Runnable() {
+		@Override
+		public void run() {
+			recodeTime = 0.0f;
+			while (isRecording) {
+				try {
+					Thread.sleep(200);
+					recodeTime += 0.2;
+					voiceValue = AudioRecoderManager.getInstance(context).getAmplitude();
+					imgHandle.sendEmptyMessage(1);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		Handler imgHandle = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				switch (msg.what) {
+				case 1:
+					setDialogImage();
+					break;
+				default:
+					break;
+				}
+				
+			}
+		};
+	};
 }

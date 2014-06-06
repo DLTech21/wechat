@@ -11,4 +11,9 @@
         <item name="shadow_right">@drawable/shadow_right</item>
         <item name="shadow_bottom">@drawable/shadow_bottom</item>
     </style>
+    
+    <style name="VoiceDialogStyle" parent="@android:style/Theme.Dialog">
+    	<item name="android:windowBackground"> @android:color/transparent </item>
+    	<item name="android:backgroundDimEnabled">false</item>    
+    </style>
 </resources>

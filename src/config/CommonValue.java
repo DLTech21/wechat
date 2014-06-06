@@ -21,20 +21,18 @@ import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 public class CommonValue {
 	public static String PackageName = "com.donal.wechat";
 	
-	public static String BASE_API = "http://115.29.150.153/api/";
-	public static String BASE_URL = "http://115.29.150.153/";
-	public static String BASE_XMPP_SERVER_NAME = "@hcios.com";
-//	public static String BASE_API = "http://192.168.1.147:8080/wechat/api/";
-//	public static String BASE_URL = "http://192.168.1.147:8080/";
-//	public static String BASE_XMPP_SERVER_NAME = "@donaldeimac.local";
+//	public static String BASE_API = "http://115.29.150.153/api/";
+//	public static String BASE_URL = "http://115.29.150.153/";
+	public static String BASE_API = "http://192.168.1.147:8080/wechat/api/";
+	public static String BASE_URL = "http://192.168.1.147:8080/";
 	
-	public static int kWCMessageTypePlain = 0;
-	public static int kWCMessageTypeImage = 1;
-	public static int kWCMessageTypeVoice =2;
-	public static int kWCMessageTypeLocation=3;
+	public static final int kWCMessageTypePlain = 0;
+	public static final int kWCMessageTypeImage = 1;
+	public static final int kWCMessageTypeVoice =2;
+	public static final int kWCMessageTypeLocation=3;
 	
-	public static int kWCMessageStatusWait = 1;
-	public static int kWCMessageStatusSending = 2;
+	public static final int kWCMessageStatusWait = 1;
+	public static final int kWCMessageStatusSending = 2;
 	
 	// auil options
 	public interface DisplayOptions {

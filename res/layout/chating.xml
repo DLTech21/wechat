@@ -60,9 +60,16 @@
 	        android:layout_width="40dp"
 	        android:layout_height="40dp"
 	        android:background="@android:drawable/ic_menu_camera"
-	        android:layout_alignParentRight="true"
 	        android:layout_marginRight="10dp"
 	        android:onClick="ButtonClick"
+	        />
+        <Button 
+	        android:id="@+id/voiceButton"
+	        android:layout_below="@+id/menuView"
+	        android:layout_width="40dp"
+	        android:layout_height="40dp"
+	        android:background="@android:drawable/ic_btn_speak_now"
+	        android:layout_marginRight="10dp"
 	        />
     </LinearLayout>
 

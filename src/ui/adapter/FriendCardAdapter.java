@@ -10,6 +10,7 @@ import com.donal.wechat.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import config.CommonValue;
+import config.XmppConnectionManager;
 import bean.UserInfo;
 import android.content.Context;
 import android.content.Intent;
@@ -80,7 +81,7 @@ public class FriendCardAdapter extends BaseAdapter {
 		convertView.setOnClickListener( new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				((Friend)context).createChat(model.userId+CommonValue.BASE_XMPP_SERVER_NAME);
+				((Friend)context).createChat(model.userId+XmppConnectionManager.BASE_XMPP_SERVER_NAME);
 			}
 		});
 		convertView.setOnLongClickListener(new OnLongClickListener() {

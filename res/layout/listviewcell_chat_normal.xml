@@ -71,6 +71,14 @@
 		       android:scaleType="centerCrop"
 		       android:layout_marginRight="-20dp"
 		       />
+            <TextView
+		       android:id="@+id/receiverVoiceNode"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:drawableLeft="@drawable/receiver_voice_node"
+		       android:layout_centerVertical="true"
+		       android:layout_marginLeft="7dp"
+		       />
        </RelativeLayout>
        
     </RelativeLayout>
@@ -132,7 +140,17 @@
 		       android:visibility="gone"
 		       android:gravity="center"
                />
+           <TextView
+		       android:id="@+id/senderVoiceNode"
+		       android:layout_width="wrap_content"
+		       android:layout_height="wrap_content"
+		       android:scaleType="centerCrop"
+		       android:drawableRight="@drawable/sender_voice_node"
+		       android:layout_centerVertical="true"
+		       android:layout_marginLeft="10dp"
+		       />
        </RelativeLayout>
+       
        <ProgressBar
             android:id="@+id/view_progress_r"
             android:layout_width="26dp"
