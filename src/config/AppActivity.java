@@ -48,7 +48,6 @@ public class AppActivity extends BaseActivity implements AppActivitySupport{
 		context = this;
 		preferences = getSharedPreferences(CommonValue.LOGIN_SET, 0);
 		notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		pg = new ProgressDialog(context);
 	}
 
 	@Override

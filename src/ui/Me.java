@@ -244,7 +244,7 @@ public class Me extends AppActivity{
 	}
 	
 	private void uploadPhotoService(String file) {
-		pg = UIHelper.showProgress(this, null, "上传头像");
+		pg = UIHelper.showProgress(this, "", "上传头像", true);
 		imageLoader.displayImage("file:///"+file, avatarView, CommonValue.DisplayOptions.avatar_options);
 		ApiClent.uploadFile(appContext.getLoginApiKey(), file, new ClientCallback() {
 			
@@ -268,7 +268,7 @@ public class Me extends AppActivity{
 	}
 	
 	private void modify(String nickname, String head, String des) {
-		pg = UIHelper.showProgress(this, null, "保存中");
+		pg = UIHelper.showProgress(this, "", "保存中", true);
 		ApiClent.modifiedUser(appContext, appContext.getLoginApiKey(), nickname, head, des, new ClientCallback() {
 			
 			@Override
