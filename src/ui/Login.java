@@ -14,7 +14,7 @@ import tools.AppManager;
 import tools.ImageUtils;
 import tools.UIHelper;
 import ui.adapter.TextAdapter;
-import xlistview.XListView;
+import widget.XListView;
 import bean.UserEntity;
 
 import com.donal.wechat.R;

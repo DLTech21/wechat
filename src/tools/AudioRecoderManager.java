@@ -11,7 +11,7 @@ import android.os.Environment;
 
 public class AudioRecoderManager {
 
-	private static final String CACHE_VOICE_FILE_PATH = Environment.getExternalStorageDirectory() + "/donal/voice/";
+	public static final String CACHE_VOICE_FILE_PATH = Environment.getExternalStorageDirectory() + "/donal/voice/";
 	
 	private static int SAMPLE_RATE_IN_HZ = 8000; 
 	private static AudioRecoderManager audioRecoderManager = null;

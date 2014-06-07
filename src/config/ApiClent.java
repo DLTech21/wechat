@@ -2,8 +2,11 @@ package config;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.apache.http.Header;
 import org.json.JSONArray;
@@ -11,19 +14,24 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import tools.AppException;
+import tools.AudioRecoderManager;
 import tools.Logger;
+import tools.MD5Util;
 import tools.StringUtils;
-import android.content.Entity;
+import android.content.Context;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import bean.StrangerEntity;
 import bean.Update;
 import bean.UserDetail;
 import bean.UserEntity;
 import bean.UserInfo;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.BinaryHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
 
 public class ApiClent {
 	public final static String message_error = "服务器连接有问题";
@@ -321,6 +329,72 @@ public class ApiClent {
 			public void onFailure(int statusCode, Header[] headers,
 					byte[] responseBody, Throwable error) {
 				callback.onFailure(message_error);
+			}
+		});
+	}
+	
+	//下载
+	public static void downVoiceFromQiniu(Context context, final String url, final String format, final ClientCallback callback) {
+		QYRestClient.getWeb(context, url, null, new BinaryHttpResponseHandler() {
+			
+			@Override
+			public void onSuccess(int arg0, Header[] arg1, byte[] binaryData) {
+				handleDownloadFile(binaryData, callback, url, format);
+			}
+			
+			@Override
+			public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable arg3) {
+				callback.onFailure("语音地址有错");
+			}
+		});
+	}
+	public static void handleDownloadFile(final byte[] binaryData, final ClientCallback callback, final String url, final String format) {
+		final Handler handler = new Handler() {
+			@Override
+			public void handleMessage(Message msg) {
+				switch (msg.what) {
+				case 1:
+					callback.onSuccess((String)msg.obj);
+					break;
+
+				default:
+					callback.onError((Exception)msg.obj);
+					break;
+				}
+			}
+		};
+		ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+		singleThreadExecutor.execute(new Runnable() {
+			@Override
+			public void run() {
+				Message msg = new Message();
+				String storageState = Environment.getExternalStorageState();	
+				String savePath = null;
+				if(storageState.equals(Environment.MEDIA_MOUNTED)){
+					savePath = AudioRecoderManager.CACHE_VOICE_FILE_PATH;
+					File dir = new File(savePath);
+					if(!dir.exists()){
+						dir.mkdirs();
+					}
+				}
+				String md5FilePath = savePath + MD5Util.getMD5String(url) + format;
+				File ApkFile = new File(md5FilePath);
+				if(ApkFile.exists()){
+					ApkFile.delete();
+				}
+				File tmpFile = new File(md5FilePath);
+				try {
+					FileOutputStream fos = new FileOutputStream(tmpFile);
+					fos.write(binaryData);
+					fos.close();
+					msg.what = 1;
+					msg.obj = md5FilePath;
+				} catch (Exception e) {
+					e.printStackTrace();
+					msg.what = -1;
+					msg.obj = e;
+				} 
+				handler.sendMessage(msg);
 			}
 		});
 	}

@@ -18,8 +18,6 @@ import org.jivesoftware.smack.packet.XMPPError;
 import tools.Logger;
 import ui.adapter.WeChatAdapter;
 import ui.view.SlideDrawerView;
-import xlistview.XListView;
-import xlistview.XListView.IXListViewListener;
 
 import com.donal.wechat.R;
 
