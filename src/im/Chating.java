@@ -420,11 +420,13 @@ public class Chating extends AChating implements OnTouchListener{
 				IMMessage message = items.get(position);
 				String content = message.getContent();
 				JsonMessage msg = JsonMessage.parse(content);
+				Logger.i(""+message.getMsgType());
 				if (convertView == null) {
-					switch (message.getMsgType()) {
-					case 0://左边
+					Logger.i(""+message.getMsgType());
+					if (message.getMsgType() == 0) {
 						switch (msg.messageType) {
 						case CommonValue.kWCMessageTypePlain:
+							Logger.i("abbb");
 							holderLeftText = new ViewHolderLeftText();
 							convertView = inflater.inflate(R.layout.chat_left_text,null);
 							holderLeftText.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
@@ -434,30 +436,29 @@ public class Chating extends AChating implements OnTouchListener{
 							displayLeftText(msg, holderLeftText, position);
 							convertView.setTag(holderLeftText);
 							break;
-						case CommonValue.kWCMessageTypeImage:
-							holderLeftImg = new ViewHolderLeftImage();
-							convertView = inflater.inflate(R.layout.chat_left_image,null);
-							holderLeftImg.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
-							holderLeftImg.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
-							holderLeftImg.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
-							holderLeftImg.leftPhoto = (ImageView) convertView.findViewById(R.id.photo_content_l);
-							displayLeftImage(msg, holderLeftImg, position);
-							convertView.setTag(holderLeftImg);
-							break;
-						case CommonValue.kWCMessageTypeVoice:
-							holderLeftVoice = new ViewHolderLeftVoice();
-							convertView = inflater.inflate(R.layout.chat_left_voice,null);
-							holderLeftVoice.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
-							holderLeftVoice.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
-							holderLeftVoice.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
-							holderLeftVoice.leftVoice = (TextView) convertView.findViewById(R.id.receiverVoiceNode);
-							displayLeftVoice(msg, holderLeftVoice, position);
-							convertView.setTag(holderLeftVoice);
-							break;
+//						case CommonValue.kWCMessageTypeImage:
+//							holderLeftImg = new ViewHolderLeftImage();
+//							convertView = inflater.inflate(R.layout.chat_left_image,null);
+//							holderLeftImg.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
+//							holderLeftImg.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
+//							holderLeftImg.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
+//							holderLeftImg.leftPhoto = (ImageView) convertView.findViewById(R.id.photo_content_l);
+//							displayLeftImage(msg, holderLeftImg, position);
+//							convertView.setTag(holderLeftImg);
+//							break;
+//						case CommonValue.kWCMessageTypeVoice:
+//							holderLeftVoice = new ViewHolderLeftVoice();
+//							convertView = inflater.inflate(R.layout.chat_left_voice,null);
+//							holderLeftVoice.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
+//							holderLeftVoice.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
+//							holderLeftVoice.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
+//							holderLeftVoice.leftVoice = (TextView) convertView.findViewById(R.id.receiverVoiceNode);
+//							displayLeftVoice(msg, holderLeftVoice, position);
+//							convertView.setTag(holderLeftVoice);
+//							break;
 						}
-						break;
-
-					case 1://右边
+					}
+					else {
 						switch (msg.messageType) {
 						case CommonValue.kWCMessageTypePlain:
 							holderRightText = new ViewHolderRightText();
@@ -470,76 +471,74 @@ public class Chating extends AChating implements OnTouchListener{
 							convertView.setTag(holderRightText);
 							break;
 
-						case CommonValue.kWCMessageTypeImage:
-							holderRightImg = new ViewHolderRightImage();
-							convertView = inflater.inflate(R.layout.chat_right_image, null);
-							holderRightImg.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
-							holderRightImg.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
-							holderRightImg.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
-							holderRightImg.rightPhoto = (ImageView) convertView.findViewById(R.id.photo_content_r);
-							holderRightImg.photoProgress = (TextView) convertView.findViewById(R.id.photo_content_progress);
-							holderRightImg.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
-							displayRightImage(message, msg, holderRightImg, position);
-							convertView.setTag(holderRightImg);
-							break;
-							
-						case CommonValue.kWCMessageTypeVoice:
-							holderRightVoice = new ViewHolderRightVoice();
-							convertView = inflater.inflate(R.layout.chat_right_voice, null);
-							holderRightVoice.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
-							holderRightVoice.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
-							holderRightVoice.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
-							holderRightVoice.rightVoice = (TextView) convertView.findViewById(R.id.senderVoiceNode);
-							holderRightVoice.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
-							displayRightVoice(message, msg, holderRightVoice, position);
-							convertView.setTag(holderRightVoice);
-							break;
+//						case CommonValue.kWCMessageTypeImage:
+//							holderRightImg = new ViewHolderRightImage();
+//							convertView = inflater.inflate(R.layout.chat_right_image, null);
+//							holderRightImg.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
+//							holderRightImg.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
+//							holderRightImg.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
+//							holderRightImg.rightPhoto = (ImageView) convertView.findViewById(R.id.photo_content_r);
+//							holderRightImg.photoProgress = (TextView) convertView.findViewById(R.id.photo_content_progress);
+//							holderRightImg.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
+//							displayRightImage(message, msg, holderRightImg, position);
+//							convertView.setTag(holderRightImg);
+//							break;
+//							
+//						case CommonValue.kWCMessageTypeVoice:
+//							holderRightVoice = new ViewHolderRightVoice();
+//							convertView = inflater.inflate(R.layout.chat_right_voice, null);
+//							holderRightVoice.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
+//							holderRightVoice.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
+//							holderRightVoice.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
+//							holderRightVoice.rightVoice = (TextView) convertView.findViewById(R.id.senderVoiceNode);
+//							holderRightVoice.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
+//							displayRightVoice(message, msg, holderRightVoice, position);
+//							convertView.setTag(holderRightVoice);
+//							break;
 						}
-						break;
 					}
 				}
 				else {
-					switch (message.getMsgType()) {
-					case 0://左边
+					Logger.i(""+message.getMsgType());
+					if (message.getMsgType() == 0) {
 						switch (msg.messageType) {
 						case CommonValue.kWCMessageTypePlain:
+							Logger.i("aa");
 							holderLeftText = (ViewHolderLeftText) convertView.getTag();
 							displayLeftText(msg, holderLeftText, position);
 							break;
-						case CommonValue.kWCMessageTypeImage:
-							holderLeftImg = (ViewHolderLeftImage) convertView.getTag();
-							displayLeftImage(msg, holderLeftImg, position);
-							break;
-						case CommonValue.kWCMessageTypeVoice:
-							holderLeftVoice = (ViewHolderLeftVoice) convertView.getTag();
-							displayLeftVoice(msg, holderLeftVoice, position);
-							break;
+//						case CommonValue.kWCMessageTypeImage:
+//							holderLeftImg = (ViewHolderLeftImage) convertView.getTag();
+//							displayLeftImage(msg, holderLeftImg, position);
+//							break;
+//						case CommonValue.kWCMessageTypeVoice:
+//							holderLeftVoice = (ViewHolderLeftVoice) convertView.getTag();
+//							displayLeftVoice(msg, holderLeftVoice, position);
+//							break;
 						}
-						break;
-
-					case 1://右边
+					}
+					else {
 						switch (msg.messageType) {
 						case CommonValue.kWCMessageTypePlain:
 							holderRightText = (ViewHolderRightText) convertView.getTag();
 							displayRightText(msg, holderRightText, position);
 							break;
-
-						case CommonValue.kWCMessageTypeImage:
-							holderRightImg = (ViewHolderRightImage) convertView.getTag();
-							displayRightImage(message, msg, holderRightImg, position);
-							break;
-							
-						case CommonValue.kWCMessageTypeVoice:
-							holderRightVoice = (ViewHolderRightVoice) convertView.getTag();
-							displayRightVoice(message, msg, holderRightVoice, position);
-							break;
+//
+//						case CommonValue.kWCMessageTypeImage:
+//							holderRightImg = (ViewHolderRightImage) convertView.getTag();
+//							displayRightImage(message, msg, holderRightImg, position);
+//							break;
+//							
+//						case CommonValue.kWCMessageTypeVoice:
+//							holderRightVoice = (ViewHolderRightVoice) convertView.getTag();
+//							displayRightVoice(message, msg, holderRightVoice, position);
+//							break;
 						}
-						break;
 					}
 				}
 			}
 			catch (Exception e) {
-				
+				Logger.i(e);
 			}
 			return convertView;
 		}
@@ -596,21 +595,21 @@ public class Chating extends AChating implements OnTouchListener{
 		}
 		
 		private void displayTime(int position, TextView timeTV) {
-			String currentTime = items.get(position).getTime();
-			String previewTime = (position - 1) >= 0 ? items.get(position-1).getTime() : "0";
-			try {
-				long time1 = Long.valueOf(currentTime);
-				long time2 = Long.valueOf(previewTime);
-				if ((time1-time2) >= 5 * 60 ) {
-					timeTV.setVisibility(View.VISIBLE);
-					timeTV.setText(DateUtil.wechat_time(currentTime));
-				}
-				else {
-					timeTV.setVisibility(View.GONE);
-				}
-			} catch (Exception e) {
-				Logger.i(e);
-			}
+//			String currentTime = items.get(position).getTime();
+//			String previewTime = (position - 1) >= 0 ? items.get(position-1).getTime() : "0";
+//			try {
+//				long time1 = Long.valueOf(currentTime);
+//				long time2 = Long.valueOf(previewTime);
+//				if ((time1-time2) >= 5 * 60 ) {
+//					timeTV.setVisibility(View.VISIBLE);
+//					timeTV.setText(DateUtil.wechat_time(currentTime));
+//				}
+//				else {
+//					timeTV.setVisibility(View.GONE);
+//				}
+//			} catch (Exception e) {
+//				Logger.i(e);
+//			}
 		}
 		
 		private void uploadImageToQiniu(final IMMessage message, String filePath, final ViewHolderRightImage cell, final int messageType) {
