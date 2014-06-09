@@ -3,18 +3,12 @@
  */
 package ui;
 
-import im.WeChat;
-
 import java.util.ArrayList;
-
-import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.packet.Presence;
 
 import tools.AppManager;
 import tools.ImageUtils;
 import tools.UIHelper;
 import ui.adapter.TextAdapter;
-import widget.XListView;
 import bean.UserEntity;
 
 import com.donal.wechat.R;
@@ -23,18 +17,16 @@ import com.google.analytics.tracking.android.EasyTracker;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
-import android.widget.Toast;
 import android.widget.AbsListView.OnScrollListener;
 import config.ApiClent;
 import config.AppActivity;
-import config.CommonValue;
 import config.ApiClent.ClientCallback;
 
 /**
@@ -71,9 +63,7 @@ public class Login extends AppActivity{
 	}
 	
 	private void initUI() {
-		final XListView xlistView = (XListView) findViewById(R.id.xlistview);
-		xlistView.setPullRefreshEnable(false);
-		xlistView.setPullLoadEnable(false);
+		final ListView xlistView = (ListView) findViewById(R.id.xlistview);
 		View mHeaderView = getLayoutInflater().inflate(R.layout.login_header, null);
 		RelativeLayout layout = (RelativeLayout) mHeaderView.findViewById(R.id.layout);
 		xlistView.addHeaderView(mHeaderView);
