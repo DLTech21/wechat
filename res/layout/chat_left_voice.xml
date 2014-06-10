@@ -57,11 +57,11 @@
            android:layout_toRightOf="@id/image_portrait_l"
            android:background="@drawable/incoming"
             >
-            <TextView
+            <ImageView
 		       android:id="@+id/receiverVoiceNode"
-		       android:layout_width="wrap_content"
-		       android:layout_height="wrap_content"
-		       android:drawableLeft="@drawable/receiver_voice_node"
+		       android:layout_width="20dp"
+		       android:layout_height="20dp"
+		       android:src="@drawable/chatfrom_voice_playing"
 		       android:layout_centerVertical="true"
 		       android:layout_marginLeft="7dp"
 		       />

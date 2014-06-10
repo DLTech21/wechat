@@ -1,14 +1,16 @@
 package im;
 
+import android.view.View;
+
 
 public interface VoiceBubbleListener {
 
-	public void playFail(MessageBubble messageBubble);
+	public void playFail(View messageBubble);
 
-	public void playStoped(MessageBubble messageBubble);
+	public void playStoped(View messageBubble);
 
-	public void playStart(MessageBubble messageBubble);
+	public void playStart(View messageBubble);
 
-	public void playCompletion(MessageBubble messageBubble);
+	public void playCompletion(View messageBubble);
 	
 }

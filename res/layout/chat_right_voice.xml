@@ -57,12 +57,12 @@
            android:layout_below="@id/textview_name_r"
            android:layout_toLeftOf="@id/image_portrait_r"
            android:background="@drawable/outgoing">
-           <TextView
+           <ImageView
 		       android:id="@+id/senderVoiceNode"
-		       android:layout_width="wrap_content"
-		       android:layout_height="wrap_content"
+		       android:layout_width="20dp"
+		       android:layout_height="20dp"
 		       android:scaleType="centerCrop"
-		       android:drawableRight="@drawable/sender_voice_node"
+		       android:src="@drawable/chatto_voice_playing_f3"
 		       android:layout_centerVertical="true"
 		       android:layout_marginLeft="10dp"
 		       />

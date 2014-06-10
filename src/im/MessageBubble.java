@@ -98,79 +98,79 @@ public class MessageBubble extends LinearLayout implements OnClickListener{
 		this.context = context;
 		Logger.i("init");
 		LayoutInflater inflater = ((Activity) context).getLayoutInflater();
-		ViewGroup convertView = (ViewGroup) inflater.inflate(R.layout.listviewcell_chat_normal, null);
-		timeTV = (TextView) convertView.findViewById(R.id.textview_time);
-		leftLayout = (RelativeLayout) convertView.findViewById(R.id.layout_left);
-		leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
-		leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
-		leftText = (TextView) convertView.findViewById(R.id.textview_content_l);
-		leftPhoto = (ImageView) convertView.findViewById(R.id.photo_content_l);
-		leftVoice = (TextView) convertView.findViewById(R.id.receiverVoiceNode);		
-		
-		rightLayout = (RelativeLayout) convertView.findViewById(R.id.layout_right);
-		rightFrame = (RelativeLayout) convertView.findViewById(R.id.layout_content_r);
-		rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
-		rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
-		rightText = (TextView) convertView.findViewById(R.id.textview_content_r);
-		rightPhoto = (ImageView) convertView.findViewById(R.id.photo_content_r);
-		photoProgress = (TextView) convertView.findViewById(R.id.photo_content_progress);
-		rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
-		rightVoice = (TextView) convertView.findViewById(R.id.senderVoiceNode);
-		
-		leftLayout.setOnClickListener(this);
-		rightLayout.setOnClickListener(this);
-
-		bubbleHandler = new BubbleHandler();
-		mMediaPlayer = new MediaPlayer();
-		mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-		mMediaPlayer.setOnCompletionListener(new OnCompletionListener() {
-
-			@Override
-			public void onCompletion(MediaPlayer mp) {
-				if (mIsprepared) {
-					bubbleHandler.sendEmptyMessage(STOP_VIEW);
-					if (voiceBubbleListener != null) {
-						voiceBubbleListener.playCompletion(MessageBubble.this);
-					}
-				} else {
-					bubbleHandler.sendEmptyMessage(ERROR_VIEW);
-					if (voiceBubbleListener != null) {
-						voiceBubbleListener.playFail(MessageBubble.this);
-					}
-				}
-			}
-		});
-		mMediaPlayer.setOnErrorListener(new OnErrorListener() {
-
-			@Override
-			public boolean onError(MediaPlayer arg0, int arg1, int arg2) {
-				bubbleHandler.sendEmptyMessage(ERROR_VIEW);
-				if (voiceBubbleListener != null) {
-					voiceBubbleListener.playFail(MessageBubble.this);
-				}
-				return false;
-			}
-		});
-		mMediaPlayer.setOnInfoListener(new OnInfoListener() {
-
-			@Override
-			public boolean onInfo(MediaPlayer arg0, int arg1, int arg2) {
-				return false;
-			}
-		});
-		mMediaPlayer.setOnPreparedListener(new OnPreparedListener() {
-
-			@Override
-			public void onPrepared(MediaPlayer mp) {
-				mIsprepared = true;
-				if (playAfterDownload) {
-					startStopPlay();
-				} else {
-					bubbleHandler.sendEmptyMessage(STOP_VIEW);
-				}
-			}
-		});
-		this.addView(convertView);
+//		ViewGroup convertView = (ViewGroup) inflater.inflate(R.layout.listviewcell_chat_normal, null);
+//		timeTV = (TextView) convertView.findViewById(R.id.textview_time);
+//		leftLayout = (RelativeLayout) convertView.findViewById(R.id.layout_left);
+//		leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
+//		leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
+//		leftText = (TextView) convertView.findViewById(R.id.textview_content_l);
+//		leftPhoto = (ImageView) convertView.findViewById(R.id.photo_content_l);
+//		leftVoice = (TextView) convertView.findViewById(R.id.receiverVoiceNode);		
+//		
+//		rightLayout = (RelativeLayout) convertView.findViewById(R.id.layout_right);
+//		rightFrame = (RelativeLayout) convertView.findViewById(R.id.layout_content_r);
+//		rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
+//		rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
+//		rightText = (TextView) convertView.findViewById(R.id.textview_content_r);
+//		rightPhoto = (ImageView) convertView.findViewById(R.id.photo_content_r);
+//		photoProgress = (TextView) convertView.findViewById(R.id.photo_content_progress);
+//		rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
+//		rightVoice = (TextView) convertView.findViewById(R.id.senderVoiceNode);
+//		
+//		leftLayout.setOnClickListener(this);
+//		rightLayout.setOnClickListener(this);
+//
+//		bubbleHandler = new BubbleHandler();
+//		mMediaPlayer = new MediaPlayer();
+//		mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//		mMediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+//
+//			@Override
+//			public void onCompletion(MediaPlayer mp) {
+//				if (mIsprepared) {
+//					bubbleHandler.sendEmptyMessage(STOP_VIEW);
+//					if (voiceBubbleListener != null) {
+//						voiceBubbleListener.playCompletion(MessageBubble.this);
+//					}
+//				} else {
+//					bubbleHandler.sendEmptyMessage(ERROR_VIEW);
+//					if (voiceBubbleListener != null) {
+//						voiceBubbleListener.playFail(MessageBubble.this);
+//					}
+//				}
+//			}
+//		});
+//		mMediaPlayer.setOnErrorListener(new OnErrorListener() {
+//
+//			@Override
+//			public boolean onError(MediaPlayer arg0, int arg1, int arg2) {
+//				bubbleHandler.sendEmptyMessage(ERROR_VIEW);
+//				if (voiceBubbleListener != null) {
+//					voiceBubbleListener.playFail(MessageBubble.this);
+//				}
+//				return false;
+//			}
+//		});
+//		mMediaPlayer.setOnInfoListener(new OnInfoListener() {
+//
+//			@Override
+//			public boolean onInfo(MediaPlayer arg0, int arg1, int arg2) {
+//				return false;
+//			}
+//		});
+//		mMediaPlayer.setOnPreparedListener(new OnPreparedListener() {
+//
+//			@Override
+//			public void onPrepared(MediaPlayer mp) {
+//				mIsprepared = true;
+//				if (playAfterDownload) {
+//					startStopPlay();
+//				} else {
+//					bubbleHandler.sendEmptyMessage(STOP_VIEW);
+//				}
+//			}
+//		});
+//		this.addView(convertView);
 	}
 	
 	public void setVoiceBubbleListener(VoiceBubbleListener voiceBubbleListener) {

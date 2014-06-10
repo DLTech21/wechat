@@ -21,6 +21,7 @@ import qiniu.io.PutExtra;
 import qiniu.utils.Config;
 import qiniu.utils.Mac;
 import qiniu.utils.PutPolicy;
+import tools.AudioPlayManager;
 import tools.AudioRecoderManager;
 import tools.DateUtil;
 import tools.ImageUtils;
@@ -43,6 +44,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,6 +63,8 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -77,7 +81,7 @@ import android.widget.Toast;
  * @author donal
  *
  */
-public class Chating extends AChating implements OnTouchListener{
+public class Chating extends AChating implements OnTouchListener, OnItemClickListener, VoiceBubbleListener{
 	private Button voiceButton;
 	private MessageListAdapter adapter = null;
 	private EditText messageInput = null;
@@ -91,15 +95,18 @@ public class Chating extends AChating implements OnTouchListener{
 	private int currentPage = 1;
 	private int objc;
 	
+	private AnimationDrawable leftAnimationDrawable;
+	private AnimationDrawable rightAnimationDrawable;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.chating);
-		init();
+		initUI();
 		user = FriendManager.getInstance(context).getFriend(to.split("@")[0]);
 	}
 	
-	private void init() {
+	private void initUI() {
 		voiceButton = (Button) findViewById(R.id.voiceButton);
 		voiceButton.setOnTouchListener(this);
 		listView = (ListView) findViewById(R.id.chat_list);
@@ -107,7 +114,7 @@ public class Chating extends AChating implements OnTouchListener{
 		adapter = new MessageListAdapter(Chating.this, getMessages(),
 				listView);
 		listView.setAdapter(adapter);
-		
+		listView.setOnItemClickListener(this);
 		listView.setOnScrollListener(new OnScrollListener() {
 			
 			@Override
@@ -167,6 +174,7 @@ public class Chating extends AChating implements OnTouchListener{
 			break;
 
 		case R.id.cameraButton:
+			AudioPlayManager.getInstance(this, bHandler, this).stopPlay();
 			PhotoChooseOption();
 			break;
 		}
@@ -325,7 +333,7 @@ public class Chating extends AChating implements OnTouchListener{
 			TextView timeTV;
 			ImageView leftAvatar;
 			TextView leftNickname;
-			TextView leftVoice;
+			ImageView leftVoice;
 		}
 		
 		class ViewHolderRightText {
@@ -349,7 +357,7 @@ public class Chating extends AChating implements OnTouchListener{
 			TextView timeTV;
 			ImageView rightAvatar;
 			TextView rightNickname;
-			TextView rightVoice;
+			ImageView rightVoice;
 			ProgressBar rightProgress;
 		}
 		
@@ -449,7 +457,7 @@ public class Chating extends AChating implements OnTouchListener{
 							holderLeftVoice.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
 							holderLeftVoice.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
 							holderLeftVoice.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
-							holderLeftVoice.leftVoice = (TextView) convertView.findViewById(R.id.receiverVoiceNode);
+							holderLeftVoice.leftVoice = (ImageView) convertView.findViewById(R.id.receiverVoiceNode);
 							displayLeftVoice(msg, holderLeftVoice, position);
 							convertView.setTag(holderLeftVoice);
 							break;
@@ -486,7 +494,7 @@ public class Chating extends AChating implements OnTouchListener{
 							holderRightVoice.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
 							holderRightVoice.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
 							holderRightVoice.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
-							holderRightVoice.rightVoice = (TextView) convertView.findViewById(R.id.senderVoiceNode);
+							holderRightVoice.rightVoice = (ImageView) convertView.findViewById(R.id.senderVoiceNode);
 							holderRightVoice.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
 							displayRightVoice(message, msg, holderRightVoice, position);
 							convertView.setTag(holderRightVoice);
@@ -540,7 +548,7 @@ public class Chating extends AChating implements OnTouchListener{
 								holderLeftVoice.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
 								holderLeftVoice.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
 								holderLeftVoice.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
-								holderLeftVoice.leftVoice = (TextView) convertView.findViewById(R.id.receiverVoiceNode);
+								holderLeftVoice.leftVoice = (ImageView) convertView.findViewById(R.id.receiverVoiceNode);
 								displayLeftVoice(msg, holderLeftVoice, position);
 								convertView.setTag(holderLeftVoice);
 							}
@@ -594,7 +602,7 @@ public class Chating extends AChating implements OnTouchListener{
 								holderRightVoice.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
 								holderRightVoice.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
 								holderRightVoice.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
-								holderRightVoice.rightVoice = (TextView) convertView.findViewById(R.id.senderVoiceNode);
+								holderRightVoice.rightVoice = (ImageView) convertView.findViewById(R.id.senderVoiceNode);
 								holderRightVoice.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
 								displayRightVoice(message, msg, holderRightVoice, position);
 								convertView.setTag(holderRightVoice);
@@ -623,6 +631,7 @@ public class Chating extends AChating implements OnTouchListener{
 		}
 		
 		private void displayLeftVoice(JsonMessage msg, ViewHolderLeftVoice viewHolderLeftVoice, int position) {
+			viewHolderLeftVoice.leftVoice.setTag(msg.file);
 			imageLoader.displayImage(CommonValue.BASE_URL+ user.userHead, viewHolderLeftVoice.leftAvatar, options);
 			displayTime(position, viewHolderLeftVoice.timeTV);
 		}
@@ -649,6 +658,7 @@ public class Chating extends AChating implements OnTouchListener{
 		}
 		
 		private void displayRightVoice(IMMessage message, JsonMessage msg, ViewHolderRightVoice viewHolderRightVoice, int position) {
+			viewHolderRightVoice.rightVoice.setTag(msg.file);
 			imageLoader.displayImage(CommonValue.BASE_URL+ appContext.getLoginUserHead(), viewHolderRightVoice.rightAvatar, options);
 			if (message.getType() == CommonValue.kWCMessageStatusWait) {
 				message.setType(CommonValue.kWCMessageStatusSending);
@@ -872,6 +882,7 @@ public class Chating extends AChating implements OnTouchListener{
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			try {
+				AudioPlayManager.getInstance(this, bHandler, this).stopPlay();
 				isRecording = true;
 				showVoiceDialog();
 				AudioRecoderManager.getInstance(this).start();
@@ -931,4 +942,172 @@ public class Chating extends AChating implements OnTouchListener{
 			}
 		};
 	};
+	
+	protected void onDestroy() {
+		AudioPlayManager.getInstance(this, bHandler, null).stopPlay();
+		super.onDestroy();
+	};
+	
+	
+	private String currentVoice = "";
+	private View currentConvertView;
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View convertView, int position, long arg3) {
+		if (convertView.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderLeftVoice) {
+			im.Chating.MessageListAdapter.ViewHolderLeftVoice viewHolderLeftVoice = (im.Chating.MessageListAdapter.ViewHolderLeftVoice) convertView.getTag();
+			String voice = (String) viewHolderLeftVoice.leftVoice.getTag();
+			if (currentVoice.equals(voice)) {
+				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, bHandler, this);
+				audioPlayManager.setConvertView(convertView);
+				audioPlayManager.setURL(voice);
+				audioPlayManager.startStopPlay();
+			}
+			else {
+				if (currentConvertView != null) {
+					this.playStoped(currentConvertView);
+				}
+				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, bHandler, this);
+				audioPlayManager.stopPlay();
+				audioPlayManager.setConvertView(convertView);
+				audioPlayManager.setURL(voice);
+				audioPlayManager.startStopPlay();
+			}
+			currentVoice = voice;
+			currentConvertView = convertView;
+			
+		}
+		else if (convertView.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderRightVoice) {
+			im.Chating.MessageListAdapter.ViewHolderRightVoice viewHolderRightVoice = (im.Chating.MessageListAdapter.ViewHolderRightVoice) convertView.getTag();
+			String voice = (String) viewHolderRightVoice.rightVoice.getTag();
+			if (currentVoice.equals(voice)) {
+				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, bHandler, this);
+				audioPlayManager.setConvertView(convertView);
+				audioPlayManager.setURL(voice);
+				audioPlayManager.startStopPlay();
+			}
+			else {
+				if (currentConvertView != null) {
+					this.playStoped(currentConvertView);
+				}
+				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, bHandler, this);
+				audioPlayManager.stopPlay();
+				audioPlayManager.setConvertView(convertView);
+				audioPlayManager.setURL(voice);
+				audioPlayManager.startStopPlay();
+			}
+			
+			currentVoice = voice;
+			currentConvertView = convertView;
+		}
+		else if (convertView.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderLeftImage) {
+			
+		}
+		else if (convertView.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderRightImage) {
+			
+		}
+	}
+	
+	private static final int PREPARE_VIEW = 110;
+	private static final int START_VIEW = 111;
+	private static final int STOP_VIEW = 112;
+	private static final int ERROR_VIEW = 113;
+	private Handler bHandler = new BubbleHandler();
+	
+	private class BubbleHandler extends Handler {
+		@Override
+		public void dispatchMessage(Message msg) {
+			super.dispatchMessage(msg);
+
+			switch (msg.what) {
+			case START_VIEW:
+				setPlayingView();
+				break;
+			case STOP_VIEW:
+				setStopView();
+				break;
+			case PREPARE_VIEW:
+				setLoadingView();
+				break;
+			case ERROR_VIEW:
+				setErrorView();
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	
+	private void setPlayingView() {
+	}
+
+	private void setStopView() {
+	}
+
+	private void setErrorView() {
+		// TODO Auto-generated method stub
+	}
+
+	private void setLoadingView() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void playFail(View messageBubble) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void playStoped(View messageBubble) {
+		if (messageBubble.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderLeftVoice) {
+			im.Chating.MessageListAdapter.ViewHolderLeftVoice viewHolderLeftVoice = (im.Chating.MessageListAdapter.ViewHolderLeftVoice) messageBubble.getTag();
+			if (leftAnimationDrawable != null && leftAnimationDrawable.isRunning()) {
+				leftAnimationDrawable.stop();
+			}
+			viewHolderLeftVoice.leftVoice.setImageResource(R.drawable.chatfrom_voice_playing);
+		}
+		else if (messageBubble.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderRightVoice) {
+			im.Chating.MessageListAdapter.ViewHolderRightVoice viewHolderRightVoice = (im.Chating.MessageListAdapter.ViewHolderRightVoice) messageBubble.getTag();
+			if (rightAnimationDrawable != null && rightAnimationDrawable.isRunning()) {
+				rightAnimationDrawable.stop();
+			}
+			viewHolderRightVoice.rightVoice.setImageResource(R.drawable.chatto_voice_playing_f3);
+		}
+	}
+
+	@Override
+	public void playStart(View messageBubble) {
+		if (messageBubble.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderLeftVoice) {
+			im.Chating.MessageListAdapter.ViewHolderLeftVoice viewHolderLeftVoice = (im.Chating.MessageListAdapter.ViewHolderLeftVoice) messageBubble.getTag();
+			viewHolderLeftVoice.leftVoice.setImageResource(R.anim.receiver_voice_node_playing);
+			leftAnimationDrawable = (AnimationDrawable) viewHolderLeftVoice.leftVoice.getDrawable();
+			leftAnimationDrawable.start();
+		}
+		else if (messageBubble.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderRightVoice) {
+			im.Chating.MessageListAdapter.ViewHolderRightVoice viewHolderRightVoice = (im.Chating.MessageListAdapter.ViewHolderRightVoice) messageBubble.getTag();
+			viewHolderRightVoice.rightVoice.setImageResource(R.anim.sender_voice_node_playing);
+			rightAnimationDrawable = (AnimationDrawable) viewHolderRightVoice.rightVoice.getDrawable();
+			rightAnimationDrawable.start();
+		}
+	}
+
+	@Override
+	public void playCompletion(View messageBubble) {
+		
+		if (messageBubble.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderLeftVoice) {
+			im.Chating.MessageListAdapter.ViewHolderLeftVoice viewHolderLeftVoice = (im.Chating.MessageListAdapter.ViewHolderLeftVoice) messageBubble.getTag();
+			if (leftAnimationDrawable != null && leftAnimationDrawable.isRunning()) {
+				leftAnimationDrawable.stop();
+			}
+			viewHolderLeftVoice.leftVoice.setImageResource(R.drawable.chatfrom_voice_playing);
+		}
+		else if (messageBubble.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderRightVoice) {
+			im.Chating.MessageListAdapter.ViewHolderRightVoice viewHolderRightVoice = (im.Chating.MessageListAdapter.ViewHolderRightVoice) messageBubble.getTag();
+			if (rightAnimationDrawable != null && rightAnimationDrawable.isRunning()) {
+				rightAnimationDrawable.stop();
+			}
+			viewHolderRightVoice.rightVoice.setImageResource(R.drawable.chatto_voice_playing_f3);
+		}
+	}
 }

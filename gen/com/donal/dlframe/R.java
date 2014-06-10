@@ -16,12 +16,12 @@ public final class R {
 		public static final int loadmore_animation = 0x7f040005;
 		public static final int pophidden_anim = 0x7f040006;
 		public static final int popshow_anim = 0x7f040007;
-		public static final int refresh_button_rotation = 0x7f040008;
-		public static final int slide_in_up = 0x7f040009;
-		public static final int slide_out_down = 0x7f04000a;
-		public static final int translucent_zoom_exit = 0x7f04000b;
-		public static final int translucent_zoom_in = 0x7f04000c;
-		public static final int translucent_zoom_out = 0x7f04000d;
+		public static final int refresh_button_rotation = 0x7f040009;
+		public static final int slide_in_up = 0x7f04000b;
+		public static final int slide_out_down = 0x7f04000c;
+		public static final int translucent_zoom_exit = 0x7f04000d;
+		public static final int translucent_zoom_in = 0x7f04000e;
+		public static final int translucent_zoom_out = 0x7f04000f;
 	}
 	public static final class array {
 		public static final int comment_options_1 = 0x7f050003;
@@ -109,32 +109,32 @@ public final class R {
 		public static final int standard_padding = 0x7f070001;
 	}
 	public static final class drawable {
-		public static final int clearwords_bg = 0x7f02000a;
-		public static final int clearwords_bg_nor = 0x7f02000b;
-		public static final int clearwords_bg_sel = 0x7f02000c;
-		public static final int clearwords_icon = 0x7f02000d;
-		public static final int content_image_loading = 0x7f02000e;
-		public static final int ic_launcher = 0x7f020010;
-		public static final int ic_pulltorefresh_arrow = 0x7f020011;
-		public static final int loading_page_loading0 = 0x7f020013;
-		public static final int loading_page_loading1 = 0x7f020014;
-		public static final int loading_page_loading2 = 0x7f020015;
-		public static final int loading_page_loading3 = 0x7f020016;
-		public static final int nav_refresh = 0x7f020017;
-		public static final int new_data_toast = 0x7f020018;
-		public static final int refreshlistview_arrow = 0x7f02002a;
-		public static final int review_bg_blue = 0x7f02002b;
-		public static final int round_1 = 0x7f02002c;
-		public static final int round_10 = 0x7f02002d;
-		public static final int round_2 = 0x7f02002e;
-		public static final int round_3 = 0x7f02002f;
-		public static final int round_4 = 0x7f020030;
-		public static final int round_5 = 0x7f020031;
-		public static final int round_6 = 0x7f020032;
-		public static final int round_7 = 0x7f020033;
-		public static final int round_8 = 0x7f020034;
-		public static final int round_9 = 0x7f020035;
-		public static final int xlistview_arrow = 0x7f02004b;
+		public static final int clearwords_bg = 0x7f020011;
+		public static final int clearwords_bg_nor = 0x7f020012;
+		public static final int clearwords_bg_sel = 0x7f020013;
+		public static final int clearwords_icon = 0x7f020014;
+		public static final int content_image_loading = 0x7f020015;
+		public static final int ic_launcher = 0x7f020017;
+		public static final int ic_pulltorefresh_arrow = 0x7f020018;
+		public static final int loading_page_loading0 = 0x7f02001a;
+		public static final int loading_page_loading1 = 0x7f02001b;
+		public static final int loading_page_loading2 = 0x7f02001c;
+		public static final int loading_page_loading3 = 0x7f02001d;
+		public static final int nav_refresh = 0x7f02001e;
+		public static final int new_data_toast = 0x7f02001f;
+		public static final int refreshlistview_arrow = 0x7f020030;
+		public static final int review_bg_blue = 0x7f020031;
+		public static final int round_1 = 0x7f020032;
+		public static final int round_10 = 0x7f020033;
+		public static final int round_2 = 0x7f020034;
+		public static final int round_3 = 0x7f020035;
+		public static final int round_4 = 0x7f020036;
+		public static final int round_5 = 0x7f020037;
+		public static final int round_6 = 0x7f020038;
+		public static final int round_7 = 0x7f020039;
+		public static final int round_8 = 0x7f02003a;
+		public static final int round_9 = 0x7f02003b;
+		public static final int xlistview_arrow = 0x7f020050;
 	}
 	public static final class id {
 		public static final int arrow = 0x7f080042;
@@ -199,17 +199,17 @@ public final class R {
 		public static final int help = 0x7f03000e;
 		public static final int history_list_item = 0x7f03000f;
 		public static final int layout_refreshlistview_header = 0x7f030011;
-		public static final int pull_to_refresh_head = 0x7f03001a;
-		public static final int refresh_footer = 0x7f03001b;
-		public static final int refresh_header = 0x7f03001c;
-		public static final int search_book_contents = 0x7f03001f;
-		public static final int search_book_contents_header = 0x7f030020;
-		public static final int search_book_contents_list_item = 0x7f030021;
-		public static final int share = 0x7f030022;
-		public static final int toastmessage_text = 0x7f030025;
-		public static final int update_dialog = 0x7f030026;
-		public static final int xlistview_footer = 0x7f03002a;
-		public static final int xlistview_header = 0x7f03002b;
+		public static final int pull_to_refresh_head = 0x7f030019;
+		public static final int refresh_footer = 0x7f03001a;
+		public static final int refresh_header = 0x7f03001b;
+		public static final int search_book_contents = 0x7f03001e;
+		public static final int search_book_contents_header = 0x7f03001f;
+		public static final int search_book_contents_list_item = 0x7f030020;
+		public static final int share = 0x7f030021;
+		public static final int toastmessage_text = 0x7f030024;
+		public static final int update_dialog = 0x7f030025;
+		public static final int xlistview_footer = 0x7f030029;
+		public static final int xlistview_header = 0x7f03002a;
 	}
 	public static final class string {
 		public static final int Cancel = 0x7f0900b3;
