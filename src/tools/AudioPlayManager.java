@@ -31,7 +31,6 @@ public class AudioPlayManager {
 	private static VoiceBubbleListener voiceBubbleListener;
 	private String mUrl;
 	private boolean mIsprepared;// 是否准备好了，（文件已经下载下来，且MediaPlayer可以播放）
-	private int mId;
 	private boolean isDownloading;// 如果正在下载，则不再触发下载
 	private boolean playAfterDownload;// 播放时本地缓存不存在，触发下载，下载完成后是否播放(可能下载过程中，触发了其它语音的播放，则此标志置为false)
 	
@@ -135,7 +134,6 @@ public class AudioPlayManager {
 	private boolean doPrepare(File soundFile) {
 		try {
 			mMediaPlayer.reset();
-			Logger.i(soundFile.getAbsolutePath());
 			mMediaPlayer.setDataSource(soundFile.getAbsolutePath());
 			mMediaPlayer.prepare();
 			return true;
@@ -153,23 +151,18 @@ public class AudioPlayManager {
 	 */
 	public void startStopPlay() {
 		if (mMediaPlayer.isPlaying()) {
-			Logger.i("a");
 			doStop();
 			if (voiceBubbleListener != null) {
 				voiceBubbleListener.playStoped(convertView);
 			}
 		} else {
-			Logger.i("b");
 			if (voiceBubbleListener != null) {
 				voiceBubbleListener.playStart(convertView);
 			}
 			if (mIsprepared) {
-				Logger.i("c");
 				doPlay();
 			} else {
-				Logger.i("d");
 				if (mUrl != null && mUrl.length() > 0) {
-					Logger.i("e");
 					new Thread(new Runnable() {
 						@Override
 						public void run() {
@@ -189,7 +182,6 @@ public class AudioPlayManager {
 	
 	private void doPlay() {
 		try {
-			Logger.i("play");
 			mMediaPlayer.start();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -212,7 +204,6 @@ public class AudioPlayManager {
 					voiceBubbleListener.playDownload(convertView);
 				}
 				isDownloading = true;
-				Logger.i(url);
 				try {
 					isDownloading = true;
 					if (!(new File(AudioRecoderManager.CACHE_VOICE_FILE_PATH)).exists()) {
