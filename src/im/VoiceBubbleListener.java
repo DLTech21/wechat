@@ -11,6 +11,9 @@ public interface VoiceBubbleListener {
 
 	public void playStart(View messageBubble);
 
+	public void playDownload(View messageBubble);
+	
 	public void playCompletion(View messageBubble);
+	
 	
 }

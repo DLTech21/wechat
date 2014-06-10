@@ -174,7 +174,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 			break;
 
 		case R.id.cameraButton:
-			AudioPlayManager.getInstance(this, bHandler, this).stopPlay();
+			AudioPlayManager.getInstance(this, this).stopPlay();
 			PhotoChooseOption();
 			break;
 		}
@@ -882,7 +882,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
 			try {
-				AudioPlayManager.getInstance(this, bHandler, this).stopPlay();
+				AudioPlayManager.getInstance(this, this).stopPlay();
 				isRecording = true;
 				showVoiceDialog();
 				AudioRecoderManager.getInstance(this).start();
@@ -944,7 +944,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 	};
 	
 	protected void onDestroy() {
-		AudioPlayManager.getInstance(this, bHandler, null).stopPlay();
+		AudioPlayManager.getInstance(this, null).stopPlay();
 		super.onDestroy();
 	};
 	
@@ -958,7 +958,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 			im.Chating.MessageListAdapter.ViewHolderLeftVoice viewHolderLeftVoice = (im.Chating.MessageListAdapter.ViewHolderLeftVoice) convertView.getTag();
 			String voice = (String) viewHolderLeftVoice.leftVoice.getTag();
 			if (currentVoice.equals(voice)) {
-				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, bHandler, this);
+				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, this);
 				audioPlayManager.setConvertView(convertView);
 				audioPlayManager.setURL(voice);
 				audioPlayManager.startStopPlay();
@@ -967,7 +967,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 				if (currentConvertView != null) {
 					this.playStoped(currentConvertView);
 				}
-				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, bHandler, this);
+				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, this);
 				audioPlayManager.stopPlay();
 				audioPlayManager.setConvertView(convertView);
 				audioPlayManager.setURL(voice);
@@ -975,13 +975,12 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 			}
 			currentVoice = voice;
 			currentConvertView = convertView;
-			
 		}
 		else if (convertView.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderRightVoice) {
 			im.Chating.MessageListAdapter.ViewHolderRightVoice viewHolderRightVoice = (im.Chating.MessageListAdapter.ViewHolderRightVoice) convertView.getTag();
 			String voice = (String) viewHolderRightVoice.rightVoice.getTag();
 			if (currentVoice.equals(voice)) {
-				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, bHandler, this);
+				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, this);
 				audioPlayManager.setConvertView(convertView);
 				audioPlayManager.setURL(voice);
 				audioPlayManager.startStopPlay();
@@ -990,13 +989,12 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 				if (currentConvertView != null) {
 					this.playStoped(currentConvertView);
 				}
-				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, bHandler, this);
+				AudioPlayManager audioPlayManager = AudioPlayManager.getInstance(this, this);
 				audioPlayManager.stopPlay();
 				audioPlayManager.setConvertView(convertView);
 				audioPlayManager.setURL(voice);
 				audioPlayManager.startStopPlay();
 			}
-			
 			currentVoice = voice;
 			currentConvertView = convertView;
 		}
@@ -1006,50 +1004,6 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		else if (convertView.getTag() instanceof im.Chating.MessageListAdapter.ViewHolderRightImage) {
 			
 		}
-	}
-	
-	private static final int PREPARE_VIEW = 110;
-	private static final int START_VIEW = 111;
-	private static final int STOP_VIEW = 112;
-	private static final int ERROR_VIEW = 113;
-	private Handler bHandler = new BubbleHandler();
-	
-	private class BubbleHandler extends Handler {
-		@Override
-		public void dispatchMessage(Message msg) {
-			super.dispatchMessage(msg);
-
-			switch (msg.what) {
-			case START_VIEW:
-				setPlayingView();
-				break;
-			case STOP_VIEW:
-				setStopView();
-				break;
-			case PREPARE_VIEW:
-				setLoadingView();
-				break;
-			case ERROR_VIEW:
-				setErrorView();
-				break;
-			default:
-				break;
-			}
-		}
-	}
-	
-	private void setPlayingView() {
-	}
-
-	private void setStopView() {
-	}
-
-	private void setErrorView() {
-		// TODO Auto-generated method stub
-	}
-
-	private void setLoadingView() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -1109,5 +1063,11 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 			}
 			viewHolderRightVoice.rightVoice.setImageResource(R.drawable.chatto_voice_playing_f3);
 		}
+	}
+	
+	@Override
+	public void playDownload(View messageBubble) {
+		// TODO Auto-generated method stub
+		
 	}
 }

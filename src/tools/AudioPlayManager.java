@@ -1,6 +1,5 @@
 package tools;
 
-import im.MessageBubble;
 import im.VoiceBubbleListener;
 
 import java.io.File;
@@ -35,11 +34,6 @@ public class AudioPlayManager {
 	private int mId;
 	private boolean isDownloading;// 如果正在下载，则不再触发下载
 	private boolean playAfterDownload;// 播放时本地缓存不存在，触发下载，下载完成后是否播放(可能下载过程中，触发了其它语音的播放，则此标志置为false)
-	private static Handler bubbleHandler;
-	private static final int PREPARE_VIEW = 110;
-	private static final int START_VIEW = 111;
-	private static final int STOP_VIEW = 112;
-	private static final int ERROR_VIEW = 113;
 	
 	private AudioPlayManager(Context context) {
 		mMediaPlayer = new MediaPlayer();
@@ -48,12 +42,10 @@ public class AudioPlayManager {
 			@Override
 			public void onCompletion(MediaPlayer mp) {
 				if (mIsprepared) {
-					bubbleHandler.sendEmptyMessage(STOP_VIEW);
 					if (voiceBubbleListener != null) {
 						voiceBubbleListener.playCompletion(convertView);
 					}
 				} else {
-					bubbleHandler.sendEmptyMessage(ERROR_VIEW);
 					if (voiceBubbleListener != null) {
 						voiceBubbleListener.playFail(convertView);
 					}
@@ -64,7 +56,6 @@ public class AudioPlayManager {
 
 			@Override
 			public boolean onError(MediaPlayer arg0, int arg1, int arg2) {
-				bubbleHandler.sendEmptyMessage(ERROR_VIEW);
 				if (voiceBubbleListener != null) {
 					voiceBubbleListener.playFail(convertView);
 				}
@@ -86,16 +77,14 @@ public class AudioPlayManager {
 				if (playAfterDownload) {
 					startStopPlay();
 				} else {
-					bubbleHandler.sendEmptyMessage(STOP_VIEW);
 				}
 			}
 		});
 	}
 
-	public static AudioPlayManager getInstance(Context c, Handler handler, VoiceBubbleListener listener) {
+	public static AudioPlayManager getInstance(Context c, VoiceBubbleListener listener) {
 		if (audioPlayManager == null) {
 			audioPlayManager = new AudioPlayManager(c);
-			bubbleHandler = handler;
 			voiceBubbleListener = listener;
 		}
 		return audioPlayManager;
@@ -152,7 +141,6 @@ public class AudioPlayManager {
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			bubbleHandler.sendEmptyMessage(ERROR_VIEW);
 			if (voiceBubbleListener != null) {
 				voiceBubbleListener.playFail(convertView);
 			}
@@ -191,7 +179,6 @@ public class AudioPlayManager {
 					}).start();
 
 				} else {
-					bubbleHandler.sendEmptyMessage(ERROR_VIEW);
 					if (voiceBubbleListener != null) {
 						voiceBubbleListener.playFail(convertView);
 					}
@@ -201,13 +188,11 @@ public class AudioPlayManager {
 	}
 	
 	private void doPlay() {
-		bubbleHandler.sendEmptyMessage(START_VIEW);
 		try {
 			Logger.i("play");
 			mMediaPlayer.start();
 		} catch (Exception e) {
 			e.printStackTrace();
-			bubbleHandler.sendEmptyMessage(ERROR_VIEW);
 			if (voiceBubbleListener != null) {
 				voiceBubbleListener.playFail(convertView);
 			}
@@ -215,7 +200,6 @@ public class AudioPlayManager {
 	}
 
 	private void doStop() {
-		bubbleHandler.sendEmptyMessage(STOP_VIEW);
 		mMediaPlayer.pause();
 		mMediaPlayer.seekTo(0);
 	}
@@ -224,7 +208,9 @@ public class AudioPlayManager {
 		final File soundFile = new File(AudioRecoderManager.CACHE_VOICE_FILE_PATH + MD5Util.getMD5String(url) + ".amr");
 		if (!soundFile.exists()) {
 			if (!isDownloading) {
-				bubbleHandler.sendEmptyMessage(PREPARE_VIEW);
+				if (voiceBubbleListener != null) {
+					voiceBubbleListener.playDownload(convertView);
+				}
 				isDownloading = true;
 				Logger.i(url);
 				try {
@@ -243,7 +229,9 @@ public class AudioPlayManager {
 					// throw new RuntimeException("无法获知文件大小 ");
 					// }
 					if (is == null) { // 没有下载流
-						bubbleHandler.sendEmptyMessage(ERROR_VIEW);
+						if (voiceBubbleListener != null) {
+							voiceBubbleListener.playFail(convertView);
+						}
 					}
 					FileOutputStream FOS = new FileOutputStream(soundFile); // 创建写入文件内存流，通过此流向目标写文件
 
@@ -265,7 +253,9 @@ public class AudioPlayManager {
 
 				} catch (Exception e) {
 					e.printStackTrace();
-					bubbleHandler.sendEmptyMessage(ERROR_VIEW);
+					if (voiceBubbleListener != null) {
+						voiceBubbleListener.playFail(convertView);
+					}
 					isDownloading = false;
 				}
 			}
