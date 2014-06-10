@@ -307,25 +307,50 @@ public class Chating extends AChating implements OnTouchListener{
 	
 	private class MessageListAdapter extends BaseAdapter {
 
-		class ViewHoler {
+		class ViewHolderLeftText {
 			TextView timeTV;
-			
-			RelativeLayout leftLayout;
 			ImageView leftAvatar;
 			TextView leftNickname;
 			TextView leftText;
+		}
+		
+		class ViewHolderLeftImage {
+			TextView timeTV;
+			ImageView leftAvatar;
+			TextView leftNickname;
 			ImageView leftPhoto;
+		}
+		
+		class ViewHolderLeftVoice {
+			TextView timeTV;
+			ImageView leftAvatar;
+			TextView leftNickname;
 			TextView leftVoice;
-			
-			RelativeLayout rightLayout;
-			RelativeLayout rightFrame;
+		}
+		
+		class ViewHolderRightText {
+			TextView timeTV;
 			ImageView rightAvatar;
 			TextView rightNickname;
 			TextView rightText;
+			ProgressBar rightProgress;
+		}
+		
+		class ViewHolderRightImage {
+			TextView timeTV;
+			ImageView rightAvatar;
+			TextView rightNickname;
 			ImageView rightPhoto;
 			TextView photoProgress;
 			ProgressBar rightProgress;
+		}
+		
+		class ViewHolderRightVoice {
+			TextView timeTV;
+			ImageView rightAvatar;
+			TextView rightNickname;
 			TextView rightVoice;
+			ProgressBar rightProgress;
 		}
 		
 		private List<IMMessage> items;
@@ -385,89 +410,16 @@ public class Chating extends AChating implements OnTouchListener{
 		
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			ViewHoler cell = null;
-			if (convertView == null) {
-				cell = new ViewHoler();
-				convertView = inflater.inflate(R.layout.listviewcell_chat_normal, null);
-				cell.timeTV = (TextView) convertView.findViewById(R.id.textview_time);
-				cell.leftLayout = (RelativeLayout) convertView.findViewById(R.id.layout_left);
-				cell.leftAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_l);
-				cell.leftNickname = (TextView) convertView.findViewById(R.id.textview_name_l);
-				cell.leftText = (TextView) convertView.findViewById(R.id.textview_content_l);
-				cell.leftPhoto = (ImageView) convertView.findViewById(R.id.photo_content_l);
-				cell.leftVoice = (TextView) convertView.findViewById(R.id.receiverVoiceNode);		
-				
-				cell.rightLayout = (RelativeLayout) convertView.findViewById(R.id.layout_right);
-				cell.rightFrame = (RelativeLayout) convertView.findViewById(R.id.layout_content_r);
-				cell.rightAvatar = (ImageView) convertView.findViewById(R.id.image_portrait_r);
-				cell.rightNickname = (TextView) convertView.findViewById(R.id.textview_name_r);
-				cell.rightText = (TextView) convertView.findViewById(R.id.textview_content_r);
-				cell.rightPhoto = (ImageView) convertView.findViewById(R.id.photo_content_r);
-				cell.photoProgress = (TextView) convertView.findViewById(R.id.photo_content_progress);
-				cell.rightProgress = (ProgressBar) convertView.findViewById(R.id.view_progress_r);
-				cell.rightVoice = (TextView) convertView.findViewById(R.id.senderVoiceNode);
-				convertView.setTag(cell);
-			}
-			else {
-				cell = (ViewHoler) convertView.getTag();
-			}
-			IMMessage message = items.get(position);
-			cell.leftLayout.setVisibility(message.getMsgType() == 0? View.VISIBLE:View.INVISIBLE);
-			cell.rightLayout.setVisibility(message.getMsgType() == 0? View.INVISIBLE:View.VISIBLE);
-			String content = message.getContent();
+			ViewHolderRightText holderRightText = null;
+			ViewHolderRightImage holderRightImg = null;
+			ViewHolderRightVoice holderRightVoice = null;
+			ViewHolderLeftText holderLeftText = null;
+			ViewHolderLeftImage holderLeftImg = null;
+			ViewHolderLeftVoice holderLeftVoice = null;
 			try {
-				imageLoader.displayImage(CommonValue.BASE_URL+ user.userHead, cell.leftAvatar, options);
-				imageLoader.displayImage(CommonValue.BASE_URL+ appContext.getLoginUserHead(), cell.rightAvatar, options);
-			} catch (Exception e) {
-				
-			}
-			try {
+				IMMessage message = items.get(position);
+				String content = message.getContent();
 				JsonMessage msg = JsonMessage.parse(content);
-<<<<<<< HEAD
-				if (msg.messageType == CommonValue.kWCMessageTypePlain) {
-					cell.leftText.setVisibility(View.VISIBLE);
-					cell.rightText.setVisibility(View.VISIBLE);
-					cell.leftText.setText(msg.text);
-					cell.rightText.setText(msg.text);
-					cell.leftPhoto.setVisibility(View.GONE);
-					cell.rightPhoto.setVisibility(View.GONE);
-					cell.leftVoice.setVisibility(View.GONE);
-					cell.rightVoice.setVisibility(View.GONE);
-				}
-				else if (msg.messageType == CommonValue.kWCMessageTypeImage) {
-					cell.leftText.setVisibility(View.GONE);
-					cell.rightText.setVisibility(View.GONE);
-					cell.leftPhoto.setVisibility(View.VISIBLE);
-					cell.rightPhoto.setVisibility(View.VISIBLE);
-					cell.leftVoice.setVisibility(View.GONE);
-					cell.rightVoice.setVisibility(View.GONE);
-					imageLoader.displayImage(msg.file, cell.leftPhoto, photooptions);
-					imageLoader.displayImage(msg.file, cell.rightPhoto, photooptions);
-					if (message.getType() == CommonValue.kWCMessageStatusWait) {
-						message.setType(CommonValue.kWCMessageStatusSending);
-						cell.photoProgress.setVisibility(View.VISIBLE);
-						imageLoader.displayImage("file:///"+msg.file, cell.rightPhoto, photooptions);
-						uploadQiniu(message, msg.file, cell, CommonValue.kWCMessageTypeImage);
-					}
-					else if (message.getType() == 0) {
-						cell.photoProgress.setVisibility(View.GONE);
-					}
-				}
-				else if (msg.messageType == CommonValue.kWCMessageTypeVoice) {
-					cell.leftText.setVisibility(View.GONE);
-					cell.rightText.setVisibility(View.GONE);
-					cell.leftPhoto.setVisibility(View.GONE);
-					cell.rightPhoto.setVisibility(View.GONE);
-					cell.leftVoice.setVisibility(View.VISIBLE);
-					cell.rightVoice.setVisibility(View.VISIBLE);
-					if (message.getType() == CommonValue.kWCMessageStatusWait) {
-						message.setType(CommonValue.kWCMessageStatusSending);
-						cell.photoProgress.setVisibility(View.VISIBLE);
-						uploadQiniu(message, msg.file, cell, CommonValue.kWCMessageTypeVoice);
-					}
-					else if (message.getType() == 0) {
-						cell.photoProgress.setVisibility(View.GONE);
-=======
 				if (convertView == null) {
 					if (message.getMsgType() == 0) {
 						switch (msg.messageType) {
@@ -649,31 +601,9 @@ public class Chating extends AChating implements OnTouchListener{
 							}
 							break;
 						}
->>>>>>> dev
 					}
 				}
-			} catch (Exception e) {
-				cell.leftText.setText(content);
-				cell.rightText.setText(content);
 			}
-<<<<<<< HEAD
-			String currentTime = message.getTime();
-			String previewTime = (position - 1) >= 0 ? items.get(position-1).getTime() : "0";
-			try {
-				long time1 = Long.valueOf(currentTime);
-				long time2 = Long.valueOf(previewTime);
-				if ((time1-time2) >= 5 * 60 ) {
-					cell.timeTV.setVisibility(View.VISIBLE);
-					cell.timeTV.setText(DateUtil.wechat_time(message.getTime()));
-				}
-				else {
-					cell.timeTV.setVisibility(View.GONE);
-				}
-			} catch (Exception e) {
-				Logger.i(e);
-			}
-			return convertView;
-=======
 			catch (Exception e) {
 				Logger.i(e);
 			}
@@ -732,25 +662,24 @@ public class Chating extends AChating implements OnTouchListener{
 		}
 		
 		private void displayTime(int position, TextView timeTV) {
-//			String currentTime = items.get(position).getTime();
-//			String previewTime = (position - 1) >= 0 ? items.get(position-1).getTime() : "0";
-//			try {
-//				long time1 = Long.valueOf(currentTime);
-//				long time2 = Long.valueOf(previewTime);
-//				if ((time1-time2) >= 5 * 60 ) {
-//					timeTV.setVisibility(View.VISIBLE);
-//					timeTV.setText(DateUtil.wechat_time(currentTime));
-//				}
-//				else {
-//					timeTV.setVisibility(View.GONE);
-//				}
-//			} catch (Exception e) {
-//				Logger.i(e);
-//			}
->>>>>>> dev
+			String currentTime = items.get(position).getTime();
+			String previewTime = (position - 1) >= 0 ? items.get(position-1).getTime() : "0";
+			try {
+				long time1 = Long.valueOf(currentTime);
+				long time2 = Long.valueOf(previewTime);
+				if ((time1-time2) >= 5 * 60 ) {
+					timeTV.setVisibility(View.VISIBLE);
+					timeTV.setText(DateUtil.wechat_time(currentTime));
+				}
+				else {
+					timeTV.setVisibility(View.GONE);
+				}
+			} catch (Exception e) {
+				Logger.i(e);
+			}
 		}
 		
-		private void uploadQiniu(final IMMessage message, String filePath, final ViewHoler cell, final int messageType) {
+		private void uploadImageToQiniu(final IMMessage message, String filePath, final ViewHolderRightImage cell, final int messageType) {
 			String bucketName = "dchat";
 	        PutPolicy putPolicy = new PutPolicy(bucketName);
 			Config.ACCESS_KEY = "5e71GMRBlrPS5pjETWcgElaH-uvhGRsWRGMR_Pfs";
@@ -778,6 +707,61 @@ public class Chating extends AChating implements OnTouchListener{
 							cell.photoProgress.setText("处理中...");
 						}
 					}
+				}
+
+				@Override
+				public void onSuccess(JSONObject resp) {
+					String key = resp.optString("hash", "");
+					try {
+						JsonMessage msg = new JsonMessage();
+						msg.file = "http://dchat.qiniudn.com/"+key;
+						Logger.i(msg.file);
+						switch (messageType) {
+						case CommonValue.kWCMessageTypeImage:
+							msg.messageType = CommonValue.kWCMessageTypeImage;
+							msg.text = "[图片]";
+							break;
+
+						case CommonValue.kWCMessageTypeVoice:
+							msg.messageType = CommonValue.kWCMessageTypeVoice;
+							msg.text = "[语音]";
+							break;
+						}
+						Gson gson = new Gson();
+						String json = gson.toJson(msg);
+						message.setContent(json);
+						sendMediaMessage(message);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+
+				@Override
+				public void onFailure(Exception ex) {
+					Logger.i(ex.toString());
+				}
+			});
+		}
+		
+		private void uploadVoiceToQiniu(final IMMessage message, String filePath, final ViewHolderRightVoice cell, final int messageType) {
+			String bucketName = "dchat";
+	        PutPolicy putPolicy = new PutPolicy(bucketName);
+			Config.ACCESS_KEY = "5e71GMRBlrPS5pjETWcgElaH-uvhGRsWRGMR_Pfs";
+	        Config.SECRET_KEY = "cqzLJe_hA4YO33Oobp7AF0Fhca4q3EQ2rAfwS2YB";
+	        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+	        String auploadToken = null;
+			try {
+				auploadToken = putPolicy.token(mac);
+				Logger.i(auploadToken);
+			} catch (Exception e) {
+				Logger.i(e);
+			}
+			String key = IO.UNDEFINED_KEY; 
+			PutExtra extra = new PutExtra();
+			extra.params = new HashMap<String, String>();
+			IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
+				@Override
+				public void onProcess(long current, long total) {
 				}
 
 				@Override

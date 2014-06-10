@@ -137,30 +137,30 @@ public final class R {
 		public static final int xlistview_arrow = 0x7f02004b;
 	}
 	public static final class id {
-		public static final int arrow = 0x7f080031;
+		public static final int arrow = 0x7f080042;
 		public static final int auto_focus = 0x7f080000;
-		public static final int back_button = 0x7f080027;
+		public static final int back_button = 0x7f080038;
 		public static final int bookmark_title = 0x7f080010;
 		public static final int bookmark_url = 0x7f080011;
-		public static final int comment = 0x7f080033;
-		public static final int contents_text_view = 0x7f08001d;
-		public static final int date = 0x7f080034;
+		public static final int comment = 0x7f080044;
+		public static final int contents_text_view = 0x7f08002e;
+		public static final int date = 0x7f080045;
 		public static final int decode = 0x7f080001;
 		public static final int decode_failed = 0x7f080002;
 		public static final int decode_succeeded = 0x7f080003;
-		public static final int done_button = 0x7f080028;
+		public static final int done_button = 0x7f080039;
 		public static final int encode_failed = 0x7f080004;
 		public static final int encode_succeeded = 0x7f080005;
 		public static final int head_arrowImageView = 0x7f080051;
-		public static final int header = 0x7f080030;
-		public static final int help_contents = 0x7f080026;
-		public static final int history_detail = 0x7f08002a;
-		public static final int history_title = 0x7f080029;
-		public static final int image_view = 0x7f08001c;
+		public static final int header = 0x7f080041;
+		public static final int help_contents = 0x7f080037;
+		public static final int history_detail = 0x7f08003b;
+		public static final int history_title = 0x7f08003a;
+		public static final int image_view = 0x7f08002d;
 		public static final int launch_product_query = 0x7f080006;
 		public static final int listview_head_loading = 0x7f080052;
 		public static final int page_number_view = 0x7f080061;
-		public static final int progress = 0x7f080032;
+		public static final int progress = 0x7f080043;
 		public static final int pull_to_load_text = 0x7f080055;
 		public static final int pull_to_refresh_header = 0x7f080053;
 		public static final int pull_to_refresh_text = 0x7f080056;
@@ -195,21 +195,21 @@ public final class R {
 	}
 	public static final class layout {
 		public static final int bookmark_picker_list_item = 0x7f030000;
-		public static final int encode = 0x7f030004;
-		public static final int help = 0x7f030008;
-		public static final int history_list_item = 0x7f030009;
-		public static final int layout_refreshlistview_header = 0x7f03000b;
-		public static final int pull_to_refresh_head = 0x7f030014;
-		public static final int refresh_footer = 0x7f030015;
-		public static final int refresh_header = 0x7f030016;
-		public static final int search_book_contents = 0x7f030019;
-		public static final int search_book_contents_header = 0x7f03001a;
-		public static final int search_book_contents_list_item = 0x7f03001b;
-		public static final int share = 0x7f03001c;
-		public static final int toastmessage_text = 0x7f03001f;
-		public static final int update_dialog = 0x7f030020;
-		public static final int xlistview_footer = 0x7f030024;
-		public static final int xlistview_header = 0x7f030025;
+		public static final int encode = 0x7f03000a;
+		public static final int help = 0x7f03000e;
+		public static final int history_list_item = 0x7f03000f;
+		public static final int layout_refreshlistview_header = 0x7f030011;
+		public static final int pull_to_refresh_head = 0x7f03001a;
+		public static final int refresh_footer = 0x7f03001b;
+		public static final int refresh_header = 0x7f03001c;
+		public static final int search_book_contents = 0x7f03001f;
+		public static final int search_book_contents_header = 0x7f030020;
+		public static final int search_book_contents_list_item = 0x7f030021;
+		public static final int share = 0x7f030022;
+		public static final int toastmessage_text = 0x7f030025;
+		public static final int update_dialog = 0x7f030026;
+		public static final int xlistview_footer = 0x7f03002a;
+		public static final int xlistview_header = 0x7f03002b;
 	}
 	public static final class string {
 		public static final int Cancel = 0x7f0900b3;

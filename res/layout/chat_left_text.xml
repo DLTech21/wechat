@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp" >
+
+    <TextView
+        android:id="@+id/textview_time"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:textSize="12sp"
+        android:textColor="#666666"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="6dp"
+        android:gravity="center"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_centerHorizontal="true"/>
+    
+     <!-- <View 
+        android:id="@+id/check_box"
+       	android:layout_width="35dp"
+   		android:layout_height="35dp"
+   		android:layout_centerVertical="true"
+   		android:visibility="visible"
+   		/> -->
+    <RelativeLayout 
+       android:id="@+id/layout_left"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/textview_time"
+       >
+       
+       <ImageView
+           android:id="@+id/image_portrait_l" 
+           android:layout_width="40dp"
+           android:layout_height="40dp"
+           android:scaleType="centerCrop"
+           android:layout_alignParentLeft="true"/>
+       
+       <TextView
+           android:id="@+id/textview_name_l"
+           android:layout_width="wrap_content"
+           android:layout_height="12dp"
+           android:textSize="12dp"
+           android:textColor="#666666"
+           android:visibility="gone"
+           android:layout_toRightOf="@id/image_portrait_l"/>
+           
+       <RelativeLayout
+           android:id="@+id/layout_content_l"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginRight="60dp"
+           android:layout_marginLeft="5dp"
+           android:layout_below="@id/textview_name_l"
+           android:layout_toRightOf="@id/image_portrait_l"
+           android:background="@drawable/incoming"
+            >
+            <TextView
+      			android:id="@+id/textview_content_l"
+      			android:layout_width="wrap_content"
+      			android:layout_height="wrap_content"
+		        android:textSize="18dp"
+		        android:layout_gravity="center_horizontal"
+		        android:textColor="#000000"/>
+       </RelativeLayout>
+       
+    </RelativeLayout>
+   
+</RelativeLayout>
