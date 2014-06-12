@@ -35,10 +35,10 @@ import org.jivesoftware.smackx.search.UserSearch;
  */
 public class XmppConnectionManager {
 //	final String XmppHost = "115.29.150.153";
-	final String XmppHost = "192.168.1.147";
-	final int XmppPort = 5222;
+	final String XmppHost = "112.126.70.4";
+	final int XmppPort = 5228;
 //	public static String BASE_XMPP_SERVER_NAME = "@hcios.com";
-	public static String BASE_XMPP_SERVER_NAME = "@donaldeimac.local";
+	public static String BASE_XMPP_SERVER_NAME = "@ay140607161152z";
 	
 	private XMPPConnection connection;
 	private static ConnectionConfiguration connectionConfig;

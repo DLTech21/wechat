@@ -2,7 +2,7 @@
 
     <string name="app_name">wechat</string>
 
-    <string name="main_wechat">微信</string>
+    <string name="main_wechat">会话</string>
     <string name="main_friend">通讯录</string>
     <string name="main_find_friend">发现</string>
     <string name="main_me">我</string>

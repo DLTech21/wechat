@@ -28,7 +28,7 @@
             android:id="@+id/titleBarView"
             android:layout_width="wrap_content"
       		android:layout_height="wrap_content"
-            android:text="微信"
+            android:text="会话"
             android:layout_centerInParent="true"
             android:textColor="@color/black"
             android:textSize="18sp"

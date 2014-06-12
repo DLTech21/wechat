@@ -4,24 +4,22 @@
 package ui;
 
 import im.Chating;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import tools.UIHelper;
 import ui.adapter.FriendCardAdapter;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
-import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import bean.StrangerEntity;
 import bean.UserInfo;
@@ -49,12 +47,29 @@ public class Friend extends AppActivity implements OnScrollListener, OnRefreshLi
 	private FriendCardAdapter mAdapter;
 	private SwipeRefreshLayout swipeLayout;
 	
+	private FriendReceiver receiver = null;
+	
+	private void init() {
+		receiver = new FriendReceiver();
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(CommonValue.ADD_FRIEND_ACTION);
+		registerReceiver(receiver, filter);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(receiver);
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.friend);
 		initUI();
+		init();
 		getFriendCardFromCache();
+		
 	}
 	
 	private void initUI() {
@@ -187,6 +202,19 @@ public class Friend extends AppActivity implements OnScrollListener, OnRefreshLi
 		}
 		else {
 			swipeLayout.setRefreshing(false);
+		}
+	}
+	
+	private class FriendReceiver extends BroadcastReceiver {
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (CommonValue.ADD_FRIEND_ACTION.equals(action)) {
+				UserInfo user = (UserInfo) intent.getSerializableExtra("user");
+				datas.add(0, user);
+				mAdapter.notifyDataSetChanged();
+			} 
 		}
 	}
 }

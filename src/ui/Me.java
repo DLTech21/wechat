@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -125,6 +126,7 @@ public class Me extends AppActivity{
 			MessageManager.destroy();
 			NoticeManager.destroy();
 			FriendManager.destroy();
+			appContext.setUserLogout();
 			AppManager.getAppManager().finishAllActivity();
 			startActivity(new Intent(this, Login.class));
 			break;
@@ -207,9 +209,8 @@ public class Me extends AppActivity{
 						//手机选图
 						if( item == 0 )
 						{
-							Intent intent = new Intent(Intent.ACTION_GET_CONTENT); 
-							intent.addCategory(Intent.CATEGORY_OPENABLE); 
-							intent.setType("image/*"); 
+							Intent intent = new Intent(Intent.ACTION_PICK,
+									Media.EXTERNAL_CONTENT_URI);
 							startActivityForResult(Intent.createChooser(intent, "选择图片"),ImageUtils.REQUEST_CODE_GETIMAGE_BYSDCARD); 
 						}
 						//拍照

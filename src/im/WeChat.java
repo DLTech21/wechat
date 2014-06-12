@@ -22,6 +22,8 @@ import ui.view.SlideDrawerView;
 import com.donal.wechat.R;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -127,7 +129,7 @@ public class WeChat extends AWechatActivity {
 				case 1:
 					indicatorImageView.setVisibility(View.INVISIBLE);
 					indicatorImageView.clearAnimation();
-					titleBarView.setText("微信");
+					titleBarView.setText("会话");
 					startService();
 					break;
 				case 2:
@@ -301,8 +303,8 @@ public class WeChat extends AWechatActivity {
 		}
 		switch (requestCode) {
 		case CommonValue.REQUEST_OPEN_CHAT:
-			String to = data.getExtras().getString("to");
-			sortChat(to);
+//			String to = data.getExtras().getString("to");
+//			sortChat(to);
 			break;
 
 		default:
@@ -310,6 +312,7 @@ public class WeChat extends AWechatActivity {
 		}
 	}
 	
+	private boolean isExit = false;
 	private void sortChat(final String to) {
 		final Handler handler = new Handler() {
 			@Override
@@ -321,7 +324,7 @@ public class WeChat extends AWechatActivity {
 		singleThreadExecutor.execute(new Runnable() {
 			@Override
 			public void run() {
-				
+				isExit = false;
 				List<IMMessage> chats = MessageManager.getInstance(context).getMessageListByFrom(to, 1, 1);
 				if (chats.size() < 1) {
 					return;
@@ -331,11 +334,28 @@ public class WeChat extends AWechatActivity {
 						ch.setContent(chats.get(0).getContent());
 						ch.setNoticeTime(chats.get(0).getTime());
 						ch.setNoticeSum(0);
+						isExit = true;
 					}
+				}
+				if (!isExit) {
+					HistoryChatBean ch = new HistoryChatBean();
+					ch.setFrom(chats.get(0).getFromSubJid());
+					ch.setContent(chats.get(0).getContent());
+					ch.setNoticeSum(0);
+					ch.setTo(to);
+					ch.setStatus(Notice.READ);
+					ch.setNoticeType(Notice.CHAT_MSG);
+					ch.setNoticeTime(chats.get(0).getTime());
+					inviteNotices.add(ch);
 				}
 				Collections.sort(inviteNotices);
 				handler.sendEmptyMessage(0);
 			}
 		});
+	}
+
+	@Override
+	protected void msgSend(String to) {
+		sortChat(to);
 	}
 }
