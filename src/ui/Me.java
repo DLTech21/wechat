@@ -125,6 +125,7 @@ public class Me extends AppActivity{
 			MessageManager.destroy();
 			NoticeManager.destroy();
 			FriendManager.destroy();
+			appContext.setUserLogout();
 			AppManager.getAppManager().finishAllActivity();
 			startActivity(new Intent(this, Login.class));
 			break;
