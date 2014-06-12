@@ -104,6 +104,7 @@
                 <action android:name="tools.NetworkState.Service" /> 
             </intent-filter>
         </service>
+        <meta-data android:name="com.amap.api.v2.apikey" android:value="ac73e16cec12cdc2f220e54fcd8ce104" />
     </application>
 
 </manifest>

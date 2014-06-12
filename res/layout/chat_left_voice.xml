@@ -63,7 +63,6 @@
 		       android:layout_height="20dp"
 		       android:src="@drawable/chatfrom_voice_playing"
 		       android:layout_centerVertical="true"
-		       android:layout_marginLeft="7dp"
 		       />
        </RelativeLayout>
        
