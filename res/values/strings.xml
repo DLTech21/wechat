@@ -11,7 +11,6 @@
     <string name="prompt">提示</string>
     <string name="check_connection">无可用网络连接，请检查网络设置！</string>
     <string name="check_sdcard">请检查内存卡！</string>
- 	<string name="menu_settings">设置</string>
  	<string name="close">关闭</string>
 	<string name="exit">退出</string>
 	<string name="confirm">确定</string>
@@ -22,4 +21,247 @@
 	<string name="app_dir">/app</string>
 	<string name="db_dir">/database</string>
 	<string name="img_dir">/img</string>  
+	
+	<string name="clearwords">清除文字吗？</string>
+    
+     <string name="no_data">没有找到符合条件</string>
+        
+    <string name="network_not_connected">网络连接失败，请检查网络设置</string>
+    <string name="xml_parser_failed">数据解析异常</string>
+    <string name="io_exception_error">文件流异常</string>
+    <string name="http_status_code_error">网络异常，错误码：%d</string>
+    <string name="http_exception_error">网络异常，请求超时</string>
+    <string name="socket_exception_error">网络异常，读取数据超时</string>
+    <string name="app_run_code_error">应用程序运行时异常</string>
+    
+    <string name="app_menu_surelogout">确定退出程序吗？</string>
+    <string name="sure">确定</string>
+    <string name="cancle">取消</string>
+    <string name="edit">编辑</string>
+    
+    <string name="app_error">应用程序错误</string>
+    <string name="app_error_message">很抱歉，应用程序出现错误，请提交错误报告，我们会尽快修复这个问题！</string>
+    <string name="submit_report">提交报告</string>
+    <!-- listview底部加载更多 -->
+    <string name="load_more">更多</string>
+    <string name="load_ing">加载中\u2026</string>
+    <string name="load_full">已加载全部</string>
+    <string name="load_empty">还没有人评论，快来抢沙发</string>
+    <string name="load_error">加载数据出错</string>
+    
+    <string name="new_data_toast_message">有 %d 条更新</string>
+    <string name="new_data_toast_none">没有新更新</string>
+    
+    <string name="msg_load_is_null">读取失败，可能已被删除</string>
+    <string name="msg_login_email_error">无效的邮箱地址</string>
+    <string name="msg_login_email_null">请输入邮箱</string>
+    <string name="msg_login_pwd_null">请输入密码</string>
+    <string name="msg_login_success">登录成功</string>
+    <string name="msg_login_fail">登录失败</string>
+    <string name="msg_login_error">用户未登录 或 密码错误</string>
+    <string name="msg_load_userface_fail">用户头像加载失败</string>
+    <string name="msg_load_image_fail">图片加载失败</string>
+    <string name="msg_read_detail_fail">无法获取文章信息</string>
+    <string name="msg_noaccess_delete">您没有删除权限</string>
+    <string name="no_sdcard">手机木有装载sdcard</string>
+   	
+    <!-- Login -->
+    <string name="login">登录</string>
+    <string name="logout">登出</string>
+    <string name="login_check_account">账号不能为空</string>
+    <string name="login_check_password">密码不能为空</string>
+    <string name="login_check_server">服务器验证中\u2026</string>
+    
+	
+	<string name="app_update">检查新版本</string>
+	<!-- 下拉刷新	 -->
+    <string name="pull_to_refresh_tap_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_update">最近更新：</string>
+    
+    <!-- ZXing相关 -->
+      <string name="app_picker_name">应用</string>
+	  <string name="bookmark_picker_name">书签</string>
+	  <string name="button_add_calendar">添加事件至日历</string>
+	  <string name="button_add_contact">添加联系人</string>
+	  <string name="button_back">返回</string>
+	  <string name="button_book_search">图书搜索</string>
+	  <string name="button_cancel">取消</string>
+	  <string name="button_custom_product_search">自定义搜索</string>
+	  <string name="button_dial">拨号</string>
+	  <string name="button_done">完成</string>
+	  <string name="button_email">发送email</string>
+	  <string name="button_get_directions">获取地址</string>
+	  <string name="button_google_shopper">谷歌购物</string>
+	  <string name="button_mms">发送彩信</string>
+	  <string name="button_ok">确定</string>
+	  <string name="button_open_browser">打开网址</string>
+	  <string name="button_product_search">产品搜索</string>
+	  <string name="button_search_book_contents">搜索图书内容</string>
+	  <string name="button_share_app">共享应用</string>
+	  <string name="button_share_bookmark">分享书签</string>
+	  <string name="button_share_by_email">email分享</string>
+	  <string name="button_share_by_sms">短信分享</string>
+	  <string name="button_share_clipboard">分享剪切板</string>
+	  <string name="button_share_contact">分享联系人</string>
+	  <string name="button_show_map">显示地图</string>
+	  <string name="button_sms">发送短信</string>
+	  <string name="button_web_search">网页搜索</string>
+	  <string name="button_wifi">连接到网络</string>
+	  <string name="contents_contact">联系人信息</string>
+	  <string name="contents_email">Email地址</string>
+	  <string name="contents_location">地理坐标</string>
+	  <string name="contents_phone">电话号码</string>
+	  <string name="contents_sms">短信地址</string>
+	  <string name="contents_text">纯文本</string>
+	  <string name="history_clear_one_history_text">删除</string>
+	  <string name="history_clear_text">删除历史</string>
+	  <string name="history_email_title">条码扫描器历史</string>
+	  <string name="history_empty">空的</string>
+	  <string name="history_empty_detail">没有条码扫描已记录</string>
+	  <string name="history_send">发送历史</string>
+	  <string name="history_title">历史</string>
+	  <string name="menu_encode_mecard">使用MECARD</string>
+	  <string name="menu_encode_vcard">使用vCard</string>
+	  <string name="menu_help">帮助</string>
+	  <string name="menu_history">历史</string>
+	  <string name="menu_settings">设置</string>
+	  <string name="menu_share">分享</string>
+	  <string name="msg_bulk_mode_scanned">批量扫描：找到条码，已保存</string>
+	  <string name="msg_camera_framework_bug">抱歉，Android相机出现问题。您可能需要重启设备。</string>
+	  <string name="msg_default_format">格式</string>
+	  <string name="msg_default_meta">元数据</string>
+	  <string name="msg_default_mms_subject">Hi</string>
+	  <string name="msg_default_time">时间</string>
+	  <string name="msg_default_type">类型</string>
+	  <string name="msg_encode_contents_failed">无法根据已有数据生成条码。   </string>
+	  <string name="msg_google_books">谷歌图书</string>
+	  <string name="msg_google_product">谷歌购物</string>
+	  <string name="msg_google_shopper_missing">谷歌购物未安装</string>
+	  <string name="msg_install_google_shopper">谷歌购物是一款将条码扫描和商品比价相结合的应用，谷歌购物不使用浏览器，您想尝试吗？</string>
+	  <string name="msg_intent_failed">抱歉，无法打开所需软件。 条码内容可能无效。</string>
+	  <string name="msg_redirect">重定向</string>
+	  <string name="msg_sbc_book_not_searchable">抱歉，无法找到此图书。</string>
+	  <string name="msg_sbc_failed">抱歉，搜索时遇到错误。</string>
+	  <string name="msg_sbc_no_page_returned">无页面返回</string>
+	  <string name="msg_sbc_page">页面</string>
+	  <string name="msg_sbc_results">结果</string>
+	  <string name="msg_sbc_searching_book">搜索图书…</string>
+	  <string name="msg_sbc_snippet_unavailable">摘录不可用</string>
+	  <string name="msg_sbc_unknown_page">未知页面</string>
+	  <string name="msg_share_explanation">您可以通过在自己的手机上显示条码，并使用其它手机扫描此条码的方式进行分享</string>
+	  <string name="msg_share_subject_line">这是我所扫描条码的内容</string>
+	  <string name="msg_share_text">或键入一些文字</string>
+	  <string name="msg_sure">你肯定吗？</string>
+	  <string name="msg_unmount_usb">抱歉，SD卡不可访问。</string>
+	  <string name="preferences_actions_title">找到条码时</string>
+	  <string name="preferences_auto_focus_title">使用自动对焦</string>
+	  <string name="preferences_bulk_mode_summary">连续扫描并保存多个条形码</string>
+	  <string name="preferences_bulk_mode_title">批量扫描模式</string>
+	  <string name="preferences_copy_to_clipboard_title">复制到剪切板</string>
+	  <string name="preferences_custom_product_search_summary" formatted="false">替换：％s=内容，％f=格式，％t=类型</string>
+	  <string name="preferences_custom_product_search_title">自定义搜索网址</string>
+	  <string name="preferences_decode_1D_title">扫描 一维条码</string>
+	  <string name="preferences_decode_Data_Matrix_title">扫描 DM码</string>
+	  <string name="preferences_decode_QR_title">扫描 QR码</string>
+	  <string name="preferences_device_bug_workarounds_title">设备问题解决办法</string>
+	  <string name="preferences_disable_continuous_focus_summary">只使用标准对焦模式</string>
+	  <string name="preferences_disable_continuous_focus_title">没有持续关注</string>
+	  <string name="preferences_disable_exposure_title">无曝光</string>
+	  <string name="preferences_front_light_auto">自动</string>
+	  <string name="preferences_front_light_off">待用</string>
+	  <string name="preferences_front_light_on">活跃</string>
+	  <string name="preferences_front_light_summary">前灯可用时，打开前灯</string>
+	  <string name="preferences_front_light_title">前灯</string>
+	  <string name="preferences_general_title">一般设置</string>
+	  <string name="preferences_name">设置</string>
+	  <string name="preferences_play_beep_title">提示音</string>
+	  <string name="preferences_remember_duplicates_summary">在历史记录中保存重复记录</string>
+	  <string name="preferences_remember_duplicates_title">记住重复</string>
+	  <string name="preferences_result_title">结果设置</string>
+	  <string name="preferences_scanning_title">条码类型选择</string>
+	  <string name="preferences_search_country">搜索国家</string>
+	  <string name="preferences_supplemental_summary">尝试检索关于条码内容的更多信息</string>
+	  <string name="preferences_supplemental_title">检索更多信息</string>
+	  <string name="preferences_try_bsplus">尝试条码扫描器+</string>
+	  <string name="preferences_try_bsplus_summary">增强新的功能和接口</string>
+	  <string name="preferences_vibrate_title">振动</string>
+	  <string name="result_address_book">找到联系人信息</string>
+	  <string name="result_calendar">找到日历事件</string>
+	  <string name="result_email_address">找到email地址</string>
+	  <string name="result_geo">找到地理坐标</string>
+	  <string name="result_isbn">找到图书</string>
+	  <string name="result_product">找到产品</string>
+	  <string name="result_sms">找到短信地址</string>
+	  <string name="result_tel">找到电话号码</string>
+	  <string name="result_text">找到纯文本</string>
+	  <string name="result_uri">找到URL</string>
+	  <string name="result_wifi">发现网络配置</string>
+	  <string name="sbc_name">Google图书搜索</string>
+	  <string name="share_name">通过条码分享</string>
+	  <string name="wifi_changing_network">请求连接到网络\u2026</string>
+	  <string name="wifi_ssid_label">网络SSID</string>
+	  <string name="wifi_type_label">类型</string>
+    
+    
+
+	  <!-- 支付宝 -->
+	  <string name="remote_call_failed">Failure calling remote service</string>
+       
+	<string name="partnerHint">"partner"</string>
+	<string name="sellerHint">"seller"</string>
+	<string name="out_trade_noHint">"out_trade_no"</string>
+	<string name="subjectHint">"subject"</string>
+	<string name="bodyHint">"body"</string>
+	<string name="total_feeHint">"total_fee"</string>
+	<string name="notify_urlHint">"notify_url"</string>
+	<string name="charsetHint">"charset"</string>
+	<string name="signTypeHint">"signType"</string>
+	
+	<string name="confirm_install_hint">"安装提示"</string>	
+	<string name="confirm_install">"为保证您的交易安全，需要您安装支付宝安全支付服务，才能进行付款。\n\n点击确定，立即安装。"</string>
+	
+	
+	<string name="Ensure">"确定"</string>
+	<string name="Cancel">"取消"</string>
+	<string name="check_sign_failed">您的订单信息已被非法篡改。</string> 
+	
+	<string name="error_config">Please set the %1$s constant and recompile the app.</string>
+    <string name="already_registered">Device is already registered on server.</string>
+    <string name="gcm_registered">From GCM: device successfully registered!</string>
+    <string name="gcm_unregistered">From GCM: device successfully unregistered!</string>
+    <string name="gcm_message">From GCM: you got message!</string>
+    <string name="gcm_error">From GCM: error (%1$s).</string>
+    <string name="gcm_recoverable_error">From GCM: recoverable error (%1$s).</string>
+    <string name="gcm_deleted">From GCM: server deleted %1$d pending messages!</string>
+    <string name="server_registering">Trying (attempt %1$d/%2$d) to register device on Demo Server.</string>
+    <string name="server_registered">From Demo Server: successfully added device!</string>
+    <string name="server_unregistered">From Demo Server: successfully removed device!</string>
+    <string name="server_register_error">Could not register device on Demo Server after %1$d attempts.</string>
+    <string name="server_unregister_error">Could not unregister device on Demo Server (%1$s).</string>
+    <string name="options_register">Register</string>
+    <string name="options_unregister">Unregister</string>
+    <string name="options_clear">Clear</string>
+    <string name="options_exit">Exit</string>
+    
+    
+	<string name="pull_to_refresh_pull_label">下拉可以刷新</string>
+    <string name="pull_to_refresh_release_label">松开即可刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中\u2026</string>
+    
+    <string name="pull_to_refresh_footer_release_label">松开后加载</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中\u2026</string>
+    
+    <string name="refreshlistview_arrow">Content Description Arrow</string>
+    <string name="refreshlistview_updating">Updating…</string>
+    <string name="refreshlistview_release">Release to refresh…</string>
+    <string name="refreshlistview_pulldown">Pull down to refresh…</string>
+    <string name="refreshlistview_no_update">"No past update"</string>
+    
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载...</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
 </resources>

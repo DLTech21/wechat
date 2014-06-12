@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- share items -->
+    <string-array name="message_list_options1">
+	    <item>回复TA</item>
+	    <item>查看卡片</item>
+    </string-array>
+    <string-array name="message_list_options2">
+	    <item>回复TA</item>
+	    <item>查看内容</item>
+    </string-array>
+    <string-array name="comment_options_2">
+	    <item>回复</item>
+	    <item>删除</item>
+    </string-array>
+    <string-array name="comment_options_1">
+	    <item>回复</item>
+    </string-array>
+    <string-array name="favorite_options">
+	    <item>取消收藏</item>
+    </string-array>
+    
+    <string-array name="copy_options">
+	    <item>复制</item>
+    </string-array>
+    
+    <string-array name="pay_type_options">
+        <item>支付宝安全支付</item>
+        <item>支付宝网页版</item>
+    </string-array>
+    
+    <string-array name="photo_choose">
+        <item>拍照</item>
+        <item>用户相册</item>
+    </string-array>
+    
+    <string-array name="country_codes">
+    <item>-</item>
+    <item>AR</item>
+    <item>AU</item>
+    <item>BR</item>
+    <item>BG</item>
+    <item>CA</item>
+    <item>CN</item>
+    <item>CZ</item>
+    <item>DE</item>
+    <item>DK</item>
+    <item>ES</item>
+    <item>FI</item>
+    <item>FR</item>
+    <item>GB</item>
+    <item>GR</item>
+    <item>HU</item>
+    <item>ID</item>
+    <item>IT</item>
+    <item>JP</item>
+    <item>KR</item>
+    <item>NL</item>
+    <item>PL</item>
+    <item>PT</item>
+    <item>RU</item>
+    <item>SE</item>
+    <item>SK</item>
+    <item>SI</item>
+    <item>TR</item>
+    <item>TW</item>
+    <item>US</item>
+  </string-array>
+    <string-array name="preferences_front_light_values">
+    <item>ON</item>
+    <item>AUTO</item>
+    <item>OFF</item>
+  </string-array>
+  <string-array name="preferences_front_light_options">
+    <item>@string/preferences_front_light_on</item>
+    <item>@string/preferences_front_light_auto</item>
+    <item>@string/preferences_front_light_off</item>
+  </string-array>
+</resources>

@@ -42,4 +42,84 @@
     
     <color name="left_drawer_item_bg_normal">#ff393939</color>
 
+    
+    <color name="text_color_big_title">#383838</color>
+    <color name="text_color_item_info">#777777</color>
+
+    <!-- 内容颜色 -->
+    <color name="content_dark">#383838</color>
+    <color name="content_light">#777777</color>
+    <color name="content_light_light">#a4a4a4</color>
+
+    <!--  -->
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="help_button_view">#ffcccccc</color>
+    <color name="help_view">#ff404040</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_image_border">#ffffffff</color>
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c000ff00</color>
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="sbc_header_text">#ff808080</color>
+    <color name="sbc_header_view">#ffffffff</color>
+    <color name="sbc_list_item">#fffff0e0</color>
+    <color name="sbc_layout_view">#ffffffff</color>
+    <color name="sbc_page_number_text">#ff000000</color>
+    <color name="sbc_snippet_text">#ff4b4b4b</color>
+    <color name="share_text">#ff000000</color>
+    <color name="share_view">#ffffffff</color>
+    <color name="status_view">#50000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="viewfinder_frame">#00ffff</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="register_back_color">#ececec</color>
+    <color name="title">#FFFFFF</color>
+    <color name="bg_light">#F1EEE9</color>
+    <color name="bg_dark">#CBC7C4</color>
+	
+    <!-- 头像背景色 -->
+    <color name="bg_pic_user">#ff0000</color>
+    <color name="bg_pic_coach">#EC00F5</color>
+    <color name="bg_pic_star">#F69900</color>
+    <color name="bg_pic_prop">#00D579</color>
+    
+    <color name="button_sns_text_color">#525252</color>
+    
+    <color name="full_transparent">#00000000</color>
+    <color name="half_transparent">#aa000000</color>
+    
+    <color name="listitem_transparent">#00000000</color>
+    <color name="listitem_black">#ff000000</color>
+    <color name="listitem_white">#ffffffff</color>
+    <color name="listitem_blue">#0e5986</color>
+    <color name="listitem_gray">#ff9da19e</color>
+    <color name="listitem_green">#ffe3ffc6</color>
+    <color name="listitem_greenyellow">#ff87b869</color>
+    <color name="listitem_yellow">#fffaffbf</color> 
+    <color name="commentslistitem_highlight">#f3eae5</color> 
+    
+    <color name="voicebutton_text_default">#a68169</color>
+    <color name="tell_story_default">#999999</color>
+    <color name="tell_story_pressed">#623417</color>
+    
+    <color name="loading_img_background">#f6eee4</color>
+    
+    <color name="diy_color_anim">#f5ede3</color>
+    
+    <color name="c3c3c">#3c3c3c</color>
+    
+    <!-- cart next button -->
+    <color name="next_button_default">#a16640</color>
+    <color name="next_button_pressed">#623417</color>
+    
+    <!-- login button -->
+    <color name="login_button_default">#bc9e8b</color>
+    <color name="login_button_pressed">#a68169</color>
+    
+    <color name="popup_main_background">#66000000</color>
+    <color name="choose_eara_item_press_color">#f4f4f4</color>
+    <color name="no_color">#00000000</color>
 </resources>

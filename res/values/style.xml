@@ -16,4 +16,163 @@
     	<item name="android:windowBackground"> @android:color/transparent </item>
     	<item name="android:backgroundDimEnabled">false</item>    
     </style>
+    
+    
+    <style name="page_background">
+	    <item name="android:background">@color/white</item>
+	    <item name="android:layout_width">fill_parent</item>
+	    <item name="android:layout_height">fill_parent</item>
+	</style>
+	
+	<style name="main_tab_bottom">
+	    <item name="android:ellipsize">marquee</item>
+	    <item name="android:gravity">center_horizontal|bottom</item>
+	    <item name="android:layout_width">fill_parent</item>
+	    <item name="android:layout_height">@dimen/bottom_tab_button_height</item>
+	    <item name="android:button">@null</item>
+	    <item name="android:singleLine">true</item>
+	    <item name="android:layout_weight">1.0</item>
+	    <item name="android:textSize">14sp</item>
+	</style>
+	
+	<style name="login_button">
+	    <item name="android:textSize">16sp</item>
+	    <item name="android:textColor">@color/white</item>
+	</style>
+	
+	<style name="header_button">
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:textColor">@color/white</item>
+	</style>
+	
+		
+	<style name="header_cancelbutton">
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:textColor">#a68169</item>
+	</style>
+	
+	<style name="home_text_style">
+	    <item name="android:textColor">#a68169</item>
+	    <item name="android:textSize">12sp</item>
+	</style>
+
+	<style name="capture_input_button">
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:textColor">#a68169</item>
+	</style>
+	
+	<style name="capture_text_style">
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:textColor">@color/white</item>
+	</style>
+	
+	<style name="minput_text_style">
+	    <item name="android:textSize">15sp</item>
+	    <item name="android:textColor">@color/black</item>
+	</style>
+	<!-- cart checkout edittext -->
+	<style name="cart_checkout_edittext">
+	    <item name="android:textSize">14sp</item>
+	    <item name="android:textColor">#282828</item>
+	    <item name="android:textColorHint">#b2b2b2</item>
+	</style>
+	
+	<style name="Animation" />
+	<style name="Theme.IOSched" parent="@android:style/Theme.Light">
+         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item> 
+    </style>
+    <style name="Animation.Translucent" parent="@style/Animation">
+        <item name="android:windowEnterAnimation">@anim/translucent_zoom_out</item>
+        <item name="android:windowExitAnimation">@anim/translucent_zoom_exit</item>
+    </style>
+    <style name="Theme.HalfTranslucent" parent="@android:style/Theme.Translucent">
+        <item name="android:windowBackground">@color/half_transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation.SlideTop</item>
+        <item name="android:windowContentOverlay">@null</item> 
+    </style>
+    <style name="Theme.FullTranslucent" parent="@android:style/Theme.Translucent">
+        <item name="android:windowBackground">@color/full_transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation.Translucent</item>
+        <item name="android:windowContentOverlay">@null</item> 
+    </style>
+    <style name="Theme.SlideTop" parent="@android:style/Theme.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/Animation.SlideTop</item>
+        <item name="android:windowContentOverlay">@null</item> 
+    </style>
+    <style name="Theme.SlideLeft" parent="@android:style/Theme.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/Animation.slideLeft</item>
+        <item name="android:windowContentOverlay">@null</item> 
+    </style>
+    <style name="Theme.ZoomLight" parent="@android:style/Theme.NoTitleBar">
+        <item name="android:windowAnimationStyle">@style/Animation.ZoomLight</item>
+        <item name="android:windowContentOverlay">@null</item> 
+    </style>
+    <style name="Theme.ZoomLight.Fullscreen" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="android:windowAnimationStyle">@style/Animation.ZoomLight</item>
+        <item name="android:windowContentOverlay">@null</item> 
+    </style>
+    <style name="Animation.SlideTop" parent="@style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_down</item>
+    </style>
+    <style name="Animation.ZoomLight" parent="@style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/translucent_zoom_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/translucent_zoom_exit</item>
+    </style>
+    <style name="Animation.slideLeft" parent="@style/Animation">
+        <item name="android:activityOpenEnterAnimation">@anim/enter_in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/enter_out_to_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/exit_in_from_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/exit_out_to_right</item>
+    </style>
+    
+    <style name="PopupWindowAnimation">  
+        <item name="android:windowEnterAnimation">@anim/popshow_anim</item>  
+        <item name="android:windowExitAnimation">@anim/pophidden_anim</item>  
+    </style>
+    
+    
+	<!--     listview twitter like -->
+    <style name="refreshlistview_container">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="refreshlistview_arrow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:src">@drawable/refreshlistview_arrow</item>
+    </style>
+
+    <style name="refreshlistview_progress">
+        <item name="android:layout_width">20dp</item>
+        <item name="android:layout_height">20dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">25dp</item>
+    </style>
+
+    <style name="refreshlistview_comment">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="refreshlistview_date">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="refreshlistview_header">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">5dp</item>
+    </style>
+    <!--     listview twitter like end-->
 </resources>
