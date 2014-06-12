@@ -12,4 +12,9 @@
 	
 	<dimen name="slidingmenu_offset">50.0dip</dimen>
     <dimen name="shadow_width">15.0dip</dimen>
+    
+    <dimen name="bottom_tab_button_height">49dp</dimen>
+	
+	<dimen name="standard_padding">8dip</dimen>
+  	<dimen name="half_padding">4dip</dimen>
 </resources>
