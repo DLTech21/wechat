@@ -12,22 +12,17 @@
     	android:orientation="vertical"
     	android:id="@+id/layout"
         >
-        <EditText
-        android:id="@+id/editTextAccount"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="23dp"
-        android:layout_marginRight="23dp"
-        android:layout_marginTop="15dp"
-        android:layout_height="55dp"
-        android:hint="账号"
-        android:textColorHint="#8f8f8f"
-        android:textColor="#222222"
-        android:textSize="18sp" 
-        android:inputType="text" 
-        >
-        <requestFocus />
-    </EditText>
     
+        <ImageView 
+            android:id="@+id/logo"
+            android:layout_alignParentTop="true"
+        android:layout_width="125dp"
+        android:layout_height="74dp"
+        android:background="@drawable/welcome"
+        android:scaleType="centerCrop"
+        android:layout_centerHorizontal="true"
+        />
+        
     <EditText
         android:layout_below="@+id/editTextAccount"
         android:id="@+id/editTextPassword"
@@ -72,6 +67,22 @@
         android:textSize="15sp"
         android:onClick="ButtonClick"
         />
+
+	<EditText
+	    android:id="@+id/editTextAccount"
+	    android:layout_width="match_parent"
+	    android:layout_height="55dp"
+	    android:layout_alignLeft="@+id/editTextPassword"
+	    android:layout_below="@+id/logo"
+	    android:layout_marginTop="24dp"
+	    android:layout_marginRight="23dp"
+	    android:ems="10"
+	    android:hint="账号"
+	    android:inputType="text"
+	    android:textColor="#222222"
+	    android:textColorHint="#8f8f8f"
+	    android:textSize="18sp" />
+
     </RelativeLayout>
     
 </RelativeLayout>

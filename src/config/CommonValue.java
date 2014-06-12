@@ -74,6 +74,8 @@ public class CommonValue {
 	
 	public static final String NEW_MESSAGE_ACTION = "chat.newmessage";
 	public static final String SEND_MESSAGE_ACTION = "chat.sendmessage";
+	
+	public static final String ADD_FRIEND_ACTION = "add.friend";
 	/**
 	 * USERINFO
 	 */

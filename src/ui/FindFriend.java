@@ -10,6 +10,7 @@ import tools.UIHelper;
 import ui.adapter.StrangerAdapter;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -24,6 +25,7 @@ import com.donal.wechat.R;
 
 import config.ApiClent;
 import config.AppActivity;
+import config.CommonValue;
 import config.ApiClent.ClientCallback;
 
 /**
@@ -141,12 +143,13 @@ public class FindFriend extends AppActivity implements OnScrollListener, OnRefre
 		}).show();
 	}
 	
-	private void addFriend(UserInfo user) {
+	private void addFriend(final UserInfo user) {
 		ApiClent.addFriend(appContext, appContext.getLoginApiKey(), user.userId, new ClientCallback() {
 			
 			@Override
 			public void onSuccess(Object data) {
 				showToast((String)data);
+				addFriendBroadcast(user);
 			}
 			
 			@Override
@@ -190,5 +193,11 @@ public class FindFriend extends AppActivity implements OnScrollListener, OnRefre
 		else {
 			swipeLayout.setRefreshing(false);
 		}
+	}
+	
+	private void addFriendBroadcast(UserInfo user) {
+		Intent intent = new Intent(CommonValue.ADD_FRIEND_ACTION);
+		intent.putExtra("user", user);
+		sendBroadcast(intent);
 	}
 }
