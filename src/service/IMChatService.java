@@ -152,6 +152,8 @@ public class IMChatService extends Service {
 		myNoti.flags = Notification.FLAG_AUTO_CANCEL;
 		myNoti.icon = iconId;
 		myNoti.tickerText = contentTitle;
+		myNoti.defaults |= Notification.DEFAULT_SOUND;
+		myNoti.defaults |= Notification.DEFAULT_VIBRATE;
 		myNoti.setLatestEventInfo(this, contentTitle, msg.text, appIntent);
 		notificationManager.notify(0, myNoti);
 	}

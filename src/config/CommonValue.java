@@ -23,8 +23,8 @@ public class CommonValue {
 	
 //	public static String BASE_API = "http://115.29.150.153/api/";
 //	public static String BASE_URL = "http://115.29.150.153/";
-	public static String BASE_API = "http://192.168.1.147:8080/wechat/api/";
-	public static String BASE_URL = "http://192.168.1.147:8080/";
+	public static String BASE_API = "http://112.126.70.4:8080/wechat/api/";
+	public static String BASE_URL = "http://112.126.70.4:8080/";
 	
 	public static final int kWCMessageTypePlain = 0;
 	public static final int kWCMessageTypeImage = 1;
@@ -73,7 +73,7 @@ public class CommonValue {
 	}
 	
 	public static final String NEW_MESSAGE_ACTION = "chat.newmessage";
-
+	public static final String SEND_MESSAGE_ACTION = "chat.sendmessage";
 	/**
 	 * USERINFO
 	 */

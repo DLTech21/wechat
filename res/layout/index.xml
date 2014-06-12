@@ -34,7 +34,7 @@
     			android:id="@+id/radio_button1"
     			style="@style/main_tab_bottom"
     			android:onClick="tabClick"
-    			android:text="微信"
+    			android:text="@string/main_wechat"
     			android:textColor="@color/tabbar_text"
     			/>
     		<RadioButton 
@@ -43,7 +43,7 @@
     			android:id="@+id/radio_button2"
     			style="@style/main_tab_bottom"
     			android:onClick="tabClick"
-    			android:text="通讯录"
+    			android:text="@string/main_friend"
     			android:textColor="@color/tabbar_text"
     			/>
     		<RadioButton 
@@ -52,7 +52,7 @@
     			android:id="@+id/radio_button3"
     			style="@style/main_tab_bottom"
     			android:onClick="tabClick"
-    			android:text="发现"
+    			android:text="@string/main_find_friend"
     			android:textColor="@color/tabbar_text"
     			/>
     		<RadioButton 
@@ -61,7 +61,7 @@
     			android:id="@+id/radio_button4"
     			style="@style/main_tab_bottom"
     			android:onClick="tabClick"
-    			android:text="我"
+    			android:text="@string/main_me"
     			android:textColor="@color/tabbar_text"
     			/>
     	</RadioGroup>

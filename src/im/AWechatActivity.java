@@ -47,6 +47,7 @@ public abstract class AWechatActivity extends AppActivity {
 		receiver = new ChatterReceiver();
 		IntentFilter filter = new IntentFilter();
 		filter.addAction(CommonValue.NEW_MESSAGE_ACTION);
+		filter.addAction(CommonValue.SEND_MESSAGE_ACTION);
 		registerReceiver(receiver, filter);
 	}
 	
@@ -71,24 +72,29 @@ public abstract class AWechatActivity extends AppActivity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
-			Notice notice = (Notice) intent.getSerializableExtra("notice");
 			if (CommonValue.NEW_MESSAGE_ACTION.equals(action)) {
+				Notice notice = (Notice) intent.getSerializableExtra("notice");
 				msgReceive(notice);
-			} else if (CommonValue.ACTION_RECONNECT_STATE.equals(action)) {
+			} 
+			else if (CommonValue.ACTION_RECONNECT_STATE.equals(action)) {
 				boolean isSuccess = intent.getBooleanExtra(
 						CommonValue.RECONNECT_STATE, true);
 				handReConnect(isSuccess);
 			}
-
+			else if (CommonValue.SEND_MESSAGE_ACTION.equals(action)) {
+				String to = intent.getStringExtra("to");
+				msgSend(to);
+			}
 		}
 	}
+	protected abstract void msgSend(String to);
 	
 	protected abstract void msgReceive(Notice notice);
 	
 	protected void createChat(String userId) {
 		Intent intent = new Intent(context, Chating.class);
 		intent.putExtra("to", userId);
-		startActivityForResult(intent, CommonValue.REQUEST_OPEN_CHAT);
+		startActivity(intent);
 	}
 
 	protected abstract void handReConnect(boolean isSuccess);

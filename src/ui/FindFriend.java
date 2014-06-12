@@ -182,13 +182,13 @@ public class FindFriend extends AppActivity implements OnScrollListener, OnRefre
 
 	@Override
 	public void onRefresh() {
-//		if (lvDataState != UIHelper.LISTVIEW_DATA_LOADING) {
-//			lvDataState = UIHelper.LISTVIEW_DATA_LOADING;
-//			currentPage = 1;
-//			findFriend(currentPage, "", UIHelper.LISTVIEW_ACTION_REFRESH);
-//		}
-//		else {
+		if (lvDataState != UIHelper.LISTVIEW_DATA_LOADING) {
+			lvDataState = UIHelper.LISTVIEW_DATA_LOADING;
+			currentPage = 1;
+			findFriend(currentPage, "", UIHelper.LISTVIEW_ACTION_REFRESH);
+		}
+		else {
 			swipeLayout.setRefreshing(false);
-//		}
+		}
 	}
 }
