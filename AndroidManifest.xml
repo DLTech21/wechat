@@ -96,7 +96,7 @@
         <activity android:name="ui.Register2" android:screenOrientation="portrait" android:windowSoftInputMode="stateHidden|adjustNothing" >           
         </activity>
         
-        <!-- 聊天服务 -->
+        <!-- ???? -->
 		<service android:name="service.IMChatService"></service>  
 		
         <service android:name="tools.NetworkStateService" >
@@ -104,7 +104,11 @@
                 <action android:name="tools.NetworkState.Service" /> 
             </intent-filter>
         </service>
+<<<<<<< HEAD
         <meta-data android:name="com.amap.api.v2.apikey" android:value="ac73e16cec12cdc2f220e54fcd8ce104" />
+=======
+        <meta-data android:name="com.crashlytics.ApiKey" android:value="d6f3179ac695a7efd4c28c329ce8a5c04f2e0bc7"/>
+>>>>>>> chat4football
     </application>
 
 </manifest>
