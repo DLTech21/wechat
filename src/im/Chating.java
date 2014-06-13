@@ -32,6 +32,7 @@ import tools.UIHelper;
 import bean.JsonMessage;
 import bean.UserInfo;
 
+import com.crashlytics.android.Crashlytics;
 import com.donal.wechat.R;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -266,7 +267,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 					newPhotoPath = imagePathAfterCompass;
 					uploadPhotoToQiniu(newPhotoPath);
 				} catch (IOException e) {
-//					Crashlytics.logException(e);
+					Crashlytics.logException(e);
 				}
 			}
 			break;
@@ -296,7 +297,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 				newPhotoPath = imagePathAfterCompass;
 				uploadPhotoToQiniu(newPhotoPath);
 			} catch (IOException e) {
-//				Crashlytics.logException(e);
+				Crashlytics.logException(e);
 			}
 			break;
 		}
