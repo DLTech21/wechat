@@ -48,7 +48,7 @@ import config.XmppConnectionManager;
  * @author donal
  *
  */
-public abstract class AChating extends SwipeBackActivity{
+public abstract class AChating extends AppActivity{
 	private Chat chat = null;
 	protected List<IMMessage> message_pool = new ArrayList<IMMessage>();
 	protected String to;

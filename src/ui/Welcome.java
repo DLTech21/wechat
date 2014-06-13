@@ -2,7 +2,7 @@ package ui;
 
 
 
-
+import com.crashlytics.android.Crashlytics;
 import im.WeChat;
 
 import com.baidu.android.pushservice.PushConstants;
@@ -38,6 +38,7 @@ public class Welcome extends AppActivity{
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Crashlytics.start(this);
 		final View view = View.inflate(this, R.layout.welcome_page, null);
 		setContentView(view);
 		DisplayMetrics dm = new DisplayMetrics();

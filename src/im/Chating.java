@@ -21,6 +21,7 @@ import qiniu.io.PutExtra;
 import qiniu.utils.Config;
 import qiniu.utils.Mac;
 import qiniu.utils.PutPolicy;
+import tools.AppManager;
 import tools.AudioPlayManager;
 import tools.AudioRecoderManager;
 import tools.DateUtil;
@@ -54,6 +55,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -62,6 +64,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
@@ -74,6 +77,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
 /**
@@ -82,7 +86,10 @@ import android.widget.Toast;
  * @author donal
  *
  */
-public class Chating extends AChating implements OnTouchListener, OnItemClickListener, VoiceBubbleListener{
+public class Chating extends AChating implements OnTouchListener, OnItemClickListener, VoiceBubbleListener, OnEditorActionListener{
+	private boolean isFace = false;
+	private Button voiceOrTextButton;
+	private Button faceOrTextButton;
 	private Button voiceButton;
 	private MessageListAdapter adapter = null;
 	private EditText messageInput = null;
@@ -108,6 +115,8 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 	}
 	
 	private void initUI() {
+		faceOrTextButton = (Button) findViewById(R.id.faceOrTextButton);
+		voiceOrTextButton = (Button) findViewById(R.id.voiceOrTextButton);
 		voiceButton = (Button) findViewById(R.id.voiceButton);
 		voiceButton.setOnTouchListener(this);
 		listView = (ListView) findViewById(R.id.chat_list);
@@ -151,30 +160,56 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 				listView.setSelection(getMessages().size()-1);
 			}
 		});
+		messageInput.setOnEditorActionListener(this);
 	}
+	
+	
 	
 	public void ButtonClick(View v) {
 		switch (v.getId()) {
-		case R.id.chat_sendbtn:
-			String message = messageInput.getText().toString();
-			if ("".equals(message)) {
-				Toast.makeText(Chating.this, "不能为空",
-						Toast.LENGTH_SHORT).show();
-			} else {
-
-				try {
-					sendMessage(message);
-					messageInput.setText("");
-				} catch (Exception e) {
-					showToast("信息发送失败");
-					messageInput.setText(message);
-				}
+		case R.id.leftBarButton:
+			closeInput();
+			AppManager.getAppManager().finishActivity(this);
+			break;
+		case R.id.voiceOrTextButton:
+			if (messageInput.getVisibility() == View.VISIBLE) {
 				closeInput();
+				messageInput.setVisibility(View.INVISIBLE);
+				voiceButton.setVisibility(View.VISIBLE);
+				voiceOrTextButton.setBackgroundResource(R.drawable.keyborad);
+				faceOrTextButton.setBackgroundResource(R.drawable.face);
 			}
-			listView.setSelection(getMessages().size()-1);
+			else if (messageInput.getVisibility() == View.INVISIBLE) {
+				messageInput.setVisibility(View.VISIBLE);
+				voiceButton.setVisibility(View.INVISIBLE);
+				voiceOrTextButton.setBackgroundResource(R.drawable.voice);
+				
+			}
+			break;
+		case R.id.faceOrTextButton:
+			if (messageInput.getVisibility() == View.VISIBLE) {
+				if (!isFace) {
+					isFace = true;
+					closeInput();
+					faceOrTextButton.setBackgroundResource(R.drawable.keyborad);
+					//show face key borad
+				}
+				else {
+					isFace = false;
+					faceOrTextButton.setBackgroundResource(R.drawable.face);
+					//hide face key borad
+				}
+				voiceOrTextButton.setBackgroundResource(R.drawable.voice);
+			}
+			else if (messageInput.getVisibility() == View.INVISIBLE) {
+				messageInput.setVisibility(View.VISIBLE);
+				voiceButton.setVisibility(View.INVISIBLE);
+				voiceOrTextButton.setBackgroundResource(R.drawable.voice);
+				faceOrTextButton.setBackgroundResource(R.drawable.keyborad);
+			}
 			break;
 
-		case R.id.cameraButton:
+		case R.id.multiMediaButton:
 			AudioPlayManager.getInstance(this, this).stopPlay();
 			PhotoChooseOption();
 			break;
@@ -398,7 +433,9 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		public void refreshList(List<IMMessage> items) {
 			this.items = items;
 			this.notifyDataSetChanged();
-			
+			if (this.items.size()>1) {
+				listView.setSelection(items.size()-1);
+			}
 		}
 
 		@Override
@@ -910,6 +947,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 			} catch (IOException e) {
 					e.printStackTrace();
 			}
+			AudioRecoderManager.destroy();
 			break;
 		}
 	}
@@ -945,6 +983,8 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 	
 	protected void onDestroy() {
 		AudioPlayManager.getInstance(this, null).stopPlay();
+		AudioRecoderManager.destroy();
+		AudioPlayManager.destroy();
 		super.onDestroy();
 	};
 	
@@ -1069,5 +1109,33 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 	public void playDownload(View messageBubble) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean onEditorAction(TextView view, int actionId, KeyEvent arg2) {
+		switch (actionId) {
+		case EditorInfo.IME_ACTION_SEND:
+			String message = messageInput.getText().toString();
+			if ("".equals(message)) {
+				Toast.makeText(Chating.this, "不能为空",
+						Toast.LENGTH_SHORT).show();
+			} else {
+
+				try {
+					sendMessage(message);
+					messageInput.setText("");
+				} catch (Exception e) {
+					showToast("信息发送失败");
+					messageInput.setText(message);
+				}
+				closeInput();
+			}
+			listView.setSelection(getMessages().size()-1);
+			break;
+
+		default:
+			break;
+		}
+		return true;
 	}
 }
