@@ -21,10 +21,8 @@ import com.nostra13.universalimageloader.core.imageaware.ImageAware;
 public class CommonValue {
 	public static String PackageName = "com.donal.wechat";
 	
-//	public static String BASE_API = "http://115.29.150.153/api/";
-//	public static String BASE_URL = "http://115.29.150.153/";
-	public static String BASE_API = "http://112.126.70.4:8080/wechat/api/";
-	public static String BASE_URL = "http://112.126.70.4:8080/";
+	public static String BASE_API = "http://182.92.101.207:8080/wechat/api/";
+	public static String BASE_URL = "http://182.92.101.207:8080/";
 	
 	public static final int kWCMessageTypePlain = 0;
 	public static final int kWCMessageTypeImage = 1;

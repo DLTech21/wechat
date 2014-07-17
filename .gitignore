@@ -1,2 +1,4 @@
 bin
 src/im/Chating.java
+out
+.idea
