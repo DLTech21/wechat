@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">    
+	    <TextView
+	        android:id="@+id/tv_title"
+	        android:layout_width="match_parent"
+	        android:layout_height="26dip"
+	        android:layout_marginTop="-10dip"
+	        android:paddingLeft="11dip"
+	        android:gravity="center_vertical"
+	        android:text="@string/smssdk_regist"
+	        android:textSize="16sp"
+	        android:textColor="#999999"
+    		android:background="#eae8ee"/>
+</RelativeLayout>

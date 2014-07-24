@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="smssdk_error_desc_server_busy">服务器繁忙</string>
+	<string name="smssdk_error_desc_511">无效请求</string>
+	<string name="smssdk_error_desc_512">禁止访问</string>
+	<string name="smssdk_error_desc_513">没有找到</string>
+	<string name="smssdk_error_desc_514">不被接受</string>
+	<string name="smssdk_error_desc_515">服务器内部错误</string>
+	<string name="smssdk_error_desc_516">不可执行</string>
+	<string name="smssdk_error_desc_517">参数缺损</string>
+	<string name="smssdk_error_desc_518">非法手机号</string>
+	<string name="smssdk_error_desc_519">请求验证超上限</string>
+	<string name="smssdk_error_desc_520">验证码错误</string>
+	<string name="smssdk_error_desc_521">token无效</string>
+	<string name="smssdk_error_desc_522">duid无效</string>
+	<string name="smssdk_error_desc_524">申请短信验证频繁</string>
+	
+	<string name="smssdk_error_detail_511">客户端请求不能被识别。</string>
+	<string name="smssdk_error_detail_512">服务器拒绝访问，或者拒绝操作</string>
+	<string name="smssdk_error_detail_513">表明服务器找不到任何匹配的内容，该内容可以是客户端发送消息的目的地。</string>
+	<string name="smssdk_error_detail_514">用于服务器因为某些理由不接受该请求（如权限不够）。</string>
+	<string name="smssdk_error_detail_515">当服务器遇到预期外的错误时发生。如数据库连接失败等。</string>
+	<string name="smssdk_error_detail_516">服务器不支持客户端请求的功能。</string>
+	<string name="smssdk_error_detail_517">请求的必要参数缺失或者损坏</string>
+	<string name="smssdk_error_detail_518">请求中用户的手机号格式不正确（包括手机的区号）</string>
+	<string name="smssdk_error_detail_519">请求发送验证码超出限制（每日、APP、单台设备以及运营商等都有各种发送验证码的上限）</string>
+	<string name="smssdk_error_detail_520">服务器找不到验证码</string>
+	<string name="smssdk_error_detail_521">请求的令牌无效或者非法</string>
+	<string name="smssdk_error_detail_522">请求的duid非法或者无效</string>
+	<string name="smssdk_error_detail_524">客户端请求发送短信验证过于频繁</string>
+</resources>

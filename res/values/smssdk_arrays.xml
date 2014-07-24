@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="smssdk_country_group_a">
+		<item>阿尔巴尼亚,355,112</item>
+		<item>阿尔及利亚,213,49</item>
+		<item>阿富汗,93,44</item>
+		<item>阿根廷,54,25</item>
+		<item>阿拉斯加,1907,179</item>
+		<item>阿鲁巴岛,297,103</item>
+		<item>阿曼,968,162</item>
+		<item>阿森松,247,80</item>
+		<item>埃及,20,4</item>
+		<item>埃塞俄比亚,251,84</item>
+		<item>爱尔兰,353,110</item>
+		<item>安哥拉,244,78</item>
+		<item>安圭拉岛,1809,172</item>
+		<item>奥地利,43,15</item>
+		<item>澳大利亚,61,31</item>
+		<item>澳门,853,150</item>
+    </string-array>
+    
+    <string-array name="smssdk_country_group_b">
+		<item>巴巴多斯,1809,173</item>
+		<item>巴哈马,1809,174</item>
+		<item>巴基斯坦,92,43</item>
+		<item>巴拉圭,595,131</item>
+		<item>巴林,973,164</item>
+		<item>巴拿马,507,125</item>
+		<item>巴西,55,26</item>
+		<item>保加利亚,359,116</item>
+		<item>贝宁,229,62</item>
+		<item>比利时,32,8</item>
+		<item>冰岛,354,111</item>
+		<item>波多黎各,1809,175</item>
+		<item>波兰,48,20</item>
+		<item>玻利维亚,591,127</item>
+		<item>伯利兹,501,119</item>
+		<item>博茨瓦纳,267,99</item>
+		<item>不丹,975,166</item>
+		<item>布基拉法索,226,59</item>
+		<item>布隆迪,257,90</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_c">
+		<item>朝鲜,850,148</item>
+		<item>赤道几内亚,240,74</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_d">
+		<item>丹麦,45,17</item>
+		<item>德国,49,21</item>
+		<item>东萨摩亚,684,144</item>
+		<item>多哥,228,61</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_e">
+		<item>俄罗斯,7,3</item>
+		<item>厄瓜多尔,593,129</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_f">
+		<item>法国,33,9</item>
+		<item>法罗群岛,298,104</item>
+		<item>法属圭亚那,594,130</item>
+		<item>梵蒂冈,396,117</item>
+		<item>菲律宾,63,33</item>
+		<item>斐济,679,141</item>
+		<item>芬兰,358,115</item>
+		<item>佛得角,238,71</item>
+		<item>福克兰群岛,500,118</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_g">
+		<item>冈比亚,220,52</item>
+		<item>刚果,242,76</item>
+		<item>哥伦比亚,57,28</item>
+		<item>哥斯达黎加,506,124</item>
+		<item>格陵兰岛,299,105</item>
+		<item>古巴,53,24</item>
+		<item>关岛,671,135</item>
+		<item>圭亚那,592,128</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_h">
+		<item>海地,509,126</item>
+		<item>韩国,82,38</item>
+		<item>荷兰,31,7</item>
+		<item>洪都拉斯,504,122</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_i">
+	    
+	</string-array>
+	
+	<string-array name="smssdk_country_group_j">
+		<item>基里巴斯,686,146</item>
+		<item>吉布提,253,86</item>
+		<item>几内亚,224,57</item>
+		<item>几内亚比绍,245,79</item>
+		<item>加拿大,1,1</item>
+		<item>加纳,233,66</item>
+		<item>加蓬,241,75</item>
+		<item>柬埔寨,855,151</item>
+		<item>津巴布韦,263,95</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_k">
+		<item>喀麦隆,237,70</item>
+		<item>卡塔尔,974,165</item>
+		<item>科科斯岛,6722,181</item>
+		<item>科克群岛,682,142</item>
+		<item>科摩罗,269,101</item>
+		<item>科特迪瓦,225,58</item>
+		<item>科威特,965,160</item>
+		<item>肯尼亚,254,87</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_l">
+		<item>莱索托,266,98</item>
+		<item>老挝,856,152</item>
+		<item>黎巴嫩,961,156</item>
+		<item>利比里亚,231,64</item>
+		<item>利比亚,218,51</item>
+		<item>列支敦士登,4175,180</item>
+		<item>留尼旺岛,262,94</item>
+		<item>卢森堡,352,109</item>
+		<item>卢旺达,250,83</item>
+		<item>罗马尼亚,40,13</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_m">
+		<item>马达加斯加,261,93</item>
+		<item>马尔代夫,960,155</item>
+		<item>马耳他,356,113</item>
+		<item>马拉维,265,97</item>
+		<item>马来西亚,60,30</item>
+		<item>马里,223,55</item>
+		<item>马提尼克,596,132</item>
+		<item>毛里求斯,230,63</item>
+		<item>毛里塔尼亚,222,54</item>
+		<item>美国,1,2</item>
+		<item>蒙古,976,167</item>
+		<item>孟加拉国,880,153</item>
+		<item>秘鲁,51,22</item>
+		<item>缅甸,95,46</item>
+		<item>摩洛哥,210,48</item>
+		<item>莫桑比克,258,91</item>
+		<item>墨西哥,52,23</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_n">
+		<item>纳米比亚,264,96</item>
+		<item>南非,27,5</item>
+		<item>南斯拉夫,338,106</item>
+		<item>瑙鲁,674,137</item>
+		<item>尼泊尔,977,168</item>
+		<item>尼加拉瓜,505,123</item>
+		<item>尼日尔,227,60</item>
+		<item>尼日利亚,234,67</item>
+		<item>纽埃岛,683,143</item>
+		<item>挪威,47,19</item>
+		<item>诺福克岛,6723,182</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_o">
+	    
+	</string-array>
+	
+	<string-array name="smssdk_country_group_p">
+		<item>葡萄牙,351,108</item>
+		<item>普林西比,239,72</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_q">
+	    
+	</string-array>
+	
+	<string-array name="smssdk_country_group_r">
+		<item>日本,81,37</item>
+		<item>瑞典,46,18</item>
+		<item>瑞士,41,14</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_s">
+		<item>萨尔瓦多,503,121</item>
+		<item>塞拉利昂,232,65</item>
+		<item>塞内加尔,221,53</item>
+		<item>塞浦路斯,357,114</item>
+		<item>塞舌尔,248,81</item>
+		<item>沙特阿拉伯,966,161</item>
+		<item>圣诞岛,6724,183</item>
+		<item>圣多美,239,73</item>
+		<item>圣赫勒拿,290,102</item>
+		<item>圣卢西亚,1809,176</item>
+		<item>圣马力诺,223,56</item>
+		<item>斯里兰卡,94,45</item>
+		<item>斯威士兰,268,100</item>
+		<item>苏丹,249,82</item>
+		<item>苏里南,597,133</item>
+		<item>所罗门群岛,677,139</item>
+		<item>索马里,252,85</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_t">
+		<item>台湾,886,154</item>
+		<item>泰国,66,36</item>
+		<item>坦桑尼亚,255,88</item>
+		<item>汤加,676,138</item>
+		<item>突尼斯,216,50</item>
+		<item>图瓦卢,688,147</item>
+		<item>土耳其,90,41</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_u">
+	    
+	</string-array>
+	
+	<string-array name="smssdk_country_group_v">
+	    
+	</string-array>
+	
+	<string-array name="smssdk_country_group_w">
+		<item>瓦努阿图,678,140</item>
+		<item>危地马拉,502,120</item>
+		<item>威克岛,1808,169</item>
+		<item>维尔京群岛,1809,177</item>
+		<item>委内瑞拉,58,29</item>
+		<item>文莱,673,136</item>
+		<item>乌干达,256,89</item>
+		<item>乌拉圭,598,134</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_x">
+		<item>西班牙,34,10</item>
+		<item>西萨摩亚,685,145</item>
+		<item>希腊,30,6</item>
+		<item>夏威夷,1808,170</item>
+		<item>香港,852,149</item>
+		<item>新加坡,65,35</item>
+		<item>新西兰,64,34</item>
+		<item>匈牙利,36,11</item>
+		<item>叙利亚,963,158</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_y">
+		<item>牙买加,1809,178</item>
+		<item>伊拉克,964,159</item>
+		<item>伊朗,98,47</item>
+		<item>以色列,972,163</item>
+		<item>意大利,39,12</item>
+		<item>印度,91,42</item>
+		<item>印度尼西亚,62,32</item>
+		<item>英国,44,16</item>
+		<item>约旦,962,157</item>
+		<item>越南,84,39</item>
+    </string-array>
+    
+	<string-array name="smssdk_country_group_z">
+		<item>赞比亚,260,92</item>
+		<item>扎伊尔,243,77</item>
+		<item>乍得,235,68</item>
+		<item>直布罗陀,350,107</item>
+		<item>智利,56,27</item>
+		<item>中非,236,69</item>
+		<item>中国,86,40</item>
+		<item>中途岛,1808,171</item>
+    </string-array>
+</resources>

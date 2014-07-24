@@ -27,7 +27,6 @@ import org.jivesoftware.smackx.provider.VCardProvider;
 import org.jivesoftware.smackx.provider.XHTMLExtensionProvider;
 import org.jivesoftware.smackx.search.UserSearch;
 
-
 /**
  * 
  * XMPP服务器连接工具类.

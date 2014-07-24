@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/smssdk_title_layout" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:paddingLeft="16dip"
+        android:paddingRight="16dip" >
+
+        <TextView
+            android:id="@+id/tv_identify_notify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="center"
+            android:text="@string/smssdk_make_sure_mobile_detail"
+            android:textColor="#999999"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dip"
+            android:gravity="center"
+            android:textColor="#353535"
+            android:textSize="19sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="41dip"
+            android:layout_marginTop="19dip"
+            android:background="@drawable/smssdk_input_bg_focus"
+            android:orientation="horizontal" >
+
+            <EditText
+                android:id="@+id/et_put_identify"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="4dip"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:hint="@string/smssdk_write_identify_code"
+                android:singleLine="true"
+                android:inputType="number" />
+
+            <ImageView
+                android:id="@+id/iv_clear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5dip"
+                android:background="@drawable/smssdk_clear_search"
+                android:scaleType="fitCenter"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_unreceive_identify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="18dip"
+            android:layout_marginTop="20dip"
+            android:gravity="center"
+            android:text="@string/smssdk_receive_msg"
+            android:textColor="#5c5c5c"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="match_parent"
+            android:layout_height="48dip"
+            android:background="@drawable/smssdk_btn_disenable"
+            android:text="@string/smssdk_next"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>
