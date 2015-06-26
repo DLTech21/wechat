@@ -6,7 +6,10 @@ package im;
 import im.model.IMMessage;
 import im.model.Notice;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +30,7 @@ import tools.AudioRecoderManager;
 import tools.DateUtil;
 import tools.ImageUtils;
 import tools.Logger;
+import tools.MD5Util;
 import tools.StringUtils;
 import tools.UIHelper;
 import bean.JsonMessage;
@@ -46,6 +50,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -55,6 +60,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -664,7 +670,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		
 		private void displayLeftImage(JsonMessage msg, ViewHolderLeftImage viewHolderLeftImage, int position) {
 			imageLoader.displayImage(CommonValue.BASE_URL+ user.userHead, viewHolderLeftImage.leftAvatar, options);
-			imageLoader.displayImage(msg.file, viewHolderLeftImage.leftPhoto, photooptions);
+			imageLoader.displayImage("file://"+stringtoBitmap(msg.file), viewHolderLeftImage.leftPhoto, photooptions);
 			displayTime(position, viewHolderLeftImage.timeTV);
 		}
 		
@@ -682,7 +688,8 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		
 		private void displayRightImage(IMMessage message, JsonMessage msg, ViewHolderRightImage viewHolderRightImage, int position) {
 			imageLoader.displayImage(CommonValue.BASE_URL+ appContext.getLoginUserHead(), viewHolderRightImage.rightAvatar, options);
-			imageLoader.displayImage(msg.file, viewHolderRightImage.rightPhoto, photooptions);
+			Logger.i(msg.file);
+			imageLoader.displayImage("file://"+stringtoBitmap(msg.file), viewHolderRightImage.rightPhoto, photooptions);
 			if (message.getType() == CommonValue.kWCMessageStatusWait) {
 				message.setType(CommonValue.kWCMessageStatusSending);
 				viewHolderRightImage.photoProgress.setVisibility(View.VISIBLE);
@@ -728,122 +735,147 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		}
 		
 		private void uploadImageToQiniu(final IMMessage message, String filePath, final ViewHolderRightImage cell, final int messageType) {
-			String bucketName = "dchat";
-	        PutPolicy putPolicy = new PutPolicy(bucketName);
-			Config.ACCESS_KEY = "ZJQmyoJNrIuXq81X-naqxYkMkjlvhNUiVgdQXBk6";
-	        Config.SECRET_KEY = "NrM8Fl1OmxqliLTtoP9m94JkIGf8vIuca7O_OG-9";
-	        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
-	        String auploadToken = null;
 			try {
-				auploadToken = putPolicy.token(mac);
-				Logger.i(auploadToken);
+				JsonMessage msg = new JsonMessage();
+				msg.file = Bitmap2StrByBase64(filePath);
+				msg.messageType = CommonValue.kWCMessageTypeImage;
+				msg.text = "[图片]";
+				Gson gson = new Gson();
+				String json = gson.toJson(msg);
+				message.setContent(json);
+				sendMediaMessage(message);
 			} catch (Exception e) {
-				Logger.i(e);
+				e.printStackTrace();
 			}
-			String key = IO.UNDEFINED_KEY; 
-			PutExtra extra = new PutExtra();
-			extra.params = new HashMap<String, String>();
-			IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
-				@Override
-				public void onProcess(long current, long total) {
-					if (messageType == CommonValue.kWCMessageTypePlain) {
-						float percent = (float) (current*1.0/total)*100;
-						if ((int)percent < 100) {
-							cell.photoProgress.setText((int)percent+"%");
-						}
-						else if ((int)percent == 100) {
-							cell.photoProgress.setText("处理中...");
-						}
-					}
-				}
-
-				@Override
-				public void onSuccess(JSONObject resp) {
-					String key = resp.optString("hash", "");
-					try {
-						JsonMessage msg = new JsonMessage();
-						msg.file = "http://7xj66h.com1.z0.glb.clouddn.com/"+key;
-						Logger.i(msg.file);
-						switch (messageType) {
-						case CommonValue.kWCMessageTypeImage:
-							msg.messageType = CommonValue.kWCMessageTypeImage;
-							msg.text = "[图片]";
-							break;
-
-						case CommonValue.kWCMessageTypeVoice:
-							msg.messageType = CommonValue.kWCMessageTypeVoice;
-							msg.text = "[语音]";
-							break;
-						}
-						Gson gson = new Gson();
-						String json = gson.toJson(msg);
-						message.setContent(json);
-						sendMediaMessage(message);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-
-				@Override
-				public void onFailure(Exception ex) {
-					Logger.i(ex.toString());
-				}
-			});
+//			String bucketName = "dchat";
+//	        PutPolicy putPolicy = new PutPolicy(bucketName);
+//			Config.ACCESS_KEY = "ZJQmyoJNrIuXq81X-naqxYkMkjlvhNUiVgdQXBk6";
+//	        Config.SECRET_KEY = "NrM8Fl1OmxqliLTtoP9m94JkIGf8vIuca7O_OG-9";
+//	        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+//	        String auploadToken = null;
+//			try {
+//				auploadToken = putPolicy.token(mac);
+//				Logger.i(auploadToken);
+//			} catch (Exception e) {
+//				Logger.i(e);
+//			}
+//			String key = IO.UNDEFINED_KEY; 
+//			PutExtra extra = new PutExtra();
+//			extra.params = new HashMap<String, String>();
+//			IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
+//				@Override
+//				public void onProcess(long current, long total) {
+//					if (messageType == CommonValue.kWCMessageTypePlain) {
+//						float percent = (float) (current*1.0/total)*100;
+//						if ((int)percent < 100) {
+//							cell.photoProgress.setText((int)percent+"%");
+//						}
+//						else if ((int)percent == 100) {
+//							cell.photoProgress.setText("处理中...");
+//						}
+//					}
+//				}
+//
+//				@Override
+//				public void onSuccess(JSONObject resp) {
+//					String key = resp.optString("hash", "");
+//					try {
+//						JsonMessage msg = new JsonMessage();
+//						msg.file = "http://7xj66h.com1.z0.glb.clouddn.com/"+key;
+//						Logger.i(msg.file);
+//						switch (messageType) {
+//						case CommonValue.kWCMessageTypeImage:
+//							msg.messageType = CommonValue.kWCMessageTypeImage;
+//							msg.text = "[图片]";
+//							break;
+//
+//						case CommonValue.kWCMessageTypeVoice:
+//							msg.messageType = CommonValue.kWCMessageTypeVoice;
+//							msg.text = "[语音]";
+//							break;
+//						}
+//						Gson gson = new Gson();
+//						String json = gson.toJson(msg);
+//						message.setContent(json);
+//						sendMediaMessage(message);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//
+//				@Override
+//				public void onFailure(Exception ex) {
+//					Logger.i(ex.toString());
+//				}
+//			});
 		}
 		
 		private void uploadVoiceToQiniu(final IMMessage message, String filePath, final ViewHolderRightVoice cell, final int messageType) {
-			String bucketName = "dchat";
-	        PutPolicy putPolicy = new PutPolicy(bucketName);
-			Config.ACCESS_KEY = "ZJQmyoJNrIuXq81X-naqxYkMkjlvhNUiVgdQXBk6";
-	        Config.SECRET_KEY = "NrM8Fl1OmxqliLTtoP9m94JkIGf8vIuca7O_OG-9";
-	        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
-	        String auploadToken = null;
+			
 			try {
-				auploadToken = putPolicy.token(mac);
-				Logger.i(auploadToken);
-			} catch (Exception e) {
-				Logger.i(e);
+				JsonMessage msg = new JsonMessage();
+				msg.file = encodeBase64File(filePath);
+				msg.messageType = CommonValue.kWCMessageTypeVoice;
+				msg.text = "[语音]";
+				Gson gson = new Gson();
+				String json = gson.toJson(msg);
+				message.setContent(json);
+				sendMediaMessage(message);
+			} catch (Exception e1) {
+				e1.printStackTrace();
 			}
-			String key = IO.UNDEFINED_KEY; 
-			PutExtra extra = new PutExtra();
-			extra.params = new HashMap<String, String>();
-			IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
-				@Override
-				public void onProcess(long current, long total) {
-				}
-
-				@Override
-				public void onSuccess(JSONObject resp) {
-					String key = resp.optString("hash", "");
-					try {
-						JsonMessage msg = new JsonMessage();
-						msg.file = "http://7xj66h.com1.z0.glb.clouddn.com/"+key;
-						Logger.i(msg.file);
-						switch (messageType) {
-						case CommonValue.kWCMessageTypeImage:
-							msg.messageType = CommonValue.kWCMessageTypeImage;
-							msg.text = "[图片]";
-							break;
-
-						case CommonValue.kWCMessageTypeVoice:
-							msg.messageType = CommonValue.kWCMessageTypeVoice;
-							msg.text = "[语音]";
-							break;
-						}
-						Gson gson = new Gson();
-						String json = gson.toJson(msg);
-						message.setContent(json);
-						sendMediaMessage(message);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-
-				@Override
-				public void onFailure(Exception ex) {
-					Logger.i(ex.toString());
-				}
-			});
+//			String bucketName = "dchat";
+//	        PutPolicy putPolicy = new PutPolicy(bucketName);
+//			Config.ACCESS_KEY = "ZJQmyoJNrIuXq81X-naqxYkMkjlvhNUiVgdQXBk6";
+//	        Config.SECRET_KEY = "NrM8Fl1OmxqliLTtoP9m94JkIGf8vIuca7O_OG-9";
+//	        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
+//	        String auploadToken = null;
+//			try {
+//				auploadToken = putPolicy.token(mac);
+//				Logger.i(auploadToken);
+//			} catch (Exception e) {
+//				Logger.i(e);
+//			}
+//			String key = IO.UNDEFINED_KEY; 
+//			PutExtra extra = new PutExtra();
+//			extra.params = new HashMap<String, String>();
+//			IO.putFile(auploadToken, key, new File(filePath), extra, new JSONObjectRet() {
+//				@Override
+//				public void onProcess(long current, long total) {
+//				}
+//
+//				@Override
+//				public void onSuccess(JSONObject resp) {
+//					String key = resp.optString("hash", "");
+//					try {
+//						JsonMessage msg = new JsonMessage();
+//						msg.file = "http://7xj66h.com1.z0.glb.clouddn.com/"+key;
+//						Logger.i(msg.file);
+//						switch (messageType) {
+//						case CommonValue.kWCMessageTypeImage:
+//							msg.messageType = CommonValue.kWCMessageTypeImage;
+//							msg.text = "[图片]";
+//							break;
+//
+//						case CommonValue.kWCMessageTypeVoice:
+//							msg.messageType = CommonValue.kWCMessageTypeVoice;
+//							msg.text = "[语音]";
+//							break;
+//						}
+//						Gson gson = new Gson();
+//						String json = gson.toJson(msg);
+//						message.setContent(json);
+//						sendMediaMessage(message);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//				}
+//
+//				@Override
+//				public void onFailure(Exception ex) {
+//					Logger.i(ex.toString());
+//				}
+//			});
 		}
 	}
 	
@@ -1139,4 +1171,43 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		}
 		return true;
 	}
+	
+	/**图片的编码
+     * 通过Base32将Bitmap转换成Base64字符串
+     */
+    public String Bitmap2StrByBase64(String filePath){
+        ByteArrayOutputStream bos=new ByteArrayOutputStream();
+        ImageUtils.getBitmapByPath(filePath).compress(Bitmap.CompressFormat.JPEG, 40, bos);//参数100表示不压缩
+        byte[] bytes=bos.toByteArray();
+        return Base64.encodeToString(bytes, Base64.DEFAULT);
+    }
+  
+  
+  /**图片的解码
+     * 通过Base32将Base64字符串转换成Bitmap
+     */
+    public String stringtoBitmap(String string) {
+        // 将字符串转换成Bitmap类型
+    	String bitmap = null;
+        try {
+            byte[] bitmapArray;
+            bitmapArray = Base64.decode(string, Base64.DEFAULT);
+//            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0,bitmapArray.length);
+            bitmap = ImageUtils.saveBitmapByte(bitmapArray, MD5Util.getMD5String(string) + ".png");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+    
+  //type是voice的编码
+    public static String encodeBase64File(String path) throws Exception {
+            File  file = new File(path);
+            FileInputStream inputFile = new FileInputStream(file);
+            byte[] buffer = new byte[(int)file.length()];
+            inputFile.read(buffer);
+            inputFile.close();
+            return Base64.encodeToString(buffer, Base64.DEFAULT);
+        }
+        
 }

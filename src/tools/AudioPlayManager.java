@@ -19,6 +19,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Base64;
 import android.view.View;
 import config.CommonValue;
 
@@ -206,41 +207,43 @@ public class AudioPlayManager {
 				isDownloading = true;
 				try {
 					isDownloading = true;
-					if (!(new File(AudioRecoderManager.CACHE_VOICE_FILE_PATH)).exists()) {
-						(new File(AudioRecoderManager.CACHE_VOICE_FILE_PATH)).mkdirs();
-					}
-					System.setProperty("http.keepAlive", "false");// 解决经常报此异常问题，at
-																	// java.util.zip.GZIPInputStream.readFully(GZIPInputStream.java:214)
-					URL Url = new URL(url);
-					URLConnection conn = Url.openConnection();
-					conn.connect();
-					InputStream is = conn.getInputStream();
-					// this.fileSize = conn.getContentLength();// 根据响应获取文件大小
-					// if (this.fileSize <= 0) { // 获取内容长度为0
-					// throw new RuntimeException("无法获知文件大小 ");
-					// }
-					if (is == null) { // 没有下载流
-						if (voiceBubbleListener != null) {
-							voiceBubbleListener.playFail(convertView);
-						}
-					}
-					FileOutputStream FOS = new FileOutputStream(soundFile); // 创建写入文件内存流，通过此流向目标写文件
+//					if (!(new File(AudioRecoderManager.CACHE_VOICE_FILE_PATH)).exists()) {
+//						(new File(AudioRecoderManager.CACHE_VOICE_FILE_PATH)).mkdirs();
+//					}
+//					System.setProperty("http.keepAlive", "false");// 解决经常报此异常问题，at
+//																	// java.util.zip.GZIPInputStream.readFully(GZIPInputStream.java:214)
+//					URL Url = new URL(url);
+//					URLConnection conn = Url.openConnection();
+//					conn.connect();
+//					InputStream is = conn.getInputStream();
+//					// this.fileSize = conn.getContentLength();// 根据响应获取文件大小
+//					// if (this.fileSize <= 0) { // 获取内容长度为0
+//					// throw new RuntimeException("无法获知文件大小 ");
+//					// }
+//					if (is == null) { // 没有下载流
+//						if (voiceBubbleListener != null) {
+//							voiceBubbleListener.playFail(convertView);
+//						}
+//					}
+//					FileOutputStream FOS = new FileOutputStream(soundFile); // 创建写入文件内存流，通过此流向目标写文件
 
-					byte buf[] = new byte[1024];
-					// downLoadFilePosition = 0;
-					int numread;
-					while ((numread = is.read(buf)) != -1) {
-						FOS.write(buf, 0, numread);
-						// downLoadFilePosition += numread
-					}
-					is.close();
+//					byte buf[] = new byte[1024];
+//					// downLoadFilePosition = 0;
+//					int numread;
+//					while ((numread = is.read(buf)) != -1) {
+//						FOS.write(buf, 0, numread);
+//						// downLoadFilePosition += numread
+//					}
+//					is.close();
+					
+					decoderBase64File(url, soundFile.getAbsolutePath());
 
 					doPrepare(soundFile);
 					isDownloading = false;
-					FOS.flush();
-					if (FOS != null) {
-						FOS.close();
-					}
+//					FOS.flush();
+//					if (FOS != null) {
+//						FOS.close();
+//					}
 
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -254,5 +257,12 @@ public class AudioPlayManager {
 			doPrepare(soundFile);
 		}
 	}
+	
+	public static void decoderBase64File(String base64Code,String savePath) throws Exception {
+        byte[] buffer =Base64.decode(base64Code, Base64.DEFAULT);
+        FileOutputStream out = new FileOutputStream(savePath);
+        out.write(buffer);
+        out.close();
+    }
 	
 }
