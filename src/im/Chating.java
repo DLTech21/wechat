@@ -1172,9 +1172,6 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		return true;
 	}
 	
-	/**图片的编码
-     * 通过Base32将Bitmap转换成Base64字符串
-     */
     public String Bitmap2StrByBase64(String filePath){
         ByteArrayOutputStream bos=new ByteArrayOutputStream();
         ImageUtils.getBitmapByPath(filePath).compress(Bitmap.CompressFormat.JPEG, 40, bos);//参数100表示不压缩
@@ -1182,17 +1179,11 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
   
-  
-  /**图片的解码
-     * 通过Base32将Base64字符串转换成Bitmap
-     */
     public String stringtoBitmap(String string) {
-        // 将字符串转换成Bitmap类型
     	String bitmap = null;
         try {
             byte[] bitmapArray;
             bitmapArray = Base64.decode(string, Base64.DEFAULT);
-//            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0,bitmapArray.length);
             bitmap = ImageUtils.saveBitmapByte(bitmapArray, MD5Util.getMD5String(string) + ".png");
         } catch (Exception e) {
             e.printStackTrace();
@@ -1200,14 +1191,13 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
         return bitmap;
     }
     
-  //type是voice的编码
     public static String encodeBase64File(String path) throws Exception {
-            File  file = new File(path);
-            FileInputStream inputFile = new FileInputStream(file);
-            byte[] buffer = new byte[(int)file.length()];
-            inputFile.read(buffer);
-            inputFile.close();
-            return Base64.encodeToString(buffer, Base64.DEFAULT);
-        }
+        File  file = new File(path);
+        FileInputStream inputFile = new FileInputStream(file);
+        byte[] buffer = new byte[(int)file.length()];
+        inputFile.read(buffer);
+        inputFile.close();
+        return Base64.encodeToString(buffer, Base64.DEFAULT);
+    }
         
 }
