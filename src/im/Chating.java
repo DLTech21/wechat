@@ -1172,32 +1172,5 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		return true;
 	}
 	
-    public String Bitmap2StrByBase64(String filePath){
-        ByteArrayOutputStream bos=new ByteArrayOutputStream();
-        ImageUtils.getBitmapByPath(filePath).compress(Bitmap.CompressFormat.JPEG, 40, bos);//参数100表示不压缩
-        byte[] bytes=bos.toByteArray();
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
-    }
-  
-    public String stringtoBitmap(String string) {
-    	String bitmap = null;
-        try {
-            byte[] bitmapArray;
-            bitmapArray = Base64.decode(string, Base64.DEFAULT);
-            bitmap = ImageUtils.saveBitmapByte(bitmapArray, MD5Util.getMD5String(string) + ".png");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return bitmap;
-    }
-    
-    public static String encodeBase64File(String path) throws Exception {
-        File  file = new File(path);
-        FileInputStream inputFile = new FileInputStream(file);
-        byte[] buffer = new byte[(int)file.length()];
-        inputFile.read(buffer);
-        inputFile.close();
-        return Base64.encodeToString(buffer, Base64.DEFAULT);
-    }
         
 }
