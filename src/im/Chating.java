@@ -730,8 +730,8 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		private void uploadImageToQiniu(final IMMessage message, String filePath, final ViewHolderRightImage cell, final int messageType) {
 			String bucketName = "dchat";
 	        PutPolicy putPolicy = new PutPolicy(bucketName);
-			Config.ACCESS_KEY = "5e71GMRBlrPS5pjETWcgElaH-uvhGRsWRGMR_Pfs";
-	        Config.SECRET_KEY = "cqzLJe_hA4YO33Oobp7AF0Fhca4q3EQ2rAfwS2YB";
+			Config.ACCESS_KEY = "ZJQmyoJNrIuXq81X-naqxYkMkjlvhNUiVgdQXBk6";
+	        Config.SECRET_KEY = "NrM8Fl1OmxqliLTtoP9m94JkIGf8vIuca7O_OG-9";
 	        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
 	        String auploadToken = null;
 			try {
@@ -762,7 +762,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 					String key = resp.optString("hash", "");
 					try {
 						JsonMessage msg = new JsonMessage();
-						msg.file = "http://dchat.qiniudn.com/"+key;
+						msg.file = "http://7xj66h.com1.z0.glb.clouddn.com/"+key;
 						Logger.i(msg.file);
 						switch (messageType) {
 						case CommonValue.kWCMessageTypeImage:
@@ -794,8 +794,8 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 		private void uploadVoiceToQiniu(final IMMessage message, String filePath, final ViewHolderRightVoice cell, final int messageType) {
 			String bucketName = "dchat";
 	        PutPolicy putPolicy = new PutPolicy(bucketName);
-			Config.ACCESS_KEY = "5e71GMRBlrPS5pjETWcgElaH-uvhGRsWRGMR_Pfs";
-	        Config.SECRET_KEY = "cqzLJe_hA4YO33Oobp7AF0Fhca4q3EQ2rAfwS2YB";
+			Config.ACCESS_KEY = "ZJQmyoJNrIuXq81X-naqxYkMkjlvhNUiVgdQXBk6";
+	        Config.SECRET_KEY = "NrM8Fl1OmxqliLTtoP9m94JkIGf8vIuca7O_OG-9";
 	        Mac mac = new Mac(Config.ACCESS_KEY, Config.SECRET_KEY);
 	        String auploadToken = null;
 			try {
@@ -817,7 +817,7 @@ public class Chating extends AChating implements OnTouchListener, OnItemClickLis
 					String key = resp.optString("hash", "");
 					try {
 						JsonMessage msg = new JsonMessage();
-						msg.file = "http://dchat.qiniudn.com/"+key;
+						msg.file = "http://7xj66h.com1.z0.glb.clouddn.com/"+key;
 						Logger.i(msg.file);
 						switch (messageType) {
 						case CommonValue.kWCMessageTypeImage:

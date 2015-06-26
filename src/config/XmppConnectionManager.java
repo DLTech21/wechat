@@ -33,9 +33,9 @@ import org.jivesoftware.smackx.search.UserSearch;
  * 
  */
 public class XmppConnectionManager {
-	final String XmppHost = "182.92.101.207";
+	final String XmppHost = "192.168.1.115";
 	final int XmppPort = 5222;
-	public static String BASE_XMPP_SERVER_NAME = "@aliyun-05808812";
+	public static String BASE_XMPP_SERVER_NAME = "@donaldemacbook-pro.local";
 	
 	private XMPPConnection connection;
 	private static ConnectionConfiguration connectionConfig;
