@@ -4,5 +4,6 @@ wechat xmpp
 
 体验软件地址 http://fir.im/l9m5
 
+该项目不再维护
 
 新版的项目可以到https://github.com/donal-tong/Tut-android
